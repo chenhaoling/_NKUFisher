@@ -8,7 +8,12 @@ const db = cloud.database()
 
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
-  result = await db.collection('User').doc(wxContext.OPENID).get()
-  return result.data
+  try {
+    let result = await db.collection('User').doc(wxContext.OPENID).get()
+    return result.data
+  }
+  catch(e) {
+    return {_id: null}
+  }
 }
 
