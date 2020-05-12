@@ -11,5 +11,5 @@ exports.main = async (event, context) => {
   const result = await db.collection('User').add({
     data: event
   })
-  return result.errMsg
+  return result._id
 }
