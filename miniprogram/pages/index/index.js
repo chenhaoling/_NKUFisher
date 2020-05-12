@@ -8,7 +8,9 @@ Page({
 	  navTab:["发布的商品", "求购的商品"],
     // currentNavtab: "0",
     TabCur: 0,
-    scrollLeft:0
+    scrollLeft:0,
+    isAnounce: true,
+    mess:"按钮测试数据",
     
     cardCur: 0,
     swiperList: [{
@@ -57,6 +59,9 @@ Page({
       scrollLeft: (e.currentTarget.dataset.id-1)*60,
       isAnounce:  e.currentTarget.dataset.id === 0 ? true : false,
     }),
+    console.log(e)
+  },
+   getmes:function(e){
     console.log(e)
   },
   

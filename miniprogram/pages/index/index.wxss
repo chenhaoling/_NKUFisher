@@ -32,3 +32,12 @@
   flex-direction: column;
   flex-wrap: nowrap;
 }
+
+
+.btn1{
+  width: 80%;
+  margin-top: 20rpx;
+  background-color:beige;
+  color: black;
+  border-radius: 98rpx;
+}

@@ -26,6 +26,19 @@
       </scroll-view>
   </view>
 
+<!-- 标签页的逻辑跳转 -->
+  <view wx:if="{{isAnounce==true}}">
+       <view class="padding flex flex-direction">
+      <button class="cu-btn bg-grey lg">玄灰</button>
+      <button class="cu-btn bg-red margin-tb-sm lg">嫣红</button>
+    </view>
+  </view>
+
+  <view wx:else>
+      <button bindtap="getmes" class="btn1">{{mess}}</button>
+  </view>
+   
+   
 
 <!-- 轮播图 -->
 <swiper class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff" style="margin-bottom:50rpx">
@@ -70,4 +83,6 @@
       我的
     </view>
   </view>
+</view>
+
 </view>
