@@ -41,3 +41,15 @@
   color: black;
   border-radius: 98rpx;
 }
+
+/* 
+.kapian{
+  position: fixed;
+  top:750rpx;
+} */
+
+#nav{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
