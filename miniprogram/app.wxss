@@ -1,4 +1,6 @@
 /**app.wxss**/
+@import "colorui/icon.wxss";
+@import "colorui/main.wxss";
 .container {
   display: flex;
   flex-direction: column;
