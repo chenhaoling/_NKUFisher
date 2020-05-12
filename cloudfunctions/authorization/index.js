@@ -8,6 +8,12 @@ exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   delete event.userInfo
   event._id = wxContext.OPENID
+  event.announce = []
+  event.collection = []
+  event.bounght = []
+  event.love = []
+  event.fans = []
+  event.role = 'user'
   const result = await db.collection('User').add({
     data: event
   })
