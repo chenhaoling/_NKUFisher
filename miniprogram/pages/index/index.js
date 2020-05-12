@@ -12,6 +12,10 @@ Page({
     isAnounce: true,
     mess:"按钮测试数据",
     
+    TabCur2: 0,
+    scrollLeft2:0,
+    goodTab:["数码产品","学习资料","生活用品","全部"],
+
     cardCur: 0,
     swiperList: [{
       id: 0,
@@ -61,6 +65,16 @@ Page({
     }),
     console.log(e)
   },
+
+  tabSelect2(e) {
+    this.setData({
+      TabCur2: e.currentTarget.dataset.id,
+      scrollLeft2: (e.currentTarget.dataset.id-1)*60,
+      isAnounce2:  e.currentTarget.dataset.id === 0 ? true : false,
+    }),
+    console.log(e)
+  },
+
    getmes:function(e){
     console.log(e)
   },
