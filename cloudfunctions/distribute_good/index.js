@@ -15,10 +15,17 @@ exports.main = async (event, context) => {
     event.comments = []
     event.image = []
     event.openId = cloud.getWXContext().OPENID
-    const result = await db.collection('Good').add({
+    let result = await db.collection('Good').add({
       data: event
     })
-    return result._id
+    const goodId = result._id
+    result = await db.collection('User').doc(event.openId).get()
+    let announce = result.data.announce
+    announce.push(goodId)
+    await db.collection('User').doc(event.openId).update({
+      data: {announce: announce}
+    })
+    return goodId
   }
   delete event.create
   const result = await db.collection('Good').doc(event._id).get()
