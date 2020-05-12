@@ -1,1 +1,34 @@
 /* miniprogram/pages/index.wxss */
+
+
+/* miniprogram/pages/index.wxss */
+.container{
+  position:fixed;
+  height: 100%;
+  /* height: 500rpx; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* background-color: rgb(84, 63, 105); */
+  /* display: flex;
+  flex-direction: row;
+  /* flex-wrap: wrap; */
+  /* justify-content: space-around;
+  align-items: flex-start;  */
+  /* align-items: baseline; */
+}
+
+#tag{
+  width: 350rpx;
+  /* background-color: bisque; */
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* flex-basis: 300rpx; */
+  /* flex-grow: ; */
+}
+
+.test{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
