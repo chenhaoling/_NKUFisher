@@ -1,2 +1,11 @@
-<!--miniprogram/pages/index.wxml-->
-<text>miniprogram/pages/index.wxml</text>
+<view class="container">
+
+ <view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px">
+      <view class="search-form round">
+        <text class="icon-search"></text>
+        <input type="text" placeholder="搜索" confirm-type="search" bindinput="searchIcon"></input>
+      </view>
+    </view>
+    
+
+</view>
