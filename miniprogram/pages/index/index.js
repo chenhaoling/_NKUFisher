@@ -36,12 +36,20 @@ Page({
       url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
     }],
   },
+
   // cardSwiper
   cardSwiper(e) {
     this.setData({
       cardCur: e.detail.current
     })
   },
+
+  isCard(e) {
+    this.setData({
+      isCard: e.detail.value
+    })
+  },
+  
   /**
    * 生命周期函数--监听页面加载
    */

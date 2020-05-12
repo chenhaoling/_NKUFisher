@@ -1,5 +1,5 @@
 <!-- 轮播图 -->
-<swiper class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
+<swiper class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff" style="margin-bottom:50rpx">
   <swiper-item wx:for="{{swiperList}}" wx:key class="{{cardCur==index?'cur':''}}">
     <view class="swiper-item">
       <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
@@ -7,9 +7,26 @@
     </view>
   </swiper-item>
 </swiper>
+<!-- 卡片 -->
+<view class="cu-card article {{isCard?'no-card':''}}">
+  <view class="cu-item shadow">
+    <view class="content">		
+			<image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"  mode="aspectFill" style="height:280rpx"></image>   
+      <view class="desc">
+      		<view class="text-cut">商品名：</view>
+					<view class="text-cut">商品详情：</view>
+        	<view class="text-content"> 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！</view>
+        	<view>
+					<view><text style="color:red" >￥88</text></view>
+      </view>
+      </view>
+    </view>
+  </view>
+</view>
+
 
 <!-- 下边导航栏 -->
-<view class="cu-bar tabbar margin-bottom-xl bg-white" style="bottom-mar">
+<view class="cu-bar tabbar margin-bottom-xl bg-white" style="position:fixed bottom:0rpx">
     <view class="action text-green">
       <view class="cuIcon-homefill"></view> 首页
     </view>

@@ -1,1 +1,6 @@
 /* miniprogram/pages/index.wxss */
+.test{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
