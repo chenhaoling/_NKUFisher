@@ -1,6 +1,11 @@
 <!--index.wxml-->
 <view class="container">
 
+<view class="padding flex flex-direction">
+  <button class="cu-btn bg-grey lg">玄灰</button>
+  <button class="cu-btn bg-red margin-tb-sm lg">嫣红</button>
+</view>
+
   <!-- 用户 openid -->
   <view class="userinfo">
     <button 
