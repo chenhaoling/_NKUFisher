@@ -11,6 +11,7 @@ exports.main = async (event, context) => {
   if(event.create)
   {
     delete event.create
+    event.state = 1
     event.star = 0
     event.comments = []
     event.image = []

@@ -10,7 +10,7 @@ exports.main = async (event, context) => {
   event._id = wxContext.OPENID
   event.announce = []
   event.collection = []
-  event.bounght = []
+  event.bought = []
   event.love = []
   event.fans = []
   event.role = 'user'
