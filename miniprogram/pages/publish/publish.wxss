@@ -41,7 +41,7 @@
     width: 98%;
     margin: 0rpx auto;
     /* margin-top: 30rpx; */
-    margin-bottom: 600rpx;
+    margin-bottom: 20rpx;
 }
 
 .title_right{
@@ -49,19 +49,18 @@
     flex-direction: column;
 }
 
-  /* 
- 
-  
-
   .title_image {
     margin: auto 0rpx;
     border: 1rpx solid #d3d3d3;
+    width: 30%;
+    margin-left: 260rpx;
+    margin-bottom: 50rpx;
   }
   .title_image image {
     width: 185rpx;
     height: 220rpx;
+    
   }
-
   .describe {
     border: 1px solid #d3d3d3;
     height: 340rpx;
@@ -77,5 +76,4 @@
     margin-bottom: 5rpx;
     margin-top: 5rpx;
   }
-   */
   

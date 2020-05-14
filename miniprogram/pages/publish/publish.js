@@ -12,8 +12,24 @@ Page({
 
     conditions: ["数码产品", "学习资料", "生活用品", "其他"], //5
     conditionIndex: 2, //
+    goodtitle:'1', //商品名字
+    thingDescribe:'',//商品描述
+    currentPrice:'1',//商品价格
+    PhoneNumber:'1',//
+    thingImage:'../../images/book.png',
+    buttonLoading: false,
   },
-
+  bindCurrentPriceInput: function(e) {
+    this.setData({
+      currentPrice: e.detail.value
+    })
+  },
+  //书本信息
+  bindBookPhoneNumberInput: function(e) {
+    this.setData({
+      PhoneNumber: e.detail.value
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -98,6 +114,143 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+  //发布物品的响应事件
+  bindSubmitThing: function() {
+    var that = this;
+    var studentId = that.data.studentId;
+    if (!studentId) {
+      wx.showModal({
+        title: '提示',
+        content: '请验证您的学生身份',
+        success: function(res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+            wx.navigateTo({
+              url: '../my/mySetting/mySetting',
+            })
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    } else {
+      this.setData({
+        buttonLoading: true
+      })
+      var thingImage = that.data.thingImage; //图片
+      var thingName = that.data.thingName; //名字
+      var thingConditionIndex = that.data.thingConditionIndex; //成色索引值
+      var thingConditions = that.data.thingConditions[thingConditionIndex]; //成色
+      var thingCampusIndex = that.data.thingCampusIndex; //校区索引值
+      var thingCampus = that.data.thingCampus[thingCampusIndex]; //校区
+      var thingDescribe = that.data.thingDescribe || '无备注或描述'; //备注
+      var thingPhoneNumber = that.data.thingPhoneNumber; //电话
+      var thingPrice = that.data.thingPrice; //价格
+      var studentId = that.data.studentId;
+      var nickName = that.data.nickName;
+      var url = app.globalData.huanbaoBase + 'thingpost.php';
+      var urlImg = app.globalData.huanbaoBase + 'thingimg.php';
+      wx.request({
+        url,
+        data: {
+          thingImage: thingImage,
+          thingName: thingName,
+          thingConditions: thingConditions,
+          thingCampus: thingCampus,
+          thingDescribe: thingDescribe,
+          thingPhoneNumber: thingPhoneNumber,
+          thingPrice: thingPrice,
+          studentId: studentId,
+          nickName: nickName,
+        },
+        method: "POST",
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        success: function(res) {
+          console.log(res);
+          var currenttime = util.formatTime(new Date());
+          var currentdate = util.formatDate(new Date());
+          var thingId = res.data;
+          const uploadTask = wx.uploadFile({
+            url: urlImg,
+            filePath: thingImage[0],
+            name: 'file',
+            formData: {
+              'date': currentdate,
+              'datetime': currenttime,
+              'thingId': thingId,
+            },
+            success: function(res) {
+              console.log(res.data);
+              wx.showToast({
+                title: '发布成功',
+                icon: 'succes',
+                duration: 2500,
+                mask: true
+              })
+              that.setData({
+                buttonLoading: false,
+                thingImage: '',
+                thingName: '',
+                thingDescribe: '',
+                thingPrice: '',
+                thingPhoneNumber: '',//电话号码
+              })
+            },
+            fail: function(res) {
+              console.log(JSON.stringify(res));
+              wx.showToast({
+                title: '发布失败',
+                icon: 'loading',
+                duration: 2000
+              })
+              that.setData({
+                buttonLoading: false
+              })
+            },
+          })
+        },
+        fail: function(res) {
+          console.log(JSON.stringify(res));
+          wx.showToast({
+            title: '发布失败',
+            icon: 'loading',
+            duration: 2000
+          })
+          that.setData({
+            buttonLoading: false
+          })
+        },
+      })
+    }
+  },
+  bindThingImageInput: function() { //商品图片选择
+    var that = this;
+    wx.chooseImage({
+      count: 1,
+      sourceType: ['album', 'camera'],
+      success: function(res) {
+        var thingImage = res.tempFilePaths;
+        that.setData({
+          thingImage: thingImage
+        })
+      },
+    })
+  },
+  bindThingDescribeInput: function(e) { //商品描述
+    this.setData({
+      thingDescribe: e.detail.value
+    })
+  },
+
+  bindBookNameInput: function(e) {
+    this.setData({
+      title: e.detail.value
+    })
+  },
+
 })
 

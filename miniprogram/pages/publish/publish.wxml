@@ -1,4 +1,7 @@
 <!--miniprogram/pages/publish/publish.wxml-->
+<!-- <view style="display:flex flex-direction:row"> -->
+
+<!-- 标签栏 -->
 <view class='box'>
   <view class='wrapper'>
     <view class="tab-content {{postBook ? 'select' : 'noSelect'}} " bindtap='choosePostBook'>商品发布</view>
@@ -17,25 +20,10 @@
             <view class="weui-label">标题</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="起个亮眼的标题吧！" bindinput="bindBookNameInput" value="{{bookName}}" />
+            <input class="weui-input" placeholder="起个亮眼的标题吧！" bindinput="bindBookNameInput" value="{{goodtitle}}" />
           </view>
         </view>
-        <!-- <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">作者</view>
-          </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="请输入作者" bindinput="bindBookAuthorInput" value="{{bookAuthor}}" />
-          </view>
-        </view>
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">出版社</view>
-          </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="请输入出版社" bindinput="bindBookPressInput" value="{{bookPress}}" />
-          </view>
-        </view> -->
+       
 
       
 
@@ -77,53 +65,23 @@
             <view class="weui-label">*联系方式</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="请输入联系方式" bindinput="bindBookPhoneNumberInput" value="{{bookPhoneNumber}}" type="digit" />
+            <input class="weui-input" placeholder="请输入联系方式" bindinput="bindBookPhoneNumberInput" value="{{PhoneNumber}}" type="digit" />
           </view>
         </view>
 
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">商品描述</view>
+        </view>
+        <view class="weui-cell__bd">
+                  <textarea class="weui-input describe_thing" value='{{thingDescribe}}' bindinput="bindThingDescribeInput" placeholder="请输入物品的描述"></textarea>
+        </view>
+      </view>
 
 
       </view>
     </view>
-    <!-- <view class="weui-panel"> -->
-      <!-- <view class="weui-cell weui-cell_switch">
-        <view class="weui-cell__bd">是否为教材教辅</view>
-        <view class="weui-cell__ft">
-          <switch checked="{{isTextbook}}" bindchange="bindNeedCourse" />
-        </view>
-      </view> -->
-
- 
-
-      <!-- <view class="weui-cell weui-cell_select">
-        <view class="weui-cell__hd weui-cell__hd_in-select-after">
-          <view class="weui-label">分类</view>
-        </view>
-        <view class="weui-cell__bd">
-          <picker bindchange="bindConditionChange" value="{{conditionIndex}}" range="{{conditions}}">
-            <view class="weui-select weui-select_in-select-after">{{conditions[conditionIndex]}}</view>
-          </picker>
-        </view>
-      </view>
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">*联系方式</view>
-          </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="请输入联系方式" bindinput="bindBookPhoneNumberInput" value="{{bookPhoneNumber}}" type="digit" />
-          </view>
-        </view> -->
-      <!-- <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">备注</view>
-        </view>
-        <view class="weui-cell__bd">
-          <input class="weui-input" bindinput="bindPostRemarkInput" value='{{postRemark}}' placeholder="可不填" />
-        </view>
-      </view> -->
-    <!-- </view> -->
-    <!-- <button type="primary" size="default" disabled="{{bookName == ''||bookAuthor == ''||bookPress == ''||bookImg == ''|| currentPrice ==''|| bookPhoneNumber == '' || buttonLoading ? true : false}}" loading="{{buttonLoading}}" bindtap="bindSubmitBook">
-      立即发布 </button> -->
+    
   </view>
 </view>
 
@@ -137,7 +95,7 @@
             <view class="weui-label">标题</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="起个亮眼的标题吧！" bindinput="bindBookNameInput" value="{{bookName}}" />
+            <input class="weui-input" placeholder="起个亮眼的标题吧！" bindinput="bindBookNameInput" value="{{goodtitle}}" />
           </view>
         </view>
      
@@ -182,9 +140,18 @@
             <view class="weui-label">*联系方式</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="请输入联系方式" bindinput="bindBookPhoneNumberInput" value="{{bookPhoneNumber}}" type="digit" />
+            <input class="weui-input" placeholder="请输入联系方式" bindinput="bindBookPhoneNumberInput" value="{{PhoneNumber}}" type="digit" />
           </view>
         </view>
+
+        <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">商品描述</view>
+        </view>
+        <view class="weui-cell__bd">
+                  <textarea class="weui-input describe_thing" value='{{thingDescribe}}' bindinput="bindThingDescribeInput" placeholder="请输入物品的描述"></textarea>
+        </view>
+    </view>
 
 
 
@@ -193,3 +160,19 @@
 
   </view>
 </view>
+
+
+<!-- 图片上传 -->
+<view class="title_image" bindtap='bindThingImageInput' >
+      <image src="{{thingImage}}" mode="aspectFit" />
+</view>
+
+
+ <!-- 发布按钮 -->
+ <button type="primary" size="default" disabled="{{goodtitle == ''|| currentPrice ==''|| PhoneNumber == '' || buttonLoading ? true : false}}" loading="{{buttonLoading}}" bindtap="bindSubmitThing" >
+      立即发布 </button>
+
+<!-- </view> -->
+
+
+
