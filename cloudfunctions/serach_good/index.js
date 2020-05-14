@@ -12,19 +12,32 @@ exports.main = async (event, context) => {
   if(event.orderBy != undefined) {
     orderByKey = event.orderBy
   }
+  delete event.orderBy
   let limitKey = 100
   if(event.limit != undefined) {
     limitKey = event.limit
   }
+  delete event.limit
   let data = {}
+  data.condition = event.condition
+  delete event.condition
+  data.state = 1
   for(let key in event) {
-    if(key != 'orderBy' && key != 'limit') {
-      data[key] = db.RegExp({
-        regexp: event[key],
-        options: 'i',
-      })
-    }
+    data[key] = db.RegExp({
+      regexp: event[key],
+      options: 'i',
+    })
   }
-  const result = await db.collection('Good').orderBy(orderByKey[0], orderByKey[1]).limit(limitKey).where(data).get()
+  const result = await db.collection('Good').orderBy(orderByKey[0], orderByKey[1]).limit(limitKey).where(data).field({
+    _id: true,
+    openId: true,
+    title: true,
+    category: true,
+    oriPrice: true,
+    curPrice: true,
+    createTime: true,
+    star: true,
+    image: true,
+  }).get()
   return result.data
 }
