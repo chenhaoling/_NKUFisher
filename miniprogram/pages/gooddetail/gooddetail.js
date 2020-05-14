@@ -9,7 +9,7 @@ Page({
     detailData: {
       thingImage: '../../images/icon9.jpeg', // 物品图片
       thingName: '商品名称', //物品名字
-      thingConditions: '', //成色
+      thingConditions: '数码产品', //成色
       thingPrice: '37', //价格
       thingCampus: '津南校区', //校区
       thingPhoneNumber: '1782', //联系方式
