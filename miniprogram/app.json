@@ -1,5 +1,7 @@
 {
   "pages": [
+   
+    "pages/publish/publish",
     "pages/index/index",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
@@ -14,10 +16,11 @@
     "pages/im/im",
     "pages/im/room/room",
     "pages/gooddetail/gooddetail",
-    "pages/publish/publish",
     "pages/perInfo/perInfo",
     "pages/manager/manager",
+    "pages/test/test",
     "pages/tradedetail/tradedetail"
+   
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -39,7 +42,7 @@
         "selectedIconPath": "images/index_focus.png"
       },
       {
-        "pagePath": "pages/addFunction/addFunction",
+        "pagePath": "pages/publish/publish",
         "text": "",
         "iconPath": "images/discovery.png",
         "selectedIconPath": "images/discovery_focus.png"

@@ -1,0 +1,10 @@
+<!--miniprogram/pages/test/test.wxml-->
+<view class="section">
+    <view class="sectiontitle">普通选择器</view>
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+        <view class="picker">
+            当前选择: {{array[index]}}
+        </view>
+    </picker>
+</view>
+

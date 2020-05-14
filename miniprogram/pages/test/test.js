@@ -1,17 +1,11 @@
-// miniprogram/pages/publish/publish.js
+// miniprogram/pages/test/test.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    postBook: true,
-    postThing: false,
-    campus: ["八里台校区", "津南校区", "泰达校区"], //6
-    campusIndex: 0,
-
-    conditions: ["数码产品", "学习资料", "生活用品", "其他"], //5
-    conditionIndex: 2, //
+    array: ['美国', '中国', '巴西', '日本'],
   },
 
   /**
@@ -63,33 +57,10 @@ Page({
 
   },
 
-  choosePostBook: function(e) {
-    var that = this;
-    that.setData({
-      postBook: true,
-      postThing: false,
-   
-    })
-  },
-  choosePostThing: function(e) {
-    var that = this;
-    that.setData({
-      postBook: false,
-      postThing: true,
-    })
-  },
-
-  bindCampusChange: function(e) {
-    console.log(e);
+  bindPickerChange: function(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
-      campusIndex: e.detail.value
-    })
-  },
-
-  bindConditionChange: function(e) { //
-    console.log(e.detail);
-    this.setData({
-      conditionIndex: e.detail.value
+      index: e.detail.value
     })
   },
 
@@ -100,4 +71,3 @@ Page({
 
   }
 })
-
