@@ -17,7 +17,7 @@ exports.main = async (event, context) => {
       reporter: event.reporter
     }).get().then(res=> {
       if (res.data.length > 0) {
-        return {detail: false} //已经被该用户投诉过一次
+        return {detail: false} //已被该用户投诉过一次
       }
       else {
          db.collection('PendingCheck').add({ 
