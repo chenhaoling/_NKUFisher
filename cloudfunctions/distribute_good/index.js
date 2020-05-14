@@ -13,6 +13,7 @@ exports.main = async (event, context) => {
     delete event.create
     event.state = 1
     event.star = 0
+    event.createTime = db.serverDate()
     event.comments = []
     event.image = []
     event.openId = cloud.getWXContext().OPENID
