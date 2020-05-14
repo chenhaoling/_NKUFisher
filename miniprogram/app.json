@@ -1,6 +1,6 @@
 {
   "pages": [
-   
+    "pages/gooddetail/gooddetail",
     "pages/publish/publish",
     "pages/index/index",
     "pages/userConsole/userConsole",
@@ -15,7 +15,7 @@
     "pages/openapi/cloudid/cloudid",
     "pages/im/im",
     "pages/im/room/room",
-    "pages/gooddetail/gooddetail",
+   
     "pages/perInfo/perInfo",
     "pages/manager/manager",
     "pages/test/test",
