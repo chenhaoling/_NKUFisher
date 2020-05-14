@@ -7,6 +7,7 @@ Page({
    */
   data: {
     detailData: {
+      isbool:false,
       thingImage: '../../images/icon9.jpeg', // 物品图片
       thingName: '商品名称', //物品名字
       thingConditions: '数码产品', //成色
@@ -18,6 +19,26 @@ Page({
      
     },
 
+    "comment":[
+      {
+        'id':0,
+        'name':'ctj',
+        'content':'凯尔，你被自己的光芒变的盲目。',
+        'date':'2018年12月4日'
+      },
+      {
+        'id':1,
+        'name':'ctj',
+        'content':'凯尔，你被自己的光芒变的盲目。',
+        'date':'2018年12月4日'
+      },
+      {
+        'id':2,
+        'name':'ctj',
+        'content':'凯尔，你被自己的光芒变的盲目。',
+        'date':'2018年12月4日'
+      }
+    ]
   },
 
   /**

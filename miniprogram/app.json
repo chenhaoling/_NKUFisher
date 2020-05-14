@@ -15,7 +15,6 @@
     "pages/openapi/cloudid/cloudid",
     "pages/im/im",
     "pages/im/room/room",
-   
     "pages/perInfo/perInfo",
     "pages/manager/manager",
     "pages/test/test",
