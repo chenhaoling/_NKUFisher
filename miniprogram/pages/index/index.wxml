@@ -105,14 +105,13 @@
   </view>
 </view>
 
-
   
 
   
 
 
 <!-- 下边导航栏 -->
-<view class="cu-bar tabbar margin-bottom-xl bg-white" style="position:fixed bottom:0rpx" id="nav">
+<!-- <view class="cu-bar tabbar margin-bottom-xl bg-white" style="position:fixed bottom:0rpx" id="nav">
     <view class="action text-green">
       <view class="cuIcon-homefill"></view> 首页
     </view>
@@ -126,7 +125,7 @@
       </view>
       我的
     </view>
-  </view>
+  </view> -->
 
 
 

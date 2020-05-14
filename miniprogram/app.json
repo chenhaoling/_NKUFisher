@@ -22,6 +22,44 @@
     "navigationBarTitleText": "云开发 QuickStart",
     "navigationBarTextStyle": "black"
   },
+  "tabBar": {
+    "color": "#626567",
+    "selectedColor": "#2A8CE5",
+    "backgroundColor": "#FBFBFB",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "",
+        "iconPath": "images/index.png",
+        "selectedIconPath": "images/index_focus.png"
+      },
+      {
+        "pagePath": "pages/addFunction/addFunction",
+        "text": "",
+        "iconPath": "images/discovery.png",
+        "selectedIconPath": "images/discovery_focus.png"
+      },
+      {
+        "pagePath": "pages/chooseLib/chooseLib",
+        "text": "",
+        "iconPath": "images/ring.png",
+        "selectedIconPath": "images/ring_focus.png"
+      },
+      {
+        "pagePath": "pages/databaseGuide/databaseGuide",
+        "text": "",
+        "iconPath": "images/chat.png",
+        "selectedIconPath": "images/chat_focus.png"
+      },
+      {
+        "pagePath": "pages/im/im",
+        "text": "",
+        "iconPath": "images/burger.png",
+        "selectedIconPath": "images/burger_focus.png"
+      }
+    ]
+  },
   "sitemapLocation": "sitemap.json",
   "style": "v2"
 }
