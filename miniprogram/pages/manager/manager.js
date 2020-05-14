@@ -1,4 +1,4 @@
-// pages/index.js
+// miniprogram/pages/manager/manager.js
 Page({
 
   /**
