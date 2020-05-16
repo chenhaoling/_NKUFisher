@@ -1,2 +1,47 @@
 <!--miniprogram/pages/perInfo/perInfo.wxml-->
-<text>miniprogram/pages/perInfo/perInfo.wxml</text>
+<view class="personalMe" >
+    <image src="{{userHead}}" style="width:68px;height:68px;border:1px solid #ddd;float:left;margin:20rpx 20rpx;border-radius: 50%;"></image>
+    <view class="personalInfo">
+        <text>姓名: {{userName}}</text>
+        <!-- <view class="Phone"> -->
+         <text>手机: {{userPhone}}</text>
+         <view class="guanzhu" >
+             <text>关注:{{guanzhu}} </text> <text style="margin-left:20rpx"> 粉丝:{{fensi}}</text>
+         </view>
+         <!-- <view class="action"> -->
+                    <!-- <button class="PhoneBtn bg-green"  style="width:20vw">修改</button> -->
+            <!-- <button class="PhoneBtn cu-btn bg-green shadow" bindtap="showModal" data-target="Modal">点击修改手机号</button> -->
+         <!-- </view> -->
+        <!-- </view> -->
+        
+    </view>
+
+    <view  wx:if="{{isAdmi}}" class="Admi">
+        <text >管理员</text>
+    </view>
+
+      <view class="margin-tb-sm text-center" style="margin-top:85rpx">
+                 <button class="cu-btn round bg-green" role="button" aria-disabled="false" style="width:25vw" bindtap="showModal" data-target="Modal">修改手机</button>
+    </view>
+</view>
+
+
+ 
+
+<!-- 绑定的对话框事件 -->
+  <view class="cu-modal {{modalName=='Modal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">请输入新的手机号</view>
+      <view class="action" bindtap="hideModal">
+        <!-- <text class="cuIcon-close text-red"></text> -->
+        <text class="text-red">确定</text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      <!-- Modal 内容。 -->
+      <input class="input" name="userName" 
+        bindinput="userNameInput"/>
+    </view>
+  </view>
+</view>

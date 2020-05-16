@@ -1,1 +1,39 @@
 /* miniprogram/pages/perInfo/perInfo.wxss */
+/* pages/personal/personal.wxss */
+/** 修改button默认的点击态样式类**/
+page{
+    /*background-color:#fff;*/
+    font-size:30rpx;
+}
+
+.personalWrap{
+    /*margin:10rpx;*/
+}
+.personalMe{
+    height:250rpx;
+    margin:30rpx 0rpx 30rpx 0rpx;
+    background-color: #E0FFFF;
+}
+.personalInfo{
+    float:left;
+    margin: 20rpx 0rpx 0rpx 20rpx;
+}
+.personalInfo wx-text{
+    display: block;
+    line-height:70rpx;
+    height:70rpx;
+}
+
+.guanzhu{
+    display: flex;
+    flex-direction: row;
+    height: 50rpx;
+    justify-content: space-between;
+    /* width: 70rpx; */
+}
+
+.Admi{
+    position: absolute; /* 要约束所在位置的子元素的位置要设置成绝对 */
+    top:60rpx;
+    right: 130rpx; /* 靠右调节 */
+}

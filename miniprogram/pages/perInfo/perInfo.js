@@ -5,7 +5,30 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userHead:'../../images/icon9.jpeg',
+    userName: 'JackLin',
+    userPhone: 123456,
+    guanzhu:12,
+    fensi:11,
+    isAdmi:true,
 
+  },
+
+  showModal(e) {
+    this.setData({
+      modalName: e.currentTarget.dataset.target
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
+  },
+
+  userNameInput:function(e){
+    this.setData({
+      userPhone:e.detail.value
+    })
   },
 
   /**
