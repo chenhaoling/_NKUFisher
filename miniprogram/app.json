@@ -16,8 +16,8 @@
     "pages/openapi/cloudid/cloudid",
     "pages/im/im",
     "pages/im/room/room",
-    "pages/manager/manager",
     "pages/test/test",
+    "pages/manager/manager",
     "pages/tradedetail/tradedetail"
    
   ],
@@ -47,7 +47,7 @@
         "selectedIconPath": "images/discovery_focus.png"
       },
       {
-        "pagePath": "pages/chooseLib/chooseLib",
+        "pagePath": "pages/perInfo/perInfo",
         "text": "",
         "iconPath": "images/ring.png",
         "selectedIconPath": "images/ring_focus.png"

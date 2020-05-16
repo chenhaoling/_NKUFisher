@@ -16,6 +16,9 @@ Page({
       thingPhoneNumber: '1782', //联系方式
       thingDescribe: '哈哈哈哈哈哈你好帅', //描述备注
       poster: 'JackLin', //发布者
+
+      contentInp:'',
+  
      
     },
 
@@ -41,6 +44,18 @@ Page({
     ]
   },
 
+
+
+
+  contentInp(e) {
+    this.setData({
+      contentInp: e.detail.value
+    })
+  },
+
+  addComment: function(){
+
+  },
   /**
    * 生命周期函数--监听页面加载
    */

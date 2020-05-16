@@ -2,8 +2,9 @@
 
 .detail {
     margin-bottom: 200rpx;
+    background-color:#fff;
   }
-  .coverFadeIn {
+  /* .coverFadeIn {
     position: absolute;
     top: 0%;
     left: 0%;
@@ -15,9 +16,9 @@
     opacity: 0.7;
     filter: alpha(opacity=70);
     transition: opacity 300ms linear;
-  }
+  } */
   .detail-cont {
-    color: #666;
+    /* color: #666; */
     margin-left: 10rpx;
   }
   .detail-image {
@@ -80,79 +81,51 @@
     height: 100rpx;
   
   }
-  .addCart {
-    color: white;
-    text-align: center;
-    background-color: #F33C52;
-    flex: 1;
-    line-height: 100rpx;
-  }
-  .buyNow {
-    color: white;
-    text-align: center;
-    background-color: #D0011B;
-    flex: 1;
-    line-height: 100rpx;
-  }
-  .paySlideUp {
-    position: fixed;
-    bottom: 0rpx;
-    height: 640rpx;
-    width: 100%;
-    background-color: #fff;
-    z-index: 999;
-    transition: bottom 300ms linear;
-  }
-  .paySlideDown {
-     position: fixed;
-    bottom: -640rpx;
-    height: 640rpx;
-    width: 100%;
-    background-color: #fff;
-    z-index: 999;
-    transition: bottom 300ms linear;
-  }
-  
+
   .thing-detail {
     display: flex;
   }
-  .pay-img{
-    width: 240rpx;
-    height: 280rpx;
-    margin: 20rpx;
-  }
-  .thing-messege {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around; 
-  }
-  .thingPrice {
-    color: #f40;
-  }
-  .delete {
-    position: absolute;
-    top: 20rpx;
-    right: 20rpx;
-    font-size: 48rpx;
-    color: #666;
-  }
+
   .content {
-     background-color: white;
+     /* background-color: white; */
+     background-color:white;
   }
-  .attention,
-  .prompt {
-    padding: 10rpx 20rpx;
-    font-family: tahoma,arial,\5FAE\8F6F\96C5\9ED1,sans-serif;
-    font: 12px/1.5 tahoma,arial,"\5b8b\4f53";
-    font: 400 12px/1.5 "Microsoft Yahei",tahoma,arial
+  
+   
+
+  .ask {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 90rpx;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
   }
-  .thing-buy {
-    margin: 30rpx auto;
-    color: #fff;
-    text-align: center;
-    line-height: 80rpx;
-    width: 700rpx;
+
+  .input {
     height: 80rpx;
-    background: linear-gradient(to right, #FF7802,#FF4A00);
-    border-radius: 40rpx;
+    width: 600rpx;
+    border: 1rpx solid #f1f1f1;
+    /* margin: 5rpx 0rpx 5rpx 10rpx; */
+    border-radius: 30rpx;
+    background: #f1f5fc;
+    font-size: 25rpx;
+    text-align: center;
   }
+   
+  .button {
+    background: #6fb442;
+    color: white;
+    border-radius: 30rpx;
+    font-size: 30rpx;
+    width: 130rpx;
+    height: 60rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 12rpx 20rpx;
+  }
+
+  
+/* .icon-shoucang2{color:red;} */

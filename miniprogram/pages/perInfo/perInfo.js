@@ -5,8 +5,15 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userHead:'../../images/icon9.jpeg',
+    userName: 'JackLin',
+    userPhone: 123456,
+    guanzhu:12,
+    fensi:11,
+    isAdmi:true,
 
   },
+
   jump:function(e){
     wx.navigateTo({
       url: '../index/index',
@@ -20,6 +27,24 @@ Page({
     
       },
      })
+  },
+
+
+  showModal(e) {
+    this.setData({
+      modalName: e.currentTarget.dataset.target
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
+  },
+
+  userNameInput:function(e){
+    this.setData({
+      userPhone:e.detail.value
+    })
   },
   /**
    * 生命周期函数--监听页面加载
