@@ -1,1 +1,11 @@
 /* miniprogram/pages/perInfo/perInfo.wxss */
+.btm {
+  border: 0;
+  border-radius: 0;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 38rpx;
+  color: #e94f4f;
+
+}
+
