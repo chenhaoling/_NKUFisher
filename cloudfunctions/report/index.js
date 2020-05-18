@@ -35,7 +35,6 @@ exports.main = async (event, context) => {
       goodId: event.goodId,
       reporter: event.reporter
     }).get().then(res=> {
-      console.log(res.data[0].length)
       if (res.data.length > 0 ) {
         for (let i = 0; i < res.data.length; i++) {
           if (res.data[i].commentId == undefined) {
@@ -56,3 +55,4 @@ exports.main = async (event, context) => {
     })
   }
 }
+
