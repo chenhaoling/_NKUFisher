@@ -20,8 +20,13 @@ exports.main = async (event, context) => {
         return {detail: false} //已被该用户投诉过一次
       }
       else {
+        data = {}
+        data.goodId = event.goodId
+        data.commentId = event.commentId
+        data.reporter = event.reporter
+        data.identity = 2
          db.collection('PendingCheck').add({ 
-          data: event
+          data: data
         })
         return {detail: true}
       }
@@ -47,8 +52,12 @@ exports.main = async (event, context) => {
         return {detail: true} 
       }
       else {
+        data = {}
+        data.goodId = event.goodId
+        data.reporter = event.reporter
+        data.identity = 3
          db.collection('PendingCheck').add({ 
-          data: event
+          data: data
         })
         return {detail: true}
       }
