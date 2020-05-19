@@ -14,6 +14,7 @@ exports.main = async (event, context) => {
   event.love = []
   event.fans = []
   event.role = 'user'
+  event.contact = ""
   const result = await db.collection('User').add({
     data: event
   })

@@ -6,7 +6,7 @@ cloud.init({
 
 const db = cloud.database()
 
-const resetable = ['nickName', 'avatar']
+const resetable = ['nickName', 'avatar', 'contact']
 
 exports.main = async (event, context) => {
   const openId =  cloud.getWXContext().OPENID
