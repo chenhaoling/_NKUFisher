@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/manager/manager",
     "pages/perInfo/perInfo",
     "pages/gooddetail/gooddetail",
     "pages/publish/publish",
@@ -17,7 +18,6 @@
     "pages/im/im",
     "pages/im/room/room",
     "pages/test/test",
-    "pages/manager/manager",
     "pages/tradedetail/tradedetail"
    
   ],
