@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+
     "comment":[
       {
         'id':0,
@@ -44,7 +45,21 @@ Page({
         "content":"折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！",
         "price":"88"
       },
-    ]
+    ],
+
+    //导航栏的数据
+    postBook: true,
+    postThing: false,
+    postJob: false,
+
+    perImg: '../../images/icon9.jpeg',
+
+    //个人信息
+    name:'JackLin',
+    stuId:'123456',
+    college:'软件学院',
+    phoneNum:'110'
+
   },
 
   /**
@@ -95,6 +110,38 @@ Page({
   onReachBottom: function () {
 
   },
+    //导航栏的响应事件
+    choosePostBook: function(e) {
+      var that = this;
+      that.setData({
+        postBook: true,
+        postThing: false,
+        postJob: false
+      })
+    },
+    choosePostThing: function(e) {
+      var that = this;
+      that.setData({
+        postBook: false,
+        postThing: true,
+        postJob: false
+      })
+    },
+    choosePostJob: function(e) {
+      var that = this;
+      that.setData({
+        postBook: false,
+        postThing: false,
+        postJob: true
+      })
+    },
+
+    pass: function(e){
+      console.log("通过");
+    },
+    noPass:function(e){
+      console.log(e);
+    },
 
   /**
    * 用户点击右上角分享

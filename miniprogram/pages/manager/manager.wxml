@@ -1,3 +1,27 @@
+
+
+
+
+<!--miniprogram/pages/manager/manager.wxml-->
+<view class='box'>
+
+    <view class="flex-sub text-center">
+        <view class="solid-bottom text-lg padding">
+            <text class="text-black">管理员</text>
+        </view>
+    </view>
+
+  <view class='wrapper'>
+    <view class="tab-content {{postBook ? 'select' : 'noSelect'}} " bindtap='choosePostBook'>身份验证</view>
+    <view class="tab-content {{postThing ? 'select' : 'noSelect'}}" bindtap='choosePostThing'>商品举报</view>
+    <view class="tab-content {{postJob ? 'select' : 'noSelect'}}" bindtap='choosePostJob'>评论处理</view>
+  </view>
+</view>
+
+
+
+<!-- 商品举报 -->
+<view class='weui-panel outside_border' wx:if="{{postThing}}">    
 <!-- 商品卡片 -->
  <view class="cu-card article {{isCard?'no-card':''}}">
   <view class="cu-item shadow" wx:for="{{good}}" wx:key ="{{index}}">
@@ -20,6 +44,11 @@
   </view>
 </view>
 
+</view>
+
+<!-- 评论处理 -->
+<view class='weui-panel outside_border' wx:if="{{postJob}}">
+    
   <!-- 评论卡片 -->
       <view class="cu-list menu-avatar comment solids-top">
         <view class="cu-item"  wx:for = "{{comment}}" wx:key = "{{index}}">
@@ -43,4 +72,9 @@
           </view>
         </view>
       </view>
+
+</view>
+
+
+
 

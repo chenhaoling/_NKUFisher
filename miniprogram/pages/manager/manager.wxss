@@ -1,1 +1,75 @@
 /* miniprogram/pages/manager/manager.wxss */
+.box{
+    width: 100%;
+    height: 200rpx;
+    background-color: #EAEAEA;
+}
+
+.wrapper {
+    /* margin-top: 70rpx; */
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 80rpx;
+  }
+
+  .tab-content {
+    width: 240rpx;
+    height: 76rpx;
+    text-align: center;
+    line-height: 76rpx;
+  }
+  .select {
+    border-bottom-width: 2rpx;
+    border-bottom-style: solid;
+    border-bottom-color: blue;
+    color: blue;
+  }
+
+  .noSelect {
+    color: #666;
+  }
+
+  .total{
+    margin: 5rpx;
+  }
+
+  .title{
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-be */
+}
+
+.title_right{
+    margin-left: 50rpx;
+
+    display: flex;
+    flex-direction: column;
+}
+.title_image {
+    margin-left: 30rpx;
+  /* margin: auto 0rpx; */
+  /* border: 1rpx solid #d3d3d3; */
+}
+.title_image image {
+  width: 190rpx;
+  height: 230rpx;
+  /* width: 100%; */
+  /* height: 100%; */
+}
+
+.weui-cell_input {
+  margin-top: 4rpx;
+}
+.weui-label {
+  width: 170rpx;
+}
+
+.check{
+    display: flex;
+}
+
+
+.check .btn{
+    background-color: #B0B0B0;
+}
