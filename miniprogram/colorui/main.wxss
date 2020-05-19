@@ -1365,7 +1365,7 @@ button.icon.lg {
 }
 
 .cu-list.menu>.cu-item.grayscale {
-	background-color: #f5f5f5
+	background-color:#e8f4d9
 }
 
 .cu-list.menu>.cu-item.cur {
