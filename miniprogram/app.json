@@ -1,6 +1,8 @@
 {
   "pages": [
+    "pages/collection/collection",
     "pages/manager/manager",
+    "pages/otherInfo/otherInfo",
     "pages/perInfo/perInfo",
     "pages/gooddetail/gooddetail",
     "pages/publish/publish",
@@ -19,7 +21,6 @@
     "pages/im/room/room",
     "pages/test/test",
     "pages/tradedetail/tradedetail"
-   
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

@@ -10,6 +10,8 @@ Page({
     userPhone: 123456,
     guanzhu:12,
     fensi:11,
+    isAdmi:true,
+
   },
 
   jump:function(e){
