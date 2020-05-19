@@ -1,0 +1,87 @@
+
+<button class="cu-btn round bg-green"  bindtap="showModal" data-target="Modal">修改手机</button>
+
+
+    <!-- 绑定的对话框事件 -->
+<view class="cu-modal {{modalName=='Modal'?'show':''}}">
+    <!-- 绑定的对话框事件 -->
+  <view class="cu-modal {{modalName=='Modal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <!-- <view class="content">请输入新的手机号</view> -->
+      <view class="action" bindtap="hideModal">
+        <!-- <text class="cuIcon-close text-red"></text> -->
+        <text class="text-red">确定</text>
+      </view>
+    </view>
+
+
+    <!-- <view class="weui-panel">
+    <view class="title"> -->
+
+      <view class="title_right">
+        <view class="weui-cell weui-cell_input">
+          <view>
+            <view class="weui-label">姓名</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="请输入您的姓名！" bindinput="bindBookNameInput" value="{{name}}" />
+          </view>
+        </view>
+       
+
+      
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">学号</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="输入让您的学号！" bindinput="bindCurrentPriceInput" value="{{stuId}}" type="digit" />
+          </view>
+        </view>
+
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">学院</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="请输入您的学院" bindinput="bindBookcollegeInput" value="{{college}}" type="digit" />
+          </view>
+        </view>
+
+        
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">手机</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="请输入您的手机号" bindinput="bindBookPhoneNumberInput" value="{{phoneNum}}" type="digit" />
+          </view>
+        </view>
+
+      </view>
+
+
+      <!-- 图片上传 -->
+<view class="title_image" bindtap='bindThingImageInput' >
+      <!-- <image src="{{thingImage}}" mode="aspectFit" /> -->
+      <image src="{{thingImage}}" />
+</view>
+<view class="wenben">
+    <text >请上传学生证或者学子卡照片</text>
+</view>
+<!-- 
+    </view>
+    
+  </view> -->
+
+    <!-- <view class="padding-xl"> -->
+      <!-- Modal 内容。 -->
+      <!-- <input class="input" name="userName" 
+        bindinput="userNameInput"/>
+    </view> -->
+  </view>
+</view>
+  
+</view>

@@ -47,3 +47,61 @@ page{
     top:60rpx;
     right: 130rpx; /* 靠右调节 */
 }
+
+
+.weui-cell_input {
+    margin-top: 4rpx;
+  }
+  .weui-label {
+    width: 170rpx;
+  }
+
+.outside_border {
+    width: 98%;
+    margin: 0rpx auto;
+    /* margin-top: 30rpx; */
+    margin-bottom: 20rpx;
+}
+
+.title_right{
+    display: flex;
+    flex-direction: column;
+}
+
+  /* .describe {
+    border: 1px solid #d3d3d3;
+    height: 340rpx;
+    line-height: 28rpx;
+    width: 535rpx;
+    margin-bottom: 5rpx;
+  }
+  .describe_thing {
+  border: 1px solid #d3d3d3;
+    height: 320rpx;
+    line-height: 28rpx;
+    width: 535rpx;
+    margin-bottom: 5rpx;
+    margin-top: 5rpx;
+  } */
+  
+  .title_image {
+    /* margin: auto 0rpx; */
+    /* background-color: red; */
+    /* border: 1rpx solid #d3d3d3; */
+    width: 30%;
+    /* height: 300rpx; */
+    margin-left: 260rpx;
+    /* margin-bottom: 50rpx; */
+  }
+
+  .title_image image {
+    width: 200rpx;
+    height: 220rpx;
+    
+  }
+
+  .xiugaiPhone{
+    position: absolute; /* 要约束所在位置的子元素的位置要设置成绝对 */
+    top:120rpx;
+    right: 80rpx; 
+  }
