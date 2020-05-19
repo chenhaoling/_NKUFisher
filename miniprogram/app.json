@@ -1,7 +1,9 @@
 {
   "pages": [
-    "pages/manager/manager",
     "pages/perInfo/perInfo",
+    "pages/test/test",
+    "pages/manager/manager",
+   
     "pages/gooddetail/gooddetail",
     "pages/publish/publish",
     "pages/index/index",
@@ -17,7 +19,7 @@
     "pages/openapi/cloudid/cloudid",
     "pages/im/im",
     "pages/im/room/room",
-    "pages/test/test",
+    
     "pages/tradedetail/tradedetail"
    
   ],

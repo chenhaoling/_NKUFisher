@@ -11,7 +11,60 @@ Page({
     guanzhu:12,
     fensi:11,
     isAdmi:true,
+    name:'1', //商品名字
+    thingDescribe:'',//商品描述
+    currentPrice:'1',//商品价格
+    college:'软件学院',//
+    thingImage:'../../images/xiangji.jpg',
+    stuId:'123',
+    phoneNum: '123678',
+    buttonLoading: false,
 
+  },
+
+  bindCurrentPriceInput: function(e) {
+    this.setData({
+      stuId: e.detail.value
+    })
+  },
+  //书本信息
+  bindBookcollegeInput: function(e) {
+    this.setData({
+      college: e.detail.value
+    })
+  },
+  bindBookPhoneNumberInput: function(e){
+      this.setData({
+          phoneNum: e.detail.value
+        })
+  },
+  showModal(e) {
+    this.setData({
+      modalName: e.currentTarget.dataset.target
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
+  },
+  bindThingImageInput: function() { //商品图片选择
+    var that = this;
+    wx.chooseImage({
+      count: 1,
+      sourceType: ['album', 'camera'],
+      success: function(res) {
+        var thingImage = res.tempFilePaths;
+        that.setData({
+          thingImage: thingImage
+        })
+      },
+    })
+  },
+  bindBookNameInput: function(e) {
+    this.setData({
+      name: e.detail.value
+    })
   },
 
   jump:function(e){
@@ -45,6 +98,10 @@ Page({
     this.setData({
       userPhone:e.detail.value
     })
+  },
+
+  verify:function(e){
+    console.log("shenfen");
   },
   /**
    * 生命周期函数--监听页面加载
