@@ -128,8 +128,8 @@
     <view class="check">
         <!-- <button class="btn">通过</button> -->
         <!-- <button class="cu-btn round btn" style="width:30vw" bindtap="pass">通过</button> -->
-         <button class="cu-btn round line-cyan" style="margin-top:10rpx width:30vw" bindtap="pass">通过</button>
-        <button class="cu-btn round line-cyan" style="margin-top:10rpx width:30vw" bindtap="noPass">不通过</button>
+         <button class="cu-btn round line-cyan" style="width:30vw" bindtap="pass">通过</button>
+        <button class="cu-btn round line-cyan" style="width:30vw" bindtap="noPass">不通过</button>
         <!-- <button class="cu-btn round bg-green" style="width:25vw" >通过</button> -->
         <!-- <button class="cu-btn round bg-green" style="width:25vw" >不通过</button> -->
         <!-- <button class="cu-btn round btn" style="width:30vw" bindtap="noPass">不通过</button> -->
@@ -157,8 +157,8 @@
       </view>
     </view>
         <view style="display:flex margin-top:500rpx">
-        <button class="cu-btn round line-cyan" style="margin-top:10rpx">忽略</button>
-        <button class="cu-btn round line-cyan" style="margin-top:10rpx">下架</button>
+        <button class="cu-btn round line-cyan" style="width:30vw">忽略</button>
+        <button class="cu-btn round line-cyan" style="width:30vw">下架</button>
       </view>  
   </view>
 </view>

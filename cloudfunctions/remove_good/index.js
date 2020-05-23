@@ -23,9 +23,4 @@ exports.main = async (event, context) => {
     }
     return {detail: true}
   }
-  result = await db.collection('User').doc(openId).get()
-  if(result.data.role == 'admin') {
-    await db.collection('Good').doc(event._id).remove()
-  }
-  return {detail: true}
 }
