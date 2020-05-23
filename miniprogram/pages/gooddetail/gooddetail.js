@@ -7,9 +7,14 @@ Page({
    */
   data: {
     'goodinfo':'',
+    'otheruser':''
   },
 
-
+  getotheruserinfo:function(e){
+    wx.navigateTo({
+      url: '../otherInfo/otherInfo',
+    })
+  },
 
 
   contentInp(e) {
@@ -25,11 +30,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    // this.setData({
+    //   goodinfo:JSON.parse(options.goodinfo),
+    //   otheruser:JSON.parse(options.otheruser),
+    // }),
     var that = this
-    that.setData({
-      goodinfo:JSON.parse(options.goodinfo)
-    })
-    // let good = JSON.parse(options.goodinfo)
+    wx.getStorage({
+      key: 'goodinfo',
+      success:function(res){
+        that.setData({
+          goodinfo:res.data
+        })
+      }
+    }),
+    wx.getStorage({
+      key: 'otheruser',
+      success:function(res){
+        that.setData({
+          otheruser:res.data
+        })
+      }
+    }),
     console.log(that.data.goodinfo)
   },
 
@@ -44,31 +65,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    var that = this;
-    var studentId = that.data.studentId; //学生id
-    var nickName = that.data.nickName;
-    try { 
-      var value = wx.getStorageSync('studentIdSync')
-      if (value) {
-        console.log(value); //同步得到studentId的值
-        that.setData({
-          studentId: value
-        })
-      }
-    } catch (e) {
-      console.log(0);
-    }
-    try {
-      var value = wx.getStorageSync('nickName')
-      if (value) {
-        that.setData({
-          nickName: value
-        })
-      }
-    } catch (e) {
-      // Do something when catch error
-    }
-    console.log(studentId);
+
   },
 
   /**
