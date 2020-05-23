@@ -7,6 +7,8 @@ Page({
   data: {
     navTab:["发布的商品", "求购的商品"],
     goodslist: [],
+    id:'',
+	  navTab:["发布的商品", "求购的商品"],
     // currentNavtab: "0",
     TabCur: 0,
     scrollLeft:0,
@@ -43,8 +45,52 @@ Page({
       type: 'image',
       url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big21016.jpg'
     }],
+    "good":[
+      {
+        "id":"05f2c36f5ebcf44c00cb82d25f35128c",
+        "name":"This is a test",
+        "content":"折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！",
+        "price":"88"
+      },
+      {
+        "id":'1',
+        "name":"This is a test",
+        "content":"折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！",
+        "price":"88"
+      },
+      {
+        "id":'2',
+        "name":"This is a test",
+        "content":"折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！",
+        "price":"88"
+      }]
   },
-
+  getInfo:function(e){
+    wx.cloud.callFunction({
+      name: 'good_info',
+      data:{_id:e.currentTarget.dataset.id},
+      // complete: res => {
+      //   console.log(res)
+      // }
+      success:function(res){
+        console.log("成功")
+        let goodinfo = JSON.stringify(res.result);
+        console.log(res.result.openId)
+        wx.cloud.callFunction({
+          name: 'user_info',
+          data: {_id:res.result.openId},
+          complete: res => {
+            console.log("获取用户信息成功")
+            console.log(res.result)
+          }
+        }),
+        wx.navigateTo({
+          url: '../gooddetail/gooddetail?goodinfo='+goodinfo,
+        })
+      },
+      fail:console.error
+    })  
+  },
   // cardSwiper
   cardSwiper(e) {
     this.setData({

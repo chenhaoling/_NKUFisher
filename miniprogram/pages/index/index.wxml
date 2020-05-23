@@ -1,7 +1,3 @@
-
-
-
-
 <!-- 搜索框 -->
  <view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px">
       <view class="search-form round">
@@ -21,9 +17,6 @@
     </swiper-item>
   </swiper> 
   </view>
-
-
-
 
 <!-- 标签页 -->
 
@@ -49,14 +42,6 @@
   </view>
 
 
- 
-
-
-
-
-
-
-
 <!-- 商品分类标签 -->
 <view>
   <scroll-view scroll-x class="bg-white nav">
@@ -67,8 +52,6 @@
   </view>
 </scroll-view>
 </view>
-
-
 
 <!-- 卡片 -->
  <view class="cu-card article {{isCard?'no-card':''}}">
@@ -87,43 +70,22 @@
   </view>
 </view>
 
-
-<!-- 卡片 -->
- <!-- <view class="cu-card article {{isCard?'no-card':''}}">
-  <view class="cu-item shadow">
-    <view class="content">		
-			<image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"  mode="aspectFill" style="height:280rpx"></image>   
+<!-- 商品卡片 -->
+ <view class="cu-card article {{isCard?'no-card':''}}">
+  <view class="cu-item shadow" wx:for="{{good}}" wx:key ="{{index}}">
+      <view class="content" data-id='{{good[index].id}}' bindtap="getInfo">		
+      <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"  mode="aspectFill" style="height:280rpx"></image>  
       <view class="desc">
-      		<view class="text-cut">商品名：</view>
-					<view class="text-cut">商品详情：</view>
-        	<view class="text-content"> 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！</view>
-        	<view>
-					<view><text style="color:red" >￥88</text></view>
-      </view>
+
+        <view class="text-cut">商品名:{{good[index].name}}</view>
+        <view class="text-cut">商品详情:</view>
+        <view class="text-content">{{good[index].content}}</view>
+        <view>
+        <view><text style="color:red" >￥{{good[index].price}}</text></view>     
+      </view>     
       </view>
     </view>
   </view>
-</view> -->
+</view> 
 
-  
-
-  
-
-
-<!-- 下边导航栏 -->
-<!-- <view class="cu-bar tabbar margin-bottom-xl bg-white" style="position:fixed bottom:0rpx" id="nav">
-    <view class="action text-green">
-      <view class="cuIcon-homefill"></view> 首页
-    </view>
-    <view class="action text-gray add-action">
-      <button class="cu-btn cuIcon-add bg-green shadow"></button>
-      发布
-    </view>
-    <view class="action text-gray">
-      <view class="cuIcon-my">
-        <view class="cu-tag badge"></view>
-      </view>
-      我的
-    </view>
-  </view>
 

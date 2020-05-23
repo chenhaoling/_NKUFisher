@@ -27,14 +27,14 @@
     <view class='detail-sell'>售价</view>
   </view>
   <view class='detail-cont'>
-    <view class='detail-title'>物品：{{detailData.thingName}}</view>
-    <view class='detail-poster'>发布者：{{detailData.poster}}</view>
+    <view class='detail-title'>物品：{{goodinfo.title}}</view>
+    <view class='detail-poster'>发布者：{{goodinfo.openId}}</view>
     <view class='detail-detail-box'>
-    <image class='detail-detail-image' src='../movie-detail/2.png'></image>
+    <image class='detail-detail-image' src=''></image>
     </view>
     <view style='color: green'>校区：{{detailData.thingCampus}}</view>
-    <view style='color: green'>类别：{{detailData.thingConditions}}</view>
-    <view class='detail-detail'>产品详情：{{detailData.thingDescribe}}</view>
+    <view style='color: green'>类别：{{goodinfo.category}}</view>
+    <view class='detail-detail'>产品详情：{{goodinfo.detail}}</view>
   </view>
 
 
@@ -44,21 +44,21 @@
 
   <!-- 评论 -->
       <view class="cu-list menu-avatar comment solids-top">
-        <view class="cu-item"  wx:for = "{{comment}}" wx:key = "{{index}}">
+        <view class="cu-item"  wx:for = "{{goodinfo.comments}}" wx:key = "{{index}}">
           <view class="cu-avatar round" style="background-image:url(https://ossweb-img.qq.com/images/lol/img/champion/Morgana.png);"></view>
           <view class="content">
             <view>
-              <view class="text-grey" style="width:95%">{{comment[index].name}}</view>
+              <view class="text-grey" style="width:95%">{{goodinfo.comments[index].name}}</view>
               <view wx:if = "{{index == 1}}">
                 <text class="cuIcon-roundclosefill lg text-gray"></text>
               </view>
             </view>
             
             <view class="text-gray text-content text-df">
-              {{comment[index].content}}
+              {{goodinfo.comments[index].content}}
             </view>
             <view class="margin-top-sm flex justify-between">
-              <view class="text-gray text-df"> {{comment[index].date}}</view>
+              <view class="text-gray text-df"> {{goodinfo.comments[index].date}}</view>
               <view>
                 <text class="cuIcon-warnfill lg text-gray" ></text>
               </view>
