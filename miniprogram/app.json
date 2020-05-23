@@ -1,12 +1,12 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/collection/collection",
     "pages/manager/manager",
     "pages/otherInfo/otherInfo",
     "pages/perInfo/perInfo",
     "pages/gooddetail/gooddetail",
     "pages/publish/publish",
-    "pages/index/index",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
     "pages/databaseGuide/databaseGuide",

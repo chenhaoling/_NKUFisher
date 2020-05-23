@@ -6,7 +6,7 @@
  <view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px">
       <view class="search-form round">
         <text class="icon-search"></text>
-        <input type="text" placeholder="搜索" confirm-type="search" bindinput="searchIcon"></input>
+        <input type="text" placeholder="搜索" confirm-type="search" bindinput="searchIcon" style="margin-left:15rpx"></input>
       </view>
   </view>
     
