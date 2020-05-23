@@ -9,9 +9,11 @@ const db = cloud.database()
 const resetable = ['nickName', 'avatar', 'contact']
 
 exports.main = async (event, context) => {
-  const openId =  cloud.getWXContext().OPENID
+  let openId =  cloud.getWXContext().OPENID
   delete event.userInfo
   let data = {}
+  if(event._id != undefined)
+    openId = event._id
   let empty = true
   for(let index = 0; index < resetable.length; index++) {
     if(resetable[index] in event) {
