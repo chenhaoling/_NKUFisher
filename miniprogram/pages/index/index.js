@@ -65,7 +65,7 @@ Page({
         "price":"88"
       }]
   },
-  getInfo:function(e){
+  getgoodInfo:function(e){
     wx.cloud.callFunction({
       name: 'good_info',
       data:{_id:e.currentTarget.dataset.id},
@@ -110,7 +110,7 @@ Page({
       scrollLeft: (e.currentTarget.dataset.id-1)*60,
       isAnounce:  e.currentTarget.dataset.id === 0 ? true : false,
     }),
-    this.getInfo(),
+    this.getInfo()
     console.log(e.currentTarget.dataset.id)
   },
 
@@ -120,7 +120,7 @@ Page({
       scrollLeft2: (e.currentTarget.dataset.id-1)*60,
       isAnounce2:  e.currentTarget.dataset.id === 0 ? true : false,
     }),
-    this.getInfo(),
+    this.getInfo()
     console.log(this.data.TabCur2)
   },
 
@@ -150,16 +150,18 @@ Page({
     wx.cloud.callFunction({
       name: 'serach_good',
       data: {condition:con,
-            //  category:cate,    
+             category:cate,    
       },
       complete: res => {
         console.log(res.result[1]),
-        this.data.goodslist = res.result
-
-        for (var index in this.data.goodslist) {
-              console.log(this.data.goodslist[index].category),
-          console.log(this.data.goodslist[index]._id)
-           }
+        this.setData({
+          goodslist:res.result
+        })
+        console.log(this.data.goodslist)
+        // for (var index in this.data.goodslist) {
+        //       console.log(this.data.goodslist[index].category),
+        //   console.log(this.data.goodslist[index]._id)
+        //    }
       // console.log(this.data.list)
       }
      

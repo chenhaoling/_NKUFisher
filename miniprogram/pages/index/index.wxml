@@ -54,7 +54,7 @@
 </view>
 
 <!-- 卡片 -->
- <view class="cu-card article {{isCard?'no-card':''}}">
+ <!-- <view class="cu-card article {{isCard?'no-card':''}}">
   <view class="cu-item shadow">
     <view class="content">		
 			<image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"  mode="aspectFill" style="height:280rpx"></image>   
@@ -68,12 +68,32 @@
       </view>
     </view>
   </view>
-</view>
+</view> -->
+
+<!-- 商品卡片 -->
+ <view class="cu-card article {{isCard?'no-card':''}}">
+  <view class="cu-item shadow" wx:for="{{goodslist}}" wx:for-item="goods">
+      <view class="content" data-id='{{goods._id}}' bindtap="getgoodInfo">		
+      <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"  mode="aspectFill" style="height:280rpx"></image>  
+      <view class="desc">
+
+        <view class="text-cut">商品名:{{goods.title}}</view>
+        <view class="text-cut">商品详情:</view>
+        <view class="text-content">{{goods.detail}}</view>
+        <view>
+        <view><text style="color:red" >￥{{goods.curPrice}}</text></view>     
+      </view>     
+      </view>
+    </view>
+  </view>
+</view> 
+
+
 
 <!-- 商品卡片 -->
  <view class="cu-card article {{isCard?'no-card':''}}">
   <view class="cu-item shadow" wx:for="{{good}}" wx:key ="{{index}}">
-      <view class="content" data-id='{{good[index].id}}' bindtap="getInfo">		
+      <view class="content" data-id='{{good[index].id}}' bindtap="getgoodInfo">		
       <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"  mode="aspectFill" style="height:280rpx"></image>  
       <view class="desc">
 
@@ -87,5 +107,4 @@
     </view>
   </view>
 </view> 
-
 
