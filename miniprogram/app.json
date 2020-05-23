@@ -1,13 +1,16 @@
 {
   "pages": [
+    "pages/index/index",
+    "pages/publish/publish",
+    "pages/perInfo/perInfo",
     "pages/collection/collection",
     "pages/manager/manager",
     "pages/otherInfo/otherInfo",
-    "pages/perInfo/perInfo",
+   
     "pages/test/test",
     "pages/gooddetail/gooddetail",
-    "pages/publish/publish",
-    "pages/index/index",
+    
+   
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
     "pages/databaseGuide/databaseGuide",
@@ -38,34 +41,23 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "",
-        "iconPath": "images/index.png",
-        "selectedIconPath": "images/index_focus.png"
+        "text": "首页",
+        "iconPath": "images/index_1.png",
+        "selectedIconPath": "images/index_.png"
       },
       {
         "pagePath": "pages/publish/publish",
-        "text": "",
-        "iconPath": "images/discovery.png",
-        "selectedIconPath": "images/discovery_focus.png"
+        "text": "发布",
+        "iconPath": "images/publish_1.png",
+        "selectedIconPath": "images/publish_.png"
       },
       {
         "pagePath": "pages/perInfo/perInfo",
-        "text": "",
-        "iconPath": "images/ring.png",
-        "selectedIconPath": "images/ring_focus.png"
-      },
-      {
-        "pagePath": "pages/databaseGuide/databaseGuide",
-        "text": "",
-        "iconPath": "images/chat.png",
-        "selectedIconPath": "images/chat_focus.png"
-      },
-      {
-        "pagePath": "pages/im/im",
-        "text": "",
-        "iconPath": "images/burger.png",
-        "selectedIconPath": "images/burger_focus.png"
+        "text": "我的",
+        "iconPath": "images/user_1.png",
+        "selectedIconPath": "images/user_.png"
       }
+
     ]
   },
   "sitemapLocation": "sitemap.json",
