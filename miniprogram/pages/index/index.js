@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-	  navTab:["发布的商品", "求购的商品"],
+    navTab:["发布的商品", "求购的商品"],
+    goodslist: [],
     // currentNavtab: "0",
     TabCur: 0,
     scrollLeft:0,
@@ -63,7 +64,8 @@ Page({
       scrollLeft: (e.currentTarget.dataset.id-1)*60,
       isAnounce:  e.currentTarget.dataset.id === 0 ? true : false,
     }),
-    console.log(e)
+    this.getInfo(),
+    console.log(e.currentTarget.dataset.id)
   },
 
   tabSelect2(e) {
@@ -72,11 +74,51 @@ Page({
       scrollLeft2: (e.currentTarget.dataset.id-1)*60,
       isAnounce2:  e.currentTarget.dataset.id === 0 ? true : false,
     }),
-    console.log(e)
+    this.getInfo(),
+    console.log(this.data.TabCur2)
   },
 
    getmes:function(e){
     console.log(e)
+  },
+
+  getInfo :function(){
+    var con = 1;
+    var cate = "";
+    if(this.data.TabCur == 0){//发布
+      con = 1
+    }else{
+      con = 0
+    }
+    if(this.data.TabCur2 == 0){
+      cate = "数码产品"
+    }else if(this.data.TabCur2 == 1){
+      cate = "学习资料"
+    }else if(this.data.TabCur2 == 2){
+      cate = "生活用品"
+    }else{
+      cate = "其他"
+    }
+    console.log(con),
+    console.log(cate),
+    wx.cloud.callFunction({
+      name: 'serach_good',
+      data: {condition:con,
+            //  category:cate,    
+      },
+      complete: res => {
+        console.log(res.result[1]),
+        this.data.goodslist = res.result
+
+        for (var index in this.data.goodslist) {
+              console.log(this.data.goodslist[index].category),
+          console.log(this.data.goodslist[index]._id)
+           }
+      // console.log(this.data.list)
+      }
+     
+    })
+    
   },
   
   /**

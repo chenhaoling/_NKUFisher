@@ -5,6 +5,38 @@ Page({
    * 页面的初始数据
    */
   data: {
+    "identify":[
+      {
+        'id': 0,
+        'perImg': '../../images/icon9.jpeg',
+
+        //个人信息
+        'name':'JackLin',
+        'stuId':'123456',
+        'college':'软件学院',
+        'phoneNum':'110'
+      },
+      {
+        'id': 1,
+        'perImg': '../../images/icon9.jpeg',
+
+        //个人信息
+        'name':'JackLin',
+        'stuId':'123456',
+        'college':'软件学院',
+        'phoneNum':'110'
+      },
+      {
+        'id': 2,
+        'perImg': '../../images/icon9.jpeg',
+
+        //个人信息
+        'name':'JackLin',
+        'stuId':'123456',
+        'college':'软件学院',
+        'phoneNum':'110'
+      },
+    ],
 
     "comment":[
       {
@@ -52,13 +84,7 @@ Page({
     postThing: false,
     postJob: false,
 
-    perImg: '../../images/icon9.jpeg',
 
-    //个人信息
-    name:'JackLin',
-    stuId:'123456',
-    college:'软件学院',
-    phoneNum:'110'
 
   },
 

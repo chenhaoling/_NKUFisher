@@ -20,10 +20,11 @@
 
 <!-- 身份验证 -->
 <view wx:if="{{postBook}}" class='outside_border'>
-  <view class="weui-panel total">
+
+  <view class="weui-panel total" wx:for="{{identify}}" wx:key ="{{index}}">
     <view class="title">
       <view class="title_image" >
-        <image src="{{perImg}}" mode="aspectFit" />
+        <image src="{{identify[index].perImg}}" mode="aspectFit" />
       </view>
 
       <view class="title_right">
@@ -32,7 +33,7 @@
             <view class="weui-label">姓名</view>
           </view>
           <view class="weui-cell__bd">
-            <text class="weui-input">{{name}}</text>
+            <text class="weui-input">{{identify[index].name}}</text>
           </view>
         </view>
         <view class="weui-cell weui-cell_input">
@@ -40,7 +41,7 @@
             <view class="weui-label">学院</view>
           </view>
           <view class="weui-cell__bd">
-              <text class="weui-input">{{college}}</text>
+              <text class="weui-input">{{identify[index].college}}</text>
             <!-- <input class="weui-input" placeholder="请输入作者"  value="{{bookAuthor}}" /> -->
           </view>
         </view>
@@ -49,7 +50,7 @@
             <view class="weui-label">学号</view>
           </view>
           <view class="weui-cell__bd">
-              <text class="weui-input">{{stuId}}</text>
+              <text class="weui-input">{{identify[index].stuId}}</text>
             <!-- <input class="weui-input" placeholder="请输入出版社" value="{{bookPress}}" /> -->
           </view>
         </view>
@@ -59,7 +60,7 @@
             <view class="weui-label">手机</view>
           </view>
           <view class="weui-cell__bd">
-              <text class="weui-input">{{phoneNum}}</text>
+              <text class="weui-input">{{identify[index].phoneNum}}</text>
             <!-- <input class="weui-input" placeholder="请输入出售价格" value="{{currentPrice}}" type="digit" /> -->
           </view>
         </view>
@@ -67,19 +68,15 @@
       </view>
     </view>
     <view class="check total" >
-        <!-- <button class="btn">通过</button> -->
-        <!-- <button class="cu-btn round btn" style="width:30vw" bindtap="pass">通过</button> -->
+
          <button class="cu-btn round line-cyan" style=" width:30vw" bindtap="pass">通过</button>
         <button class="cu-btn round line-cyan" style=" width:30vw" bindtap="noPass">不通过</button>
-        <!-- <button class="cu-btn round bg-green" style="width:25vw" >通过</button> -->
-        <!-- <button class="cu-btn round bg-green" style="width:25vw" >不通过</button> -->
-        <!-- <button class="cu-btn round btn" style="width:30vw" bindtap="noPass">不通过</button> -->
-        <!-- <button class="btn">不通过</button> -->
+
     </view>
     
   </view>
 
-  <view class="weui-panel">
+  <!-- <view class="weui-panel">
     <view class="title">
       <view class="title_image" >
         <image src="{{perImg}}" mode="aspectFit" />
@@ -100,7 +97,6 @@
           </view>
           <view class="weui-cell__bd">
               <text class="weui-input">{{college}}</text>
-            <!-- <input class="weui-input" placeholder="请输入作者"  value="{{bookAuthor}}" /> -->
           </view>
         </view>
         <view class="weui-cell weui-cell_input">
@@ -109,7 +105,6 @@
           </view>
           <view class="weui-cell__bd">
               <text class="weui-input">{{stuId}}</text>
-            <!-- <input class="weui-input" placeholder="请输入出版社" value="{{bookPress}}" /> -->
           </view>
         </view>
 
@@ -119,25 +114,22 @@
           </view>
           <view class="weui-cell__bd">
               <text class="weui-input">{{phoneNum}}</text>
-            <!-- <input class="weui-input" placeholder="请输入出售价格" value="{{currentPrice}}" type="digit" /> -->
           </view>
         </view>
 
       </view>
     </view>
     <view class="check">
-        <!-- <button class="btn">通过</button> -->
-        <!-- <button class="cu-btn round btn" style="width:30vw" bindtap="pass">通过</button> -->
          <button class="cu-btn round line-cyan" style="width:30vw" bindtap="pass">通过</button>
         <button class="cu-btn round line-cyan" style="width:30vw" bindtap="noPass">不通过</button>
-        <!-- <button class="cu-btn round bg-green" style="width:25vw" >通过</button> -->
-        <!-- <button class="cu-btn round bg-green" style="width:25vw" >不通过</button> -->
-        <!-- <button class="cu-btn round btn" style="width:30vw" bindtap="noPass">不通过</button> -->
-        <!-- <button class="btn">不通过</button> -->
     </view>
     
-  </view>
+  </view> -->
+
+
 </view>
+
+
 
 <!-- 商品举报 -->
 <view class='weui-panel outside_border' wx:if="{{postThing}}">    
