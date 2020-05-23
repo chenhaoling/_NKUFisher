@@ -1,4 +1,12 @@
 <!--miniprogram/pages/perInfo/perInfo.wxml-->
+
+<view wx:if="{{isAut==false}}">
+ <button open-type='getUserInfo' bindgetuserinfo='getMyInfo'>点击授权</button>
+</view>
+
+ <view wx:if="{{isAut==true}}">
+
+
 <view class="personalMe" >
     <image src="{{userHead}}" style="width:68px;height:68px;border:1px solid #ddd;float:left;margin:20rpx 20rpx;border-radius: 50%;"></image>
     <view class="personalInfo">
@@ -25,8 +33,6 @@
 </view>
 
 
- 
-
 <!-- 绑定的对话框事件 -->
   <view class="cu-modal {{modalName=='ModalPhone'?'show':''}}">
   <view class="cu-dialog">
@@ -47,27 +53,27 @@
 
 <view class="weui-cells weui-cells_after-title">
 
-  <navigator url="../index/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-    <view class="weui-cell__bd">我的发布</view>
-    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+  <navigator url="../collection/collection" class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="getCurrUserInfo">
+    <view class="weui-cell__bd" >我的发布</view>
+    <view class="weui-cell__ft weui-cell__ft_in-access" ></view>
   </navigator>
 
-  <navigator url="myorder/myorder" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+  <navigator  url="../collection/collection" class="weui-cell weui-cell_access"  hover-class="weui-cell_active" >
     <view class="weui-cell__bd">我淘到的</view>
     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
   </navigator>
 
-  <navigator url="purchaseHistory/purchaseHistory" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+  <navigator  url="../collection/collection" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
     <view class="weui-cell__bd">我的求购</view>
     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
   </navigator>
 
-  <navigator url="addressAdmin/addressAdmin" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+  <navigator  url="../collection/collection" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
     <view class="weui-cell__bd">我的收藏</view>
     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
   </navigator>
 
-  <navigator url="systemNotification/systemNotification" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+  <navigator url="../collection/collection" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
     <view class="weui-cell__bd">系统通知</view>
     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
   </navigator>
@@ -78,7 +84,8 @@
     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
   </navigator> -->
 
-
+ 
+  <!-- <button  bindtap="getCurrUserInfo">test打印用户信息</button> -->
   <button class="btm" bindtap='bindClear'>退出帐号</button>
 
 </view>
@@ -164,3 +171,12 @@
     </view> -->
   </view>
   </view>
+</view>
+
+
+
+
+
+
+
+

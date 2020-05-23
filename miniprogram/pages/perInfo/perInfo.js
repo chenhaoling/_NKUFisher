@@ -1,3 +1,5 @@
+
+var app = getApp()
 // miniprogram/pages/perInfo/perInfo.js
 Page({
 
@@ -19,7 +21,76 @@ Page({
     stuId:'123',
     phoneNum: '123678',
     buttonLoading: false,
+    isAut: false,
+    currUser:{}
+  },
 
+  getCurrUserInfo:function(e){
+    wx.cloud.callFunction({
+      name: 'user_info',
+      data: '',
+      complete: res => {
+        console.log(res.result)
+        this.setData({
+          currUser:res.result,
+        })
+      }
+    })
+  },
+
+  getMyInfo:function(e){
+    console.log(e.detail.userInfo),
+    this.setData({
+      isAut:true,
+      
+    }),
+    app.globalData.userInfo=e.detail.userInfo,
+    wx.cloud.callFunction({
+      name: 'authorization',
+      data: this.data.userInfo,
+      complete: res => {
+        console.log("login"),
+        console.log(res.result)
+      },
+      
+
+ 
+    })
+
+    
+
+
+    console.log(app.globalData.userInfo)
+  
+    // wx.login({
+    //   success: function(data) {
+    //     console.log('获取登录 Code：' + data.code)
+    //     var postData = {
+    //       code: data.code
+    //     };
+    //   },
+    //   fail: function() {
+    //     console('登录获取Code失败！');
+    //   }
+    // })
+  },
+
+    /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    console.log("111")
+  
+    if(Object.keys(app.globalData.userInfo).length != 0) {
+      this.setData({
+        isAut:true
+      })
+      
+      console.log("test")
+    }
+    this.onReady()
+    // this.onLoad()
+   
   },
 
   bindCurrentPriceInput: function(e) {
@@ -100,6 +171,36 @@ Page({
     })
   },
 
+  myAnounce:function(e){
+    wx.cloud.callFunction({
+      name: 'user_info',
+      data: {
+        _id:"oSO3s4l2vjkMmAZBBL-UHpZWRoUg",
+      },
+      complete: res => {
+        console.log(res.result)
+      }
+    })
+  },
+
+
+/**
+* 获取用户唯一凭证
+*/
+bingGetOpenID: function() {
+  wx.login({
+    success: function(data) {
+      console.log('获取登录 Code：' + data.code)
+      var postData = {
+        code: data.code
+      };
+    },
+    fail: function() {
+      console('登录获取Code失败！');
+    }
+  })
+},
+
   verify:function(e){
     console.log("shenfen");
   },
@@ -107,6 +208,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log("222")
+    if(Object.keys(app.globalData.userInfo).length != 0) {
+      this.setData({
+        isAut:true
+      })
+      console.log("test")
+    }
+    this.onReady()
+    // this.onShow()
 
   },
 
@@ -114,21 +224,16 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+  
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
 
-  },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    
   },
 
   /**

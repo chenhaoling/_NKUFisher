@@ -130,7 +130,7 @@ Page({
 
   getInfo :function(){
     var con = 1;
-    var cate = "";
+    var cate = "数码产品";
     if(this.data.TabCur == 0){//发布
       con = 1
     }else{
@@ -162,6 +162,13 @@ Page({
         //       console.log(this.data.goodslist[index].category),
         //   console.log(this.data.goodslist[index]._id)
         //    }
+        this.data.goodslist = res.result
+
+        for (var index in this.data.goodslist) {
+            console.log(this.data.goodslist[index].title),
+            console.log(this.data.goodslist[index]._id)
+           }
+
       // console.log(this.data.list)
       }
      
@@ -173,7 +180,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getInfo()
   },
 
   /**
