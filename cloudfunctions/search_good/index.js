@@ -38,6 +38,7 @@ exports.main = async (event, context) => {
     createTime: true,
     star: true,
     image: true,
+    detail: true,
   }).get()
   return result.data
 }
