@@ -80,17 +80,47 @@ Page({
    */
   onShow: function () {
     console.log("111")
+    wx.cloud.callFunction({
+      name: 'user_info',
+      data: '',
+      complete: res => {
+        if(res.result == null){
+          this.setData({
+            isAut:false
+          })
+          app.globalData.userInfo = {}
+        }
+        else{
+          console.log("已经注册过")
+        }
+      }
+    })
   
     if(Object.keys(app.globalData.userInfo).length != 0) {
       this.setData({
         isAut:true
       })
       
-      console.log("test")
+      console.log(app.globalData.userInfo)
     }
-    this.onReady()
+    // this.onReady()
     // this.onLoad()
    
+  },
+
+    /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    // console.log("222")
+    // if(Object.keys(app.globalData.userInfo).length != 0) {
+    //   this.setData({
+    //     isAut:true
+    //   })
+    //   console.log("test")
+    // }
+    // this.onShow()
+
   },
 
   bindCurrentPriceInput: function(e) {
@@ -204,21 +234,7 @@ bingGetOpenID: function() {
   verify:function(e){
     console.log("shenfen");
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    console.log("222")
-    if(Object.keys(app.globalData.userInfo).length != 0) {
-      this.setData({
-        isAut:true
-      })
-      console.log("test")
-    }
-    this.onReady()
-    // this.onShow()
 
-  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
