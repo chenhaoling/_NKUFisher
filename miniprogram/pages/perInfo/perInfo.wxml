@@ -1,40 +1,39 @@
 <!--miniprogram/pages/perInfo/perInfo.wxml-->
 
 <view wx:if="{{isAut==false}}">
- <button open-type='getUserInfo' bindgetuserinfo='getMyInfo'>点击授权</button>
+ <button open-type='getUserInfo' bindgetuserinfo='authorization'>点击授权</button>
 </view>
 
- <view wx:if="{{isAut==true}}">
-
-
-<view class="personalMe" >
-    <image src="{{currUser.avatarUrl}}" style="width:68px;height:68px;border:1px solid #ddd;float:left;margin:20rpx 20rpx;border-radius: 50%;"></image>
-    <view class="personalInfo">
-        <text>姓名: {{currUser.nickName}}</text>
-        <!-- <view class="Phone"> -->
-         <text>手机: {{userPhone}}</text>
-         <view class="guanzhu" >
-             <text>关注:{{guanzhu}} </text> <text style="margin-left:20rpx"> 粉丝:{{fensi}}</text>
-             <text style="margin-left:90rpx" bindtap="showModal" data-target="Modal">身份验证</text>
-         </view>
-         <!-- <view class="action"> -->
-                    <!-- <button class="PhoneBtn bg-green"  style="width:20vw">修改</button> -->
-            <!-- <button class="PhoneBtn cu-btn bg-green shadow" bindtap="showModal" data-target="Modal">点击修改手机号</button> -->
-         <!-- </view> -->
-        <!-- </view> -->
-        
+<view class="cu-card dynamic" wx:if="{{isAut==true}}">
+  <view class="cu-item shadow">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item">
+        <view class="cu-avatar round lg" style="background-image:url({{userInfo.nickName}});"></view>
+        <view class="content flex-sub">
+        <view class="text-gray">
+          <text class="margin-lr">昵称: {{userInfo.nickName}}</text>
+          <text class="cu-btn sm round line-green margin-lr"  bindtap="showModal" data-target="ModalPhone">编辑资料</text>
+        </view>
+          <view class="text-gray">
+            <text class="margin-lr" wx:if="{{isReview==true}}">学号: {{userInfo.stuNum}}</text>
+            <text class="cu-btn round sm line-red" wx:if="{{isReview==false}}" bindtap="showModal" data-target="Modal">身份验证</text>
+          </view>
+        </view>
+      </view>
     </view>
-
-
-      <!-- <view class="margin-tb-sm text-center" style="margin-top:55rpx"> -->
-          <text class="cu-btn round bg-green xiugaiPhone"  bindtap="showModal" data-target="ModalPhone">修改手机号</text>
-                 <!-- <button class="cu-btn round bg-green" role="button" aria-disabled="false" style="width:25vw" bindtap="showModal" data-target="Modal">修改手机</button> -->
-    <!-- </view> -->
+    <view class="text-grey margin-lr-xs" wx:if="{{isReview==true}}">校区: {{userInfo.campus}}</view>
+    <view class="text-grey margin-lr-xs">联系方式: {{userInfo.contact}}</view>
+    <view class="text-gray">
+      <text class="cuIcon-attentionfill margin-lr-xs"></text><text>关注:{{userInfo.love.length}} </text>
+      <text class="cuIcon-attentionfill margin-lr-xs"></text><text> 粉丝:{{userInfo.fans.length}}</text>
+    </view>
+    
+  </view>
 </view>
 
 
 <!-- 绑定的对话框事件 -->
-  <view class="cu-modal {{modalName=='ModalPhone'?'show':''}}">
+<view class="cu-modal {{modalName=='ModalPhone'?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-white justify-end">
       <view class="content">请输入新的手机号</view>
@@ -51,44 +50,25 @@
   </view>
 </view>
 
-<view class="weui-cells weui-cells_after-title">
-
-  <navigator url="../collection/collection" class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="getMyfabu">
-    <view class="weui-cell__bd" >我的发布</view>
-    <view class="weui-cell__ft weui-cell__ft_in-access" ></view>
-  </navigator>
-
-  <navigator  url="../collection/collection" class="weui-cell weui-cell_access"  hover-class="weui-cell_active" bindtap="getMytao">
-    <view class="weui-cell__bd">我淘到的</view>
-    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </navigator>
-
-  <navigator  url="../collection/collection" class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="getMyqiugou">
-    <view class="weui-cell__bd">我的求购</view>
-    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </navigator>
-
-  <navigator  url="../collection/collection" class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="getMyshoucang">
-    <view class="weui-cell__bd">我的收藏</view>
-    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </navigator>
-
-  <navigator url="../collection/collection" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-    <view class="weui-cell__bd">系统通知</view>
-    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </navigator>
-
-<!-- 
-   <navigator url="systemNotification/systemNotification" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-    <view class="weui-cell__bd">身份验证</view>
-    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </navigator> -->
-
- 
-  <!-- <button  bindtap="getCurrUserInfo">test打印用户信息</button> -->
-  <button class="btm" bindtap='bindClear'>退出帐号</button>
-
+<view class="cu-card dynamic" wx:if="{{isAut==true}}">
+  <view class="cu-item shadow" wx:for="{{blockCard}}" wx:key ="{{index}}">
+    <navigator  url="{{blockCard[index].url}}" class="weui-cell weui-cell_access"  hover-class="weui-cell_active" >
+      <view class="weui-cell__bd">{{blockCard[index].tittle}}</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+  </view>
 </view>
+
+<view class="cu-card dynamic" wx:if="{{isAut==true}}">
+  <view class="cu-item shadow">
+    <navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class='text-red' bindtap='bindClear'>退出帐号</view>
+    </navigator>
+  </view>
+</view>
+
+  
+
 
 
 
@@ -169,7 +149,6 @@
       <!-- <input class="input" name="userName" 
         bindinput="userNameInput"/>
     </view> -->
-  </view>
   </view>
 </view>
 
