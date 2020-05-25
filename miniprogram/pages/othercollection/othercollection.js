@@ -1,68 +1,27 @@
-// miniprogram/pages/perInfo/perInfo.js
+// miniprogram/pages/othercollection/othercollection.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    'otheruser':'',
-    isAdmi:true,
-
-  },
-  getcollection:function(e){
-    wx.setStorage({
-      data: this.data.otheruser.collection,
-      key: 'goods',
-    }),
-    wx.navigateTo({
-      url: '../othercollection/othercollection',
-    })
-  },
-  jump:function(e){
-    wx.navigateTo({
-      url: '../index/index',
-      success: function(res) {
-        console.log("successs");
-      },
-      fail: function(res) {
-        console.log(e);
-      },
-      complete: function(res) {
-    
-      },
-     })
+    goods:[]
   },
 
-
-  showModal(e) {
-    this.setData({
-      modalName: e.currentTarget.dataset.target
-    })
-  },
-  hideModal(e) {
-    this.setData({
-      modalName: null
-    })
-  },
-
-  userNameInput:function(e){
-    this.setData({
-      userPhone:e.detail.value
-    })
-  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that =  this
+    var that = this
     wx.getStorage({
-      key: 'otheruser',
+      key: 'goods',
       success:function(res){
         that.setData({
-          otheruser:res.data
+          goods:res.data
         })
       }
     })
+    
   },
 
   /**

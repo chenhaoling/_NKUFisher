@@ -3,7 +3,6 @@
     "pages/perInfo/perInfo",
     "pages/index/index",
     "pages/publish/publish",
-    
     "pages/collection/collection",
     "pages/manager/manager",
     "pages/otherInfo/otherInfo",
@@ -21,7 +20,8 @@
     "pages/openapi/cloudid/cloudid",
     "pages/im/im",
     "pages/im/room/room",
-    "pages/tradedetail/tradedetail"
+    "pages/tradedetail/tradedetail",
+    "pages/othercollection/othercollection"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -54,7 +54,6 @@
         "iconPath": "images/user_1.png",
         "selectedIconPath": "images/user_.png"
       }
-
     ]
   },
   "sitemapLocation": "sitemap.json",

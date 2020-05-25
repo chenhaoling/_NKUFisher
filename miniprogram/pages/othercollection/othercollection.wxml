@@ -1,0 +1,24 @@
+<!-- 商品卡片 -->
+
+ <view class="cu-card article {{isCard?'no-card':''}}">
+
+  <view class="cu-item shadow" wx:for="{{goods}}" wx:for-item="good" wx:key="_id">
+    <view class="content">		
+      <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"  mode="aspectFill" style="height:280rpx"></image>  
+      <view class="desc">
+
+        <view class="text-cut">商品名:{{good.title}}</view>
+        <view class="text-cut">商品详情:</view>
+        <view class="text-content">{{good.detail}}</view>
+        <view>
+        <view><text style="color:red" >￥{{good.curPrice}}</text></view>     
+      </view>     
+      </view>
+    </view>
+        <view style="display:flex margin-top:500rpx">
+        <!-- <button class="cu-btn round line-cyan" style="margin-top:10rpx">忽略</button> -->
+        <button class="cu-btn round line-cyan" style="margin-top:10rpx">取消收藏</button>
+      </view>  
+  </view>
+
+</view>
