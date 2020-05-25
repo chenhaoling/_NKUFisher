@@ -158,7 +158,7 @@ Page({
     console.log(con),
     console.log(cate),
     wx.cloud.callFunction({
-      name: 'serach_good',
+      name: 'search_good',
       data: {condition:con,
              category:cate,    
       },

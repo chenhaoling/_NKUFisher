@@ -11,6 +11,10 @@ Page({
   },
 
   getotheruserinfo:function(e){
+    wx.setStorage({
+      data: this.data.otheruser,
+      key: 'otheruser',
+    }),
     wx.navigateTo({
       url: '../otherInfo/otherInfo',
     })

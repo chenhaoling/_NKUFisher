@@ -5,11 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userHead:'../../images/icon9.jpeg',
-    userName: 'JackLin',
-    userPhone: 123456,
-    guanzhu:12,
-    fensi:11,
+    'otheruser':'',
     isAdmi:true,
 
   },
@@ -50,7 +46,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that =  this
+    wx.getStorage({
+      key: 'otheruser',
+      success:function(res){
+        that.setData({
+          otheruser:res.data
+        })
+      }
+    })
   },
 
   /**
