@@ -1,9 +1,9 @@
 {
   "pages": [
-    
+    "pages/perInfo/perInfo",
     "pages/index/index",
     "pages/publish/publish",
-    "pages/perInfo/perInfo",
+    
     "pages/collection/collection",
     "pages/manager/manager",
     "pages/otherInfo/otherInfo",

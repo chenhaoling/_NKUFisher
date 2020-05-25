@@ -45,6 +45,7 @@ App({
     this.globalData = {
       userInfo:{},
       openid:null,
+      fabu:0,
     }
   }
 })

@@ -167,17 +167,26 @@ Page({
         this.setData({
           goodslist:res.result
         })
-        console.log(this.data.goodslist)
+        
+
         // for (var index in this.data.goodslist) {
         //       console.log(this.data.goodslist[index].category),
         //   console.log(this.data.goodslist[index]._id)
         //    }
         this.data.goodslist = res.result
 
+
         for (var index in this.data.goodslist) {
             console.log(this.data.goodslist[index].title),
             console.log(this.data.goodslist[index]._id)
            }
+
+        // console.log(this.data.goodslist)
+        // for (var index in this.data.goodslist) {
+        //     console.log(this.data.goodslist[index].title),
+        //     console.log(this.data.goodslist[index]._id)
+        //    }
+
 
       // console.log(this.data.list)
       }

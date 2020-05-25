@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userHead:'../../images/icon9.jpeg',
+    // userHead:'../../images/icon9.jpeg',
+    // userHead:avatarUrl,
     userName: 'JackLin',
     userPhone: 123456,
     guanzhu:12,
@@ -62,17 +63,6 @@ Page({
 
     console.log(app.globalData.userInfo)
   
-    // wx.login({
-    //   success: function(data) {
-    //     console.log('获取登录 Code：' + data.code)
-    //     var postData = {
-    //       code: data.code
-    //     };
-    //   },
-    //   fail: function() {
-    //     console('登录获取Code失败！');
-    //   }
-    // })
   },
 
     /**
@@ -80,6 +70,10 @@ Page({
    */
   onShow: function () {
     console.log("111")
+    this.setData({
+      currUser : app.globalData.userInfo
+    })
+   
     wx.cloud.callFunction({
       name: 'user_info',
       data: '',
@@ -201,16 +195,20 @@ Page({
     })
   },
 
-  myAnounce:function(e){
-    wx.cloud.callFunction({
-      name: 'user_info',
-      data: {
-        _id:"oSO3s4l2vjkMmAZBBL-UHpZWRoUg",
-      },
-      complete: res => {
-        console.log(res.result)
-      }
-    })
+  getMyfabu:function(e){
+    app.globalData.fabu=0,
+    console.log("打印userinfo")
+    console.log(app.globalData.userInfo)
+  },
+
+  getMytao:function(e){
+    app.globalData.fabu=1
+  },
+  getMyqiugou:function(e){
+    app.globalData.fabu=2
+  },
+  getMyshoucang:function(e){
+    app.globalData.fabu=3
   },
 
 
