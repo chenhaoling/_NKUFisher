@@ -16,8 +16,6 @@
       </view>
     </view>
         <view style="display:flex margin-top:500rpx">
-        <!-- <button class="cu-btn round line-cyan" style="margin-top:10rpx">忽略</button> -->
-        <button class="cu-btn round line-cyan" style="margin-top:10rpx">取消收藏</button>
       </view>  
   </view>
 
