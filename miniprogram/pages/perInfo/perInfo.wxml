@@ -8,7 +8,7 @@
   <view class="cu-item shadow">
     <view class="cu-list menu-avatar">
       <view class="cu-item">
-        <view class="cu-avatar round lg" style="background-image:url({{userInfo.nickName}});"></view>
+        <view class="cu-avatar round lg" style="background-image:url({{userInfo.avatar}});"></view>
         <view class="content flex-sub">
         <view class="text-gray">
           <text class="margin-lr">昵称: {{userInfo.nickName}}</text>

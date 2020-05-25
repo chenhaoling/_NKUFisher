@@ -50,6 +50,7 @@ Page({
       userInfo: app.globalData.userInfo
     })
     if(app.globalData.userInfo._id != null) {
+      console.log("已经注册过")
       this.setData({
         isAut: true
       })
@@ -60,6 +61,7 @@ Page({
       })
     }
   },
+
 
   authorization: function(e){
     wx.getSetting({
@@ -72,7 +74,7 @@ Page({
                 name: 'authorization',
                 data: {
                   nickName: userInfo.nickName,
-                  avatar: userInfo.avatar,
+                  avatar: userInfo.avatarUrl,
                 },
                 complete: res => {
                   app.globalData.userInfo = res.result
@@ -84,13 +86,53 @@ Page({
         }
       }
     })
+    this.setData({
+      isAut: true
+    })
   },
 
     /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+
     this.getCurrUserInfo()
+
+    console.log("111")
+   
+   
+    // wx.cloud.callFunction({
+    //   name: 'user_info',
+    //   data: '',
+    //   complete: res => {
+    //     if(res.result._id == null){//么有注册过
+    //       this.setData({
+    //         isAut:false,
+    //         currUser : {}
+    //       })
+    //       app.globalData.userInfo = {}
+    //     }
+    //     else{
+    //       console.log(res.result)
+    //       this.setData({
+    //         isAut:true,
+    //         currUser : app.globalData.userInfo
+    //       })
+    //       console.log("已经注册过")
+    //       console.log(app.globalData.userInfo)
+    //     }
+    //   }
+    // })
+  
+    // if(Object.keys(app.globalData.userInfo).length != 0) {
+    //   this.setData({
+    //     isAut:true
+    //   })
+      
+    //   console.log(app.globalData.userInfo)
+    // }
+    // this.onReady()
+    // this.onLoad()
   },
 
     /**
