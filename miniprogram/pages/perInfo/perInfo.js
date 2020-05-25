@@ -7,12 +7,32 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // userHead:'../../images/icon9.jpeg',
-    // userHead:avatarUrl,
-    userName: 'JackLin',
-    userPhone: 123456,
-    guanzhu:12,
-    fensi:11,
+    userInfo: {},
+    isReview: false,
+    isAut: false,
+    blockCard: [
+      {
+        url: '../collection/collection',
+        tittle: '我的发布',
+      },
+      {
+        url: '../collection/collection',
+        tittle: '我淘到的',
+      },
+      {
+        url: '../collection/collection',
+        tittle: '我的求购',
+      },
+      {
+        url: '../collection/collection',
+        tittle: '我的收藏',
+      },
+      {
+        url: '../collection/collection',
+        tittle: '系统通知',
+      }
+    ],
+    userHead:'../../images/icon9.jpeg',
     isAdmi:true,
     name:'1', //商品名字
     thingDescribe:'',//商品描述
@@ -22,84 +42,55 @@ Page({
     stuId:'123',
     phoneNum: '123678',
     buttonLoading: false,
-    isAut: false,
     currUser:{}
   },
 
   getCurrUserInfo:function(e){
-    wx.cloud.callFunction({
-      name: 'user_info',
-      data: '',
-      complete: res => {
-        console.log(res.result)
-        this.setData({
-          currUser:res.result,
-        })
-      }
+    this.setData({
+      userInfo: app.globalData.userInfo
     })
+    if(app.globalData.userInfo._id != null) {
+      this.setData({
+        isAut: true
+      })
+    }
+    if(app.globalData.userInfo.stuNum != undefined && app.globalData.userInfo.stuNum != '') {
+      this.setData({
+        isReview: true
+      })
+    }
   },
 
-  getMyInfo:function(e){
-    console.log(e.detail.userInfo),
-    this.setData({
-      isAut:true,
-      
-    }),
-    app.globalData.userInfo=e.detail.userInfo,
-    wx.cloud.callFunction({
-      name: 'authorization',
-      data: this.data.userInfo,
-      complete: res => {
-        console.log("login"),
-        console.log(res.result)
-      },
-      
-
- 
+  authorization: function(e){
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          wx.getUserInfo({
+            success: res => {
+              const userInfo = res.userInfo
+              wx.cloud.callFunction({
+                name: 'authorization',
+                data: {
+                  nickName: userInfo.nickName,
+                  avatar: userInfo.avatar,
+                },
+                complete: res => {
+                  app.globalData.userInfo = res.result
+                  this.getCurrUserInfo()
+                },
+              })
+            }
+          })
+        }
+      }
     })
-
-    
-
-
-    console.log(app.globalData.userInfo)
-  
   },
 
     /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log("111")
-    this.setData({
-      currUser : app.globalData.userInfo
-    })
-   
-    wx.cloud.callFunction({
-      name: 'user_info',
-      data: '',
-      complete: res => {
-        if(res.result == null){
-          this.setData({
-            isAut:false
-          })
-          app.globalData.userInfo = {}
-        }
-        else{
-          console.log("已经注册过")
-        }
-      }
-    })
-  
-    if(Object.keys(app.globalData.userInfo).length != 0) {
-      this.setData({
-        isAut:true
-      })
-      
-      console.log(app.globalData.userInfo)
-    }
-    // this.onReady()
-    // this.onLoad()
-   
+    this.getCurrUserInfo()
   },
 
     /**

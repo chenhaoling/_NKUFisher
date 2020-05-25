@@ -1,4 +1,7 @@
 // miniprogram/pages/index.js
+var app = getApp()
+
+
 Page({
 
   /**
