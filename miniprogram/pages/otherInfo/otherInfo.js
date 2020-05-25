@@ -7,7 +7,16 @@ Page({
   data: {
     'otheruser':'',
     isAdmi:true,
-
+    
+  },
+  getbought:function(e){
+    wx.setStorage({
+      data: this.data.otheruser.bought,
+      key: 'boughts',
+    }),
+    wx.navigateTo({
+      url: '../otherbought/otherbought',
+    })
   },
   getcollection:function(e){
     wx.setStorage({

@@ -1,40 +1,78 @@
 <!--miniprogram/pages/perInfo/perInfo.wxml-->
-<view class="personalMe" >
-    <image src="{{otheruser.avatarUrl}}" style="width:68px;height:68px;border:1px solid #ddd;float:left;margin:20rpx 20rpx;border-radius: 50%;"></image>
-    <view class="personalInfo">
-        <text>姓名: {{otheruser.nickName}}</text>
-        <!-- <view class="Phone"> -->
-         <text>手机: {{otheruser.contact}}</text>
-         <view class="guanzhu" >
-             <text>关注:{{otheruser.love.length}} </text> <text style="margin-left:20rpx"> 粉丝:{{otheruser.fans.length}}</text>
-         </view>
+
+
+
+<view class="cu-card dynamic" >
+  <view class="cu-item shadow">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item">
+        <view class="cu-avatar round lg" style="background-image:url({{userInfo.avatar}});"></view>
+        <view class="content flex-sub">
+        <view class="text-gray">
+          <text class="margin-lr">昵称: {{otheruser.nickName}}</text>
+          
+        </view>
+          <view class="text-gray">
+            <text class="margin-lr" >学号: {{otheruser.stuNum}}</text>
+           
+          </view>
+        </view>
+      </view>
     </view>
-
-
+    <view class="text-grey margin-lr-xs" >校区: {{otheruser.campus}}</view>
+    <view class="text-grey margin-lr-xs">联系方式: {{otheruser.contact}}</view>
+    <view class="text-gray">
+      <text class="cuIcon-attentionfill margin-lr-xs"></text><text>关注:{{otheruser.love.length}} </text>
+      <text class="cuIcon-attentionfill margin-lr-xs"></text><text> 粉丝:{{otheruser.fans.length}}</text>
+    </view>
+    
+  </view>
 </view>
 
 
- 
 
-<view class="weui-cells weui-cells_after-title">
 
-  <navigator url="../index/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-    <view class="weui-cell__bd" bindtap="getpublish">ta的发布</view>
-    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </navigator>
+<view class="cu-card dynamic"  >
+  <view class="cu-item shadow" >
+    <view class="weui-cell weui-cell_access"  hover-class="weui-cell_active">
+      <view class="weui-cell__bd" bindtap="getannounce">ta的发布</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </view>
+  </view>
 
-  <navigator url="myorder/myorder" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-    <view class="weui-cell__bd" bindtap="getbought">ta淘到的</view>
-    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </navigator>
+    <view class="cu-item shadow" >
+    <view class="weui-cell weui-cell_access"  hover-class="weui-cell_active">
+      <view class="weui-cell__bd" bindtap="getbought">ta淘到的</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </view>
+  </view>
 
-  <navigator url="purchaseHistory/purchaseHistory" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-    <view class="weui-cell__bd" bindtap="getaskgood">ta的求购</view>
-    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </navigator>
+      <view class="cu-item shadow" >
+    <view class="weui-cell weui-cell_access"  hover-class="weui-cell_active">
+      <view class="weui-cell__bd" bindtap="getannounce">ta的求购</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </view>
+  </view>
 
-  <navigator url="addressAdmin/addressAdmin" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-    <view class="weui-cell__bd" bindtap="getcollection">ta的收藏</view>
-    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </navigator>
+        <view class="cu-item shadow" >
+    <view class="weui-cell weui-cell_access"  hover-class="weui-cell_active">
+      <view class="weui-cell__bd" bindtap="getcollection">ta的收藏</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </view>
+  </view>
 </view>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
