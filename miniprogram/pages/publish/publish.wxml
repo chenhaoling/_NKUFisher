@@ -1,176 +1,83 @@
 <!--miniprogram/pages/publish/publish.wxml-->
 <!-- <view style="display:flex flex-direction:row"> -->
 
-<!-- 标签栏 -->
-<view class='box'>
-  <view class='wrapper'>
-    <view class="tab-content {{postBook ? 'select' : 'noSelect'}} " bindtap='choosePostBook'>商品发布</view>
-    <view class="tab-content {{postThing ? 'select' : 'noSelect'}}" bindtap='choosePostThing'>求购发布</view>
+<scroll-view scroll-x class="bg-blue nav text-center">
+  <view class="cu-item {{0==TabCur?'text-white cur':''}}" catchtap="tabSelect" data-id="0">
+    <text class="cuIcon-camerafill"></text> 出售
   </view>
-</view>
-
-
-<view wx:if="{{postBook}}" class='outside_border'>
-  <view class="weui-panel">
-    <view class="title">
-
-      <view class="title_right">
-        <view class="weui-cell weui-cell_input">
-          <view>
-            <view class="weui-label">标题</view>
-          </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="起个亮眼的标题吧！" bindinput="bindBookNameInput" value="{{goodtitle}}" />
-          </view>
-        </view>
-       
-
-      
-
-
-      <view class="weui-cell weui-cell_select">
-        <view class="weui-cell__hd weui-cell__hd_in-select-after">
-          <view class="weui-label">校区</view>
-        </view>
-        <view class="weui-cell__bd">
-          <picker bindchange="bindCampusChange" value="{{campusIndex}}" range="{{campus}}">
-            <view class="weui-select weui-select_in-select-after">{{campus[campusIndex]}}</view>
-          </picker>
-        </view>
-      </view>
-
-       <view class="weui-cell weui-cell_select">
-        <view class="weui-cell__hd weui-cell__hd_in-select-after">
-          <view class="weui-label">分类</view>
-        </view>
-        <view class="weui-cell__bd">
-          <picker bindchange="bindConditionChange" value="{{conditionIndex}}" range="{{conditions}}">
-            <view class="weui-select weui-select_in-select-after">{{conditions[conditionIndex]}}</view>
-          </picker>
-        </view>
-      </view>
-
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">*价格</view>
-          </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="输入让你心动的价格吧！" bindinput="bindCurrentPriceInput" value="{{currentPrice}}" type="digit" />
-          </view>
-        </view>
-
-
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">*联系方式</view>
-          </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="请输入联系方式" bindinput="bindBookPhoneNumberInput" value="{{PhoneNumber}}" type="digit" />
-          </view>
-        </view>
-
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">商品描述</view>
-        </view>
-        <view class="weui-cell__bd">
-                  <textarea class="weui-input describe_thing" value='{{thingDescribe}}' bindinput="bindThingDescribeInput" placeholder="请输入物品的描述"></textarea>
-        </view>
-      </view>
-
-
-      </view>
-    </view>
-    
+  <view class="cu-item {{1==TabCur?'text-white cur':''}}" catchtap="tabSelect" data-id="1">
+    <text class="cuIcon-upstagefill"></text> 求购
   </view>
-</view>
+</scroll-view>
 
-<view wx:if="{{postThing}}" class='outside_border'>
-  <view class="weui-panel">
-    <view class="title">
-
-      <view class="title_right">
-        <view class="weui-cell weui-cell_input">
-          <view>
-            <view class="weui-label">标题</view>
+<form>
+      <view class="cu-form-group margin-top">
+        <view class="title">商品名称</view>
+        <input name="input"  bindinput="bindInput" value="{{good.title}}" data-type='title'></input>
+      </view>
+      <view class="cu-form-group">
+        <view class="title">{{TabCur==0?"出售价格": "理想价位"}}</view>
+        <input name="input"  bindinput="bindInput" value="{{good.curPrice}}" type="digit" data-type='curPrice'></input>
+      </view>
+      <view class="cu-form-group" wx:if="{{TabCur==0}}">
+        <view class="title">原始价格</view>
+        <input name="input" bindinput="bindInput" value="{{good.oriPrice}}" type="digit" data-type='oriPrice'></input>
+      </view>
+      <view class="cu-form-group">
+        <text class='cuIcon-locationfill text-orange'></text>
+        <view class="title">校区</view>
+        <picker bindchange="bindInput" value="{{campusIndex}}" range="{{campus}}" data-type="campus">
+          <view class="picker">
+            {{campus[campusIndex]}}
           </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="起个亮眼的标题吧！" bindinput="bindBookNameInput" value="{{goodtitle}}" />
+        </picker>
+      </view>
+      <view class="cu-form-group">
+        <text class='cuIcon-locationfill text-orange'></text>
+        <view class="title">类别</view>
+        <picker bindchange="bindInput" value="{{categoryIndex}}" range="{{categorys}}" data-type="category">
+          <view class="picker">
+            {{categorys[categoryIndex]}}
           </view>
+        </picker>
+      </view>
+      <view class="cu-form-group">
+        <view class="title">联系方式</view>
+        <input name="input" bindinput="bindInput" value="{{good.contact}}" type="digit" data-type='contact'></input>
+      </view>
+      <view class="cu-form-group margin-top">
+        <textarea value='{{good.detail}}' bindinput="bindInput" placeholder="物品描述" data-type='detail'></textarea>
+      </view>
+      <view class="cu-bar bg-white margin-top">
+        <view class="action">
+          图片上传
         </view>
-     
-
-      
-
-
-      <view class="weui-cell weui-cell_select">
-        <view class="weui-cell__hd weui-cell__hd_in-select-after">
-          <view class="weui-label">校区</view>
-        </view>
-        <view class="weui-cell__bd">
-          <picker bindchange="bindCampusChange" value="{{campusIndex}}" range="{{campus}}">
-            <view class="weui-select weui-select_in-select-after">{{campus[campusIndex]}}</view>
-          </picker>
+        <view class="action">
+          {{good.image.length}}/4
         </view>
       </view>
-
-       <view class="weui-cell weui-cell_select">
-        <view class="weui-cell__hd weui-cell__hd_in-select-after">
-          <view class="weui-label">分类</view>
-        </view>
-        <view class="weui-cell__bd">
-          <picker bindchange="bindConditionChange" value="{{conditionIndex}}" range="{{conditions}}">
-            <view class="weui-select weui-select_in-select-after">{{conditions[conditionIndex]}}</view>
-          </picker>
+      <view class="cu-form-group">
+        <view class="grid col-4 grid-square flex-sub">
+          <view class="bg-img" wx:for="{{good.image}}" data-url="{{good.image[index]}}">
+           <image src="{{good.image[index]}}" mode="aspectFill"></image>
+           <view class="cu-tag bg-red" bindtap="DelImg" data-index="{{index}}">
+              <text class='cuIcon-close'></text>
+            </view>
+          </view>
+          <view class="solids" bindtap="ChooseImage" wx:if="good.image.length<4">
+            <text class='cuIcon-cameraadd'></text>
+          </view>
         </view>
       </view>
-
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">*价格</view>
-          </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="输入让你心动的价格吧！" bindinput="bindCurrentPriceInput" value="{{currentPrice}}" type="digit" />
-          </view>
-        </view>
-
-
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">*联系方式</view>
-          </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="请输入联系方式" bindinput="bindBookPhoneNumberInput" value="{{PhoneNumber}}" type="digit" />
-          </view>
-        </view>
-
-        <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">商品描述</view>
-        </view>
-        <view class="weui-cell__bd">
-                  <textarea class="weui-input describe_thing" value='{{thingDescribe}}' bindinput="bindThingDescribeInput" placeholder="请输入物品的描述"></textarea>
-        </view>
-    </view>
-
-
-
+      <view class="cu-form-group">
+        <button class='cu-btn lines-blue round lg shadow'  disabled="{{good.title == ''|| good.curPrice == -1 || good.contact == '' || buttonLoading ? true : false}}" loading="{{buttonLoading}}" bindtap="bindSubmit">
+          立即发布
+        </button>
       </view>
-    </view>
-
-  </view>
-</view>
-
-
-<!-- 图片上传 -->
-<view class="title_image" bindtap='bindThingImageInput' >
-      <image src="{{thingImage}}" mode="aspectFit" />
-</view>
-
+</form>
 
  <!-- 发布按钮 -->
- <button type="primary" size="default" disabled="{{goodtitle == ''|| currentPrice ==''|| PhoneNumber == '' || buttonLoading ? true : false}}" loading="{{buttonLoading}}" bindtap="bindSubmitThing" >
-      立即发布 </button>
+ 
 
 <!-- </view> -->
 

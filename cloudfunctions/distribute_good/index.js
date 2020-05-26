@@ -15,7 +15,6 @@ exports.main = async (event, context) => {
     event.star = 0
     event.createTime = db.serverDate()
     event.comments = []
-    event.image = []
     event.openId = cloud.getWXContext().OPENID
     let result = await db.collection('Good').add({
       data: event

@@ -1,7 +1,11 @@
 {
   "pages": [
+<<<<<<< f614ba8eb80996091d170019c683973a528fe14a
     
+=======
+>>>>>>> --story=1002550 --user=planewalker 前端发布商品和求购页面逻辑 https://www.tapd.cn/53043741/s/1003817
     "pages/index/index",
+    "pages/perInfo/perInfo",
     "pages/publish/publish",
     "pages/perInfo/perInfo",
     "pages/collection/collection",
