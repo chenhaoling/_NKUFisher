@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/perInfo/perInfo",
     "pages/publish/publish",
     "pages/perInfo/perInfo",
     "pages/collection/collection",
