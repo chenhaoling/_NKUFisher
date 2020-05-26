@@ -1,4 +1,4 @@
-
+var app = getApp()
 // miniprogram/pages/gooddetail/gooddetail.js
 Page({
 
@@ -32,16 +32,42 @@ Page({
   addComment: function(){
     var that = this
     var Time = new Date()
+    console.log(app.globalData.userInfo.avatar)
     wx.cloud.callFunction({
-      name: 'comment',
+      name: 'comment', 
       data: {
         userId:that.data.otheruser._id,
         content:that.data.contentInp,
         time:Time,
-        goodId:that.data.goodinfo._id
+        goodId:that.data.goodinfo._id,
+        nickname:app.globalData.userInfo.nickName,
+        avatarUrl:app.globalData.userInfo.avatar
       },
       complete: res => {
-        console.log("商品评论发表成功")
+        wx.cloud.callFunction({
+          name:'good_info',
+          data:{_id:that.data.goodinfo._id},
+          complete:res =>{
+            console.log("重新获取商品信息成功")
+            that.setData({
+              goodinfo:res.result
+            })
+            wx.cloud.callFunction({
+              name:'getCommentsById',
+              data:{
+                ids:that.data.goodinfo.comments,
+              },
+              complete: e =>{
+                console.log()
+                console.log("重新获取comment成功")
+                that.setData({
+                  comments:e.result
+                })
+              }
+            })
+          }
+        })
+        console.log("插入评论成功")
       }
     })
   },
