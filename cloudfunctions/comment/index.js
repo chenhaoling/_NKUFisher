@@ -23,6 +23,8 @@ exports.main = async (event, context) => {
     data.userId = event.userId
     data.time = event.time
     data.content = event.content
+    data.nickname = event.nickname
+    data.avatarUrl = event.avatarUrl
     let result = await db.collection('Comment').add({ 
       data: data
     }).then(res => {
@@ -46,6 +48,8 @@ exports.main = async (event, context) => {
     childData.userId = event.userId
     childData.time = event.time
     childData.content = event.content
+    data.nickname = event.nickname
+    data.avatarUrl = event.avatarUrl
     let result2 = await db.collection('Comment').add({ 
       data: childData
     }).then(res => {
