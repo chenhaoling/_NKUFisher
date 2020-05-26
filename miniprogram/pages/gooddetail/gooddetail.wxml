@@ -44,21 +44,21 @@
 
   <!-- 评论 -->
       <view class="cu-list menu-avatar comment solids-top">
-        <view class="cu-item"  wx:for = "{{goodinfo.comments}}" wx:key = "{{index}}">
+        <view class="cu-item"  wx:for = "{{comments}}" wx:key = "{{index}}">
           <view class="cu-avatar round" style="background-image:url(https://ossweb-img.qq.com/images/lol/img/champion/Morgana.png);"></view>
           <view class="content">
             <view>
-              <view class="text-grey" style="width:95%">{{goodinfo.comments[index].name}}</view>
+              <view class="text-grey" style="width:95%">{{comments[index].nickName}}</view>
               <view wx:if = "{{index == 1}}">
                 <text class="cuIcon-roundclosefill lg text-gray"></text>
               </view>
             </view>
             
             <view class="text-gray text-content text-df">
-              {{goodinfo.comments[index].content}}
+              {{comments[index].content}}
             </view>
             <view class="margin-top-sm flex justify-between">
-              <view class="text-gray text-df"> {{goodinfo.comments[index].date}}</view>
+              <view class="text-gray text-df"> {{comments[index].time}}</view>
               <view>
                 <text class="cuIcon-warnfill lg text-gray" ></text>
               </view>

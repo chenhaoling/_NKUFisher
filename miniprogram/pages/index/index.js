@@ -78,11 +78,27 @@ Page({
       success:function(res){
         console.log("成功")
         // let goodinfo = JSON.stringify(res.result);
+       
         wx.setStorage({
           data: res.result,
           key: 'goodinfo',
         })
-        console.log(res.result.openId)
+        wx.cloud.callFunction({
+          name:'getCommentsById',
+          
+          data:{
+            ids:res.result.comments,
+          },
+          complete: e =>{
+            console.log()
+            console.log("获取comment成功")
+            wx.setStorage({
+              data: e.result,
+              key: 'comments',
+            })
+          }
+        })
+        
         var otheruser
         wx.cloud.callFunction({
           name: 'user_info',
@@ -90,7 +106,7 @@ Page({
           complete: res => {
             console.log("获取用户信息成功")
             console.log(res.result)
-            // otheruser = JSON.stringify(res.result)
+           
             wx.setStorage({
               data: res.result,
               key: 'otheruser',

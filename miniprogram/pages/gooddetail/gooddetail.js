@@ -7,7 +7,9 @@ Page({
    */
   data: {
     'goodinfo':'',
-    'otheruser':''
+    'otheruser':'',
+    'contentInp':'',
+     'comments':[],
   },
 
   getotheruserinfo:function(e){
@@ -28,7 +30,20 @@ Page({
   },
 
   addComment: function(){
-
+    var that = this
+    var Time = new Date()
+    wx.cloud.callFunction({
+      name: 'comment',
+      data: {
+        userId:that.data.otheruser._id,
+        content:that.data.contentInp,
+        time:Time,
+        goodId:that.data.goodinfo._id
+      },
+      complete: res => {
+        console.log("商品评论发表成功")
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -52,6 +67,14 @@ Page({
       success:function(res){
         that.setData({
           otheruser:res.data
+        })
+      }
+    }),
+    wx.getStorage({
+      key: 'comments',
+      success:function(res){
+        that.setData({
+          comments:res.data
         })
       }
     }),
