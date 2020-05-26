@@ -1,0 +1,24 @@
+<!-- 商品卡片 -->
+
+ <view class="cu-card article {{isCard?'no-card':''}}">
+<!-- <view wx:if="{{key == 0}}"></view> -->
+  <view class="cu-item shadow" wx:for="{{announce}}" wx:for-item="good" wx:key="_id">
+   <view wx:if="{{good.condition == key}}">
+      <view class="content">		
+        <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"  mode="aspectFill" style="height:280rpx"></image>  
+        <view class="desc">
+
+          <view class="text-cut">商品名:{{good.title}}</view>
+          <view class="text-cut">商品详情:</view>
+          <view class="text-content">{{good.detail}}</view>
+          <view>
+          <view><text style="color:red" >￥{{good.curPrice}}</text></view>     
+        </view>     
+        </view>
+    </view>
+    </view>
+        <view style="display:flex margin-top:500rpx">
+      </view>  
+  </view>
+
+</view>

@@ -35,7 +35,7 @@
 <view class="cu-card dynamic"  >
   <view class="cu-item shadow" >
     <view class="weui-cell weui-cell_access"  hover-class="weui-cell_active">
-      <view class="weui-cell__bd" bindtap="getannounce">ta的发布</view>
+      <view class="weui-cell__bd" bindtap="getannounce1">ta的发布</view>
       <view class="weui-cell__ft weui-cell__ft_in-access"></view>
     </view>
   </view>
@@ -49,7 +49,7 @@
 
       <view class="cu-item shadow" >
     <view class="weui-cell weui-cell_access"  hover-class="weui-cell_active">
-      <view class="weui-cell__bd" bindtap="getannounce">ta的求购</view>
+      <view class="weui-cell__bd" bindtap="getannounce0">ta的求购</view>
       <view class="weui-cell__ft weui-cell__ft_in-access"></view>
     </view>
   </view>

@@ -9,6 +9,32 @@ Page({
     isAdmi:true,
     
   },
+  // getannounce0:function(e){
+  //   wx.setStorage({
+  //     data:this.data.otheruser.announce,
+  //     key: 'announce',
+  //   })
+  //   wx.setStorage({
+  //     data: 0,
+  //     key: 'key',
+  //   })
+  //   wx.navigateTo({
+  //     url: '../otherannounce/otherannounce',
+  //   })
+  // },
+  getannounce1:function(e){
+    wx.setStorage({
+      data:this.data.otheruser.announce,
+      key: 'announce',
+    })
+    wx.setStorage({
+      data: 1,
+      key: 'key',
+    })
+    wx.navigateTo({
+      url: '../otherannounce/otherannounce',
+    })
+  },
   getbought:function(e){
     wx.setStorage({
       data: this.data.otheruser.bought,
