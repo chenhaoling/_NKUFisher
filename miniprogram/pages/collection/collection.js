@@ -8,6 +8,7 @@ Page({
   data: {
     userInfo : {},
     goods:[],
+    type:'fabu',
     good:[
       {
         "id":0,
@@ -33,8 +34,12 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    console.log("onLoad")
+  onLoad: function ({type}) {
+    // console.log(type)
+    this.setData({
+      type:type
+    })
+    // console.log("onLoad")
     if(this.data.goods.length === 0){
     wx.cloud.callFunction({
       name: 'user_info',
@@ -54,7 +59,7 @@ Page({
 
   backDetail: function(){
     var tempgoods = []
-    if(app.globalData.fabu==0){
+    if(this.data.type === 'fabu'){
       for (var index in this.data.userInfo.announce) {
         wx.cloud.callFunction({
           name: 'good_info',
@@ -77,12 +82,14 @@ Page({
        }
        
       //  console.log("河流:"+this.data.goods[0])
-    }else if(app.globalData.fabu==1){
-      for (var index in this.data.userInfo.announce) {
+    }else if(this.data.type === 'bought'){//淘到的
+      console.log("淘到的")
+      console.log(this.data.userInfo.bought)
+      for (var index in this.data.userInfo.bought) {
         wx.cloud.callFunction({
           name: 'good_info',
           data: {
-            _id:this.data.userInfo.announce[index]
+            _id:this.data.userInfo.bought[index]
           },
           complete: res => {
             tempgoods.push(res.result)
@@ -98,7 +105,7 @@ Page({
           }
         })
        }
-    }else if(app.globalData.fabu==2){
+    }else if(this.data.type === 'request'){
       for (var index in this.data.userInfo.announce) {
         wx.cloud.callFunction({
           name: 'good_info',
@@ -120,11 +127,14 @@ Page({
         })
        }
     }else{//我的收藏
-      for (var index in this.data.userInfo.announce) {
+      console.log("我的收藏")
+      console.log(this.data.userInfo.collection)
+      for (var index in this.data.userInfo.collection) {
+        
         wx.cloud.callFunction({
           name: 'good_info',
           data: {
-            _id:this.data.userInfo.announce[index]
+            _id:this.data.userInfo.collection[index]
           },
           complete: res => {
             tempgoods.push(res.result)
@@ -174,6 +184,7 @@ Page({
    */
   onShow: function () {
     console.log("onShow")
+    console.log(app.globalData.fabu)
     // console.log("河流:"+this.data.goods[0])
   //  console.log(this.data.goods)
   // this.onLoad()

@@ -12,19 +12,19 @@ Page({
     isAut: false,
     blockCard: [
       {
-        url: '../collection/collection',
+        url: '../collection/collection?type=fabu',
         tittle: '我的发布',
       },
       {
-        url: '../collection/collection',
+        url: '../collection/collection?type=bought',
         tittle: '我淘到的',
       },
       {
-        url: '../collection/collection',
+        url: '../collection/collection?type=request',
         tittle: '我的求购',
       },
       {
-        url: '../collection/collection',
+        url: '../collection/collection?type=collection',
         tittle: '我的收藏',
       },
       {
@@ -91,6 +91,7 @@ Page({
       isAut: true
     })
   },
+  
 
     /**
    * 生命周期函数--监听页面显示
