@@ -18,7 +18,7 @@
     </view>
         <view style="display:flex margin-top:500rpx">
         <button class="cu-btn round line-cyan" style="margin-top:10rpx">忽略</button>
-        <button class="cu-btn round line-cyan" style="margin-top:10rpx">下架</button>
+        <button class="cu-btn round line-cyan" style="margin-top:10rpx" data-goodid="{{goods[index]._id}}"bindtap="remove">下架</button>
       </view>  
   </view>
 </view>

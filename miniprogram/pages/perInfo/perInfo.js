@@ -50,6 +50,7 @@ Page({
       userInfo: app.globalData.userInfo
     })
     if(app.globalData.userInfo._id != null) {
+      console.log(app.globalData.userInfo._id )
       console.log("已经注册过")
       this.setData({
         isAut: true

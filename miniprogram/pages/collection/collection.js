@@ -119,7 +119,7 @@ Page({
           }
         })
        }
-    }else{
+    }else{//我的收藏
       for (var index in this.data.userInfo.announce) {
         wx.cloud.callFunction({
           name: 'good_info',
@@ -143,6 +143,21 @@ Page({
     }
     // this.onShow()
     // this.onReady()
+  },
+
+  remove:function(event){
+    console.log(event.currentTarget.dataset.goodid)
+
+    wx.cloud.callFunction({
+      name: 'collection_ood',
+      data: {
+        _id:event.currentTarget.dataset.goodid
+      },
+      complete: res => {
+        console.log(res.result)
+        this.onLoad()
+      }
+    })
   },
 
   /**
