@@ -45,10 +45,10 @@
   <!-- 评论 -->
       <view class="cu-list menu-avatar comment solids-top">
         <view class="cu-item"  wx:for = "{{comments}}" wx:key = "{{index}}">
-          <view class="cu-avatar round" style="background-image:url(https://ossweb-img.qq.com/images/lol/img/champion/Morgana.png);"></view>
+          <view class="cu-avatar round" style="background-image:url({{comments[index].avatarUrl}});"></view>
           <view class="content">
             <view>
-              <view class="text-grey" style="width:95%">{{comments[index].nickName}}</view>
+              <view class="text-grey" style="width:95%">{{comments[index].nickname}}</view>
               <view wx:if = "{{index == 1}}">
                 <text class="cuIcon-roundclosefill lg text-gray"></text>
               </view>
