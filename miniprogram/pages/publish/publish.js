@@ -13,15 +13,13 @@ Page({
       campus: "八里台校区",
       category: "数码产品",
       detail: "",
-      oriPrice: -1,
-      curPrice: -1,
+      oriPrice: "",
+      curPrice: "",
       image: [],
     },
-    postBook: true,
-    postThing: false,
     campus: ["八里台校区", "津南校区", "泰达校区"], 
     campusIndex: 0,
-    categorys: ["数码产品", "学习资料", "生活用品", "其他"], 
+    category: ["数码产品", "学习资料", "生活用品", "其他"], 
     categoryIndex: 0, 
     buttonLoading: false,
     TabCur: 0,
@@ -29,7 +27,11 @@ Page({
   },
 
   bindInput: function(e) {
-    this.data.good[e.currentTarget.dataset.type] = e.detail.value
+    if(e.currentTarget.dataset.type == "campus" || e.currentTarget.dataset.type == "category") {
+      this.data.good[e.currentTarget.dataset.type] = this.data[e.currentTarget.dataset.type][e.detail.value]
+    } else {
+      this.data.good[e.currentTarget.dataset.type] = e.detail.value
+    }
     this.setData({good: this.data.good})
   },
 
@@ -48,12 +50,13 @@ Page({
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success: function(res) {
+        console.log(that.data)
         if(that.data.good.image.length != 0) {
-          that.data.image= that.data.image.concat(res.tempFilePaths)
-          that.setData({good: good})
+          that.data.good.image= that.data.good.image.concat(res.tempFilePaths)
+          that.setData({good: that.data.good})
         } else {
-          that.data.image = res.tempFilePaths
-          that.setData({good: good})
+          that.data.good.image = res.tempFilePaths
+          that.setData({good: that.data.good})
         }
       },
     })
@@ -66,11 +69,76 @@ Page({
   },
   DelImg(e) {
     this.data.good.image.splice(e.currentTarget.dataset.index, 1)
-    this.setData({good: good})
+    this.setData({good: that.data.good})
   },
 
   bindSubmit: function() {
-    if (app.globalData.userInfo.stuNum == "") {
+    const that = this
+      if (app.globalData.userInfo.stuNum != undefined) {
+      this.setData({
+        buttonLoading: true
+      })
+      let promiseArr = []
+      this.data.good.create = true
+      for(let index = 0; index < this.data.good.image.length; index++) {
+        let filePath = this.data.good.image[index]
+        let suffix = /\.[^\.]+$/.exec(filePath)[0];
+        promiseArr.push(new Promise((reslove, reject)=>{
+          wx.cloud.uploadFile({
+            cloudPath: new Date().getTime() + suffix,
+            filePath: filePath,
+          }).then(res => {
+            this.data.good.image[index] = res.fileID
+            reslove()
+          }).catch(error => {
+            console.log(error)
+          })
+        }))
+      }
+      Promise.all(promiseArr).then(res=>{
+        wx.cloud.callFunction({
+          name: 'distribute_good',
+          data: this.data.good,
+          complete: res => {
+            console.log(res)
+            wx.showToast({
+              title: '发布成功',
+              icon: 'succes',
+              duration: 2500,
+              mask: true
+            })
+            that.setData({
+              good: {
+                condition: 0,
+                title: "",
+                contact: "",
+                campus: "八里台校区",
+                category: "数码产品",
+                detail: "",
+                oriPrice: "",
+                curPrice: "",
+                image: [],
+              },
+              campusIndex: 0,
+              categoryIndex: 0, 
+              buttonLoading: false,
+              TabCur: 0,
+              scrollLeft: 0,
+            })
+            if(that.data.good.condition == 0) {
+              wx.navigateTo({
+                url: '../collection/collection?type=fabu',
+              })
+            } else {
+              wx.navigateTo({
+                url: '../collection/collection?type=request',
+              })
+            }
+            
+          },
+        })
+      })
+    } else {
       wx.showModal({
         title: '提示',
         content: '请验证您的学生身份',
@@ -84,24 +152,6 @@ Page({
             console.log('用户点击取消')
           }
         }
-      })
-    } else {
-      this.setData({
-        buttonLoading: true
-      })
-      this.data.good.create = true
-      wx.cloud.callFunction({
-        name: 'distribute_good',
-        data: this.data.good,
-        complete: res => {
-          console.log(res)
-          wx.showToast({
-            title: '发布成功',
-            icon: 'succes',
-            duration: 2500,
-            mask: true
-          })
-        },
       })
     }
   },
@@ -124,7 +174,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
 
   /**
@@ -153,22 +202,6 @@ Page({
    */
   onReachBottom: function () {
 
-  },
-
-  choosePostBook: function(e) {
-    var that = this;
-    that.setData({
-      postBook: true,
-      postThing: false,
-   
-    })
-  },
-  choosePostThing: function(e) {
-    var that = this;
-    that.setData({
-      postBook: false,
-      postThing: true,
-    })
   },
 
     /**
