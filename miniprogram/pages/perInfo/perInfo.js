@@ -96,6 +96,8 @@ Page({
     this.setData({
       isAut: true
     })
+
+    this.onLoad()
   },
   
 
@@ -158,7 +160,15 @@ Page({
 
   },
 
+  bindClear:function(){
+    app.globalData.userInfo = {},
+    this.setData({
+      isAut: false,
+    })
+  },
 
+
+  
 
   bindCurrentPriceInput: function(e) {
     this.setData({
