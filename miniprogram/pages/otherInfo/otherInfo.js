@@ -11,6 +11,34 @@ Page({
     label:false
     
   },
+  changefans:function(e){
+    var that = this
+    wx.cloud.callFunction({
+      name:'fans',
+      data:{
+       _id:this.data.otheruser._id,
+       love:!that.data.label
+      },
+      complete: res =>{
+        console.log("修改关注成功")
+        that.setData({
+          label:!that.data.label
+        })
+        wx.cloud.callFunction({
+          name:'user_info',
+          data:{
+            _id:that.data.otheruser._id
+          },
+          complete:res =>{
+            console.log("关注更改后重新获取用户信息成功")
+            that.setData({
+              otheruser:res.result
+            })
+          }
+        })
+      }
+    })
+  },
   getannounce0:function(e){
     wx.setStorage({
       data:this.data.otheruser.announce,
