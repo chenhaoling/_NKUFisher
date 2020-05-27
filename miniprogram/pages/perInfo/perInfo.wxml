@@ -19,10 +19,18 @@
             <text class="cu-btn round sm line-red" wx:if="{{isReview==false}}" bindtap="showModal" data-target="Modal">身份验证</text>
           </view>
         </view>
+        
       </view>
     </view>
     <view class="text-grey margin-lr-xs" wx:if="{{isReview==true}}">校区: {{userInfo.campus}}</view>
     <view class="text-grey margin-lr-xs">联系方式: {{userInfo.contact}}</view>
+    <view wx:if="{{userInfo.role == 'admin'}}"> 
+        <navigator url="../manager/manager">
+        <view class="text-gray">
+          <text class="cu-btn sm round line-green margin-lr"  data-target="ModalPhone">管理员</text>
+        </view>
+        </navigator>
+        </view>
     <view class="text-gray">
       <text class="cuIcon-attentionfill margin-lr-xs"></text><text>关注:{{userInfo.love.length}} </text>
       <text class="cuIcon-attentionfill margin-lr-xs"></text><text> 粉丝:{{userInfo.fans.length}}</text>
