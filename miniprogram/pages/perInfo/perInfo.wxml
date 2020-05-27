@@ -60,18 +60,26 @@
 
 <view class="cu-card dynamic" wx:if="{{isAut==true}}">
   <view class="cu-item shadow" wx:for="{{blockCard}}" wx:key ="{{index}}">
+    <view wx:if="{{index < 4}}">
     <navigator  url="{{blockCard[index].url}}" class="weui-cell weui-cell_access"  hover-class="weui-cell_active" >
       <view class="weui-cell__bd">{{blockCard[index].tittle}}</view>
       <view class="weui-cell__ft weui-cell__ft_in-access"></view>
     </navigator>
+    </view>
+    <view wx:if="{{index === 4 & isAdmin}}">
+      <navigator  url="{{blockCard[index].url}}" class="weui-cell weui-cell_access"  hover-class="weui-cell_active" >
+      <view class="weui-cell__bd">{{blockCard[index].tittle}}</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+    </view>
   </view>
 </view>
 
 <view class="cu-card dynamic" wx:if="{{isAut==true}}">
   <view class="cu-item shadow">
-    <navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <button class="weui-cell weui-cell_access" hover-class="weui-cell_active">
       <view class='text-red' bindtap='bindClear'>退出帐号</view>
-    </navigator>
+    </button>
   </view>
 </view>
 

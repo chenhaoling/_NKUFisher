@@ -10,6 +10,7 @@ Page({
     userInfo: {},
     isReview: false,
     isAut: false,
+    isAdmin:false,
     blockCard: [
       {
         url: '../collection/collection?type=fabu',
@@ -28,8 +29,8 @@ Page({
         tittle: '我的收藏',
       },
       {
-        url: '../collection/collection',
-        tittle: '系统通知',
+        url: '../manager/manager',
+        tittle: '管理员待处理',
       }
     ],
     userHead:'../../images/icon9.jpeg',
@@ -54,6 +55,11 @@ Page({
       console.log("已经注册过")
       this.setData({
         isAut: true
+      })
+    }
+    if(app.globalData.userInfo.role === 'admin'){
+      this.setData({
+        isAdmin: true
       })
     }
     if(app.globalData.userInfo.stuNum != undefined && app.globalData.userInfo.stuNum != '') {
@@ -151,6 +157,8 @@ Page({
     // this.onShow()
 
   },
+
+
 
   bindCurrentPriceInput: function(e) {
     this.setData({
