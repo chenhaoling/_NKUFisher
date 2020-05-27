@@ -13,12 +13,24 @@ Page({
   },
 
   getotheruserinfo:function(e){
+    var label = false
+    var that = this
     wx.setStorage({
       data: this.data.otheruser,
       key: 'otheruser',
-    }),
+    })
+    for(var i = 0;i < that.data.otheruser.fans.length;i++){
+      if(that.data.otheruser.fans[i]== app.globalData.userInfo._id){
+        label = true;
+        break;
+      }    
+    }
+    wx.setStorage({
+      data: label,
+      key: 'label',
+    })
     wx.navigateTo({
-      url: '../otherInfo/otherInfo',
+      url: '../otherInfo/otherInfo?label',
     })
   },
 

@@ -1,3 +1,4 @@
+var app = getApp()
 // miniprogram/pages/perInfo/perInfo.js
 Page({
 
@@ -7,6 +8,7 @@ Page({
   data: {
     'otheruser':'',
     isAdmi:true,
+    label:false
     
   },
   getannounce0:function(e){
@@ -91,6 +93,14 @@ Page({
   onLoad: function (options) {
     var that =  this
     wx.getStorage({
+      key: 'label',
+      success:function(e){
+        that.setData({
+          label:e.data
+        })
+      }
+    })
+    wx.getStorage({
       key: 'otheruser',
       success:function(res){
         that.setData({
@@ -98,6 +108,7 @@ Page({
         })
       }
     })
+
   },
 
   /**
