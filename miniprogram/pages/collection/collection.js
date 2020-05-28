@@ -39,6 +39,7 @@ Page({
     this.setData({
       type:type
     })
+   
     // console.log("onLoad")
     if(this.data.goods.length === 0){
     wx.cloud.callFunction({
@@ -60,114 +61,153 @@ Page({
   backDetail: function(){
     var tempgoods = []
     if(this.data.type === 'fabu'){
-      for (var index in this.data.userInfo.announce) {
-        wx.cloud.callFunction({
-          name: 'good_info',
-          data: {
-            _id:this.data.userInfo.announce[index]
-          },
-          complete: res => {
-            tempgoods.push(res.result)
-            // console.log("山脉:"+this.data.goods[0].category)
-            console.log("长度")
-            console.log(this.data.goods.length)
-            // if(index === this.data.userInfo.announce.length - 1)
-            // {
-            this.setData({
-              goods: tempgoods
-            })
-          // }
-          }
-        })
-       }
+
+      
+
        
-      //  console.log("河流:"+this.data.goods[0])
     }else if(this.data.type === 'bought'){//淘到的
-      console.log("淘到的")
-      console.log(this.data.userInfo.bought)
+
+      let promiseArr = []
+
       for (var index in this.data.userInfo.bought) {
-        wx.cloud.callFunction({
-          name: 'good_info',
-          data: {
+
+
+        promiseArr.push(new Promise((reslove, reject)=>{
+          wx.cloud.callFunction({
+           name: 'good_info',
+           data:{
             _id:this.data.userInfo.bought[index]
-          },
-          complete: res => {
+           }
+          }).then(res => {
             tempgoods.push(res.result)
-            // console.log("山脉:"+this.data.goods[0].category)
-            console.log("长度")
-            console.log(this.data.goods.length)
-            // if(index === this.data.userInfo.announce.length - 1)
-            // {
-            this.setData({
-              goods: tempgoods
-            })
-          // }
-          }
-        })
-       }
-    }else if(this.data.type === 'request'){
-      for (var index in this.data.userInfo.announce) {
-        wx.cloud.callFunction({
-          name: 'good_info',
-          data: {
-            _id:this.data.userInfo.announce[index]
-          },
-          complete: res => {
-            tempgoods.push(res.result)
-            // console.log("山脉:"+this.data.goods[0].category)
-            console.log("长度")
-            console.log(this.data.goods.length)
-            // if(index === this.data.userInfo.announce.length - 1)
-            // {
-            this.setData({
-              goods: tempgoods
-            })
-          // }
-          }
-        })
-       }
-    }else{//我的收藏
-      console.log("我的收藏")
-      console.log(this.data.userInfo.collection)
-      for (var index in this.data.userInfo.collection) {
+            reslove()
+          }).catch(error => {
+            console.log(error)
+          })
+        }))
         
-        wx.cloud.callFunction({
-          name: 'good_info',
-          data: {
-            _id:this.data.userInfo.collection[index]
-          },
-          complete: res => {
-            tempgoods.push(res.result)
-            // console.log("山脉:"+this.data.goods[0].category)
-            console.log("长度")
-            console.log(this.data.goods.length)
-            // if(index === this.data.userInfo.announce.length - 1)
-            // {
-            this.setData({
-              goods: tempgoods
-            })
-          // }
-          }
-        })
        }
+
+       Promise.all(promiseArr).then(res=>{
+         this.setData({
+           goods:tempgoods
+         })
+        //  console.log(this.data.goods)
+       })
+
+    }else if(this.data.type === 'request'){
+
+
+    
+
+
+
+    }else{//我的收藏
+      // console.log("我的收藏")
+      // console.log(this.data.userInfo.collection)
+      let promiseArr = []
+
+      for (var index in this.data.userInfo.collection) {
+
+
+        promiseArr.push(new Promise((reslove, reject)=>{
+          wx.cloud.callFunction({
+           name: 'good_info',
+           data:{
+            _id:this.data.userInfo.collection[index]
+           }
+          }).then(res => {
+            tempgoods.push(res.result)
+            reslove()
+          }).catch(error => {
+            console.log(error)
+          })
+        }))
+        
+       }
+
+       Promise.all(promiseArr).then(res=>{
+         this.setData({
+           goods:tempgoods
+         })
+        //  console.log(this.data.goods)
+       })
+
+
+
+
     }
     // this.onShow()
     // this.onReady()
   },
 
   remove:function(event){
-    console.log(event.currentTarget.dataset.goodid)
 
-    wx.cloud.callFunction({
-      name: 'collection_ood',
-      data: {
-        _id:event.currentTarget.dataset.goodid
-      },
-      complete: res => {
-        console.log(res.result)
-        this.onLoad()
-      }
-    })
+
+    if(this.data.type === 'fabu'){
+      console.log("发布")
+      console.log(event.currentTarget.dataset.goodid)
+      wx.cloud.callFunction({
+        name: 'remove_good',
+        data: {
+          _id:event.currentTarget.dataset.goodid, 
+        },
+        complete: res => {
+          console.log(res)
+          this.backDetail()
+          // this.onLoad()
+        }
+      })
+
+    }else if(this.data.type === 'bought'){
+      console.log("买到的不能删除")
+    }else if(this.data.type === 'request'){
+      console.log("取消求购")
+      wx.cloud.callFunction({
+        name: 'remove_good',
+        data: {
+          _id:event.currentTarget.dataset.goodid,
+          buy_id:app.globalData.userInfo._id
+        },
+        complete: res => {
+          console.log(res.result)
+          this.backDetail()
+          // this.onLoad()
+        }
+      })
+
+    }else{
+      var that = this
+      console.log("取消收藏")
+
+      wx.cloud.callFunction({
+        name: 'collection_good',
+        data:{
+          _id:event.currentTarget.dataset.goodid,
+        },
+        complete: res => {
+          console.log(res.result)
+          wx.cloud.callFunction({
+            name: 'user_info',
+            data: {},
+            complete: restep => {
+              console.log("重新获取userinfo")
+              app.globalData.userInfo = restep.result
+              this.setData({
+                  userInfo: restep.result
+                })
+                that.backDetail()
+            }
+            
+          })
+         
+        }
+      })
+     
+
+    }
+
+   
   },
 
   /**
@@ -183,8 +223,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log("onShow")
-    console.log(app.globalData.fabu)
+    // console.log("onShow")
+    // console.log(app.globalData.fabu)
     // console.log("河流:"+this.data.goods[0])
   //  console.log(this.data.goods)
   // this.onLoad()
