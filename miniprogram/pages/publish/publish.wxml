@@ -1,6 +1,4 @@
 <!--miniprogram/pages/publish/publish.wxml-->
-<!-- <view style="display:flex flex-direction:row"> -->
-
 <scroll-view scroll-x class="bg-blue nav text-center">
   <view class="cu-item {{0==TabCur?'text-white cur':''}}" catchtap="tabSelect" data-id="0">
     <text class="cuIcon-shopfill"></text> 出售
@@ -11,73 +9,65 @@
 </scroll-view>
 
 <form>
-      <view class="cu-form-group margin-top">
-        <view class="title text-gray">名称</view>
-        <input name="input"  bindinput="bindInput" placeholder="必填" value="{{good.title}}" data-type='title'></input>
+  <view class="cu-form-group margin-top">
+    <view class="title text-gray">名称</view>
+    <input name="input"  bindinput="bindInput" placeholder="必填" value="{{good.title}}" data-type='title'></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title text-gray">{{TabCur==0?"售价￥": "预算￥"}}</view>
+    <input name="input"  bindinput="bindInput" placeholder="必填" value="{{good.curPrice}}" type="digit" data-type='curPrice'></input>
+  </view>
+  <view class="cu-form-group" wx:if="{{TabCur==0}}">
+    <view class="title text-gray">原价￥</view>
+    <input name="input" bindinput="bindInput" placeholder="可选" value="{{good.oriPrice}}" type="digit" data-type='oriPrice'></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title text-gray">校区</view>
+    <picker bindchange="bindInput" value="{{campusIndex}}" range="{{campus}}" data-type="campus">
+      <view class="picker">
+        {{campus[campusIndex]}}
       </view>
-      <view class="cu-form-group">
-        <view class="title text-gray">{{TabCur==0?"售价￥": "预算￥"}}</view>
-        <input name="input"  bindinput="bindInput" placeholder="必填" value="{{good.curPrice}}" type="digit" data-type='curPrice'></input>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title text-gray">类别</view>
+    <picker bindchange="bindInput" value="{{categoryIndex}}" range="{{category}}" data-type="category">
+      <view class="picker">
+        {{category[categoryIndex]}}
       </view>
-      <view class="cu-form-group" wx:if="{{TabCur==0}}">
-        <view class="title text-gray">原价￥</view>
-        <input name="input" bindinput="bindInput" placeholder="可选" value="{{good.oriPrice}}" type="digit" data-type='oriPrice'></input>
-      </view>
-      <view class="cu-form-group">
-        <view class="title text-gray">校区</view>
-        <picker bindchange="bindInput" value="{{campusIndex}}" range="{{campus}}" data-type="campus">
-          <view class="picker">
-            {{campus[campusIndex]}}
-          </view>
-        </picker>
-      </view>
-      <view class="cu-form-group">
-        <view class="title text-gray">类别</view>
-        <picker bindchange="bindInput" value="{{categoryIndex}}" range="{{category}}" data-type="category">
-          <view class="picker">
-            {{category[categoryIndex]}}
-          </view>
-        </picker>
-      </view>
-      <view class="cu-form-group">
-        <view class="title text-gray">联系方式</view>
-        <input name="input" bindinput="bindInput" placeholder="必填" value="{{good.contact}}" type="digit" data-type='contact'></input>
-      </view>
-      <view class="cu-form-group margin-top">
-        <textarea value='{{good.detail}}' bindinput="bindInput" placeholder="物品描述（可选）" data-type='detail'></textarea>
-      </view>
-      <view class="cu-bar bg-white margin-top text-gray">
-        <view class="action">
-          上传图片（可选）
-        </view>
-        <view class="action">
-          {{good.image.length}}/4
-        </view>
-      </view>
-      <view class="cu-form-group">
-        <view class="grid col-4 grid-square flex-sub">
-          <view class="bg-img" wx:for="{{good.image}}" wx:key="index" data-url="{{good.image[index]}}">
-           <image src="{{good.image[index]}}" mode="aspectFill"></image>
-           <view class="cu-tag bg-red" bindtap="DelImg" data-index="{{index}}">
-              <text class='cuIcon-close'></text>
-            </view>
-          </view>
-          <view class="solids" bindtap="ChooseImage" wx:if="good.image.length<4">
-            <text class='cuIcon-cameraadd'></text>
-          </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title text-gray">联系方式</view>
+    <input name="input" bindinput="bindInput" placeholder="必填" value="{{good.contact}}" type="digit" data-type='contact'></input>
+  </view>
+  <view class="cu-form-group margin-top">
+    <textarea value='{{good.detail}}' bindinput="bindInput" placeholder="物品描述（可选）" data-type='detail'></textarea>
+  </view>
+  <view class="cu-bar bg-white margin-top text-gray">
+    <view class="action">
+      上传图片（可选）
+    </view>
+    <view class="action">
+      {{good.image.length}}/4
+    </view>
+  </view>
+  <view class="cu-form-group">
+    <view class="grid col-4 grid-square flex-sub">
+      <view class="bg-img" wx:for="{{good.image}}" wx:key="index" data-url="{{good.image[index]}}">
+        <image src="{{good.image[index]}}" mode="aspectFill"></image>
+        <view class="cu-tag bg-red" bindtap="DelImg" data-index="{{index}}">
+          <text class='cuIcon-close'></text>
         </view>
       </view>
-      <view class="cu-form-group">
-        <button class='cu-btn lines-blue round lg shadow'  disabled="{{good.title == ''|| good.curPrice == '' || good.contact == ''}}" loading="{{buttonLoading}}" bindtap="bindSubmit">
-          立即发布
-        </button>
+      <view class="solids" bindtap="ChooseImage" wx:if="good.image.length<4">
+        <text class='cuIcon-cameraadd'></text>
       </view>
+    </view>
+  </view>
+  <view class="cu-form-group">
+    <button class='cu-btn lines-blue round lg shadow'  disabled="{{good.title == ''|| good.curPrice == '' || good.contact == ''}}" loading="{{buttonLoading}}" bindtap="bindSubmit">
+      立即发布
+    </button>
+  </view>
 </form>
-
- <!-- 发布按钮 -->
- 
-
-<!-- </view> -->
-
-
-

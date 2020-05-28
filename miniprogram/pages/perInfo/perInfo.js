@@ -11,6 +11,15 @@ Page({
     isReview: false,
     isAut: false,
     isAdmin:false,
+    buttonLoading: false,
+    updateInfo: {
+      reviewImage: '',
+      stuNum: '',
+      campus: '',
+      nickName: '',
+      contact: '',
+    },
+    buttonLoading: false,
     blockCard: [
       {
         url: '../collection/collection?type=fabu',
@@ -28,22 +37,7 @@ Page({
         url: '../collection/collection?type=collection',
         tittle: '我的收藏',
       },
-      {
-        url: '../manager/manager',
-        tittle: '管理员待处理',
-      }
     ],
-    userHead:'../../images/icon9.jpeg',
-    isAdmi:true,
-    name:'1', //商品名字
-    thingDescribe:'',//商品描述
-    currentPrice:'1',//商品价格
-    college:'软件学院',//
-    thingImage:'../../images/xiangji.jpg',
-    stuId:'123',
-    phoneNum: '123678',
-    buttonLoading: false,
-    currUser:{}
   },
 
   getCurrUserInfo:function(e){
@@ -51,10 +45,11 @@ Page({
       userInfo: app.globalData.userInfo
     })
     if(app.globalData.userInfo._id != null) {
-      console.log(app.globalData.userInfo._id )
-      console.log("已经注册过")
+      this.data.updateInfo.nickName = this.data.userInfo.nickName
+      this.data.updateInfo.contact = this.data.userInfo.contact
       this.setData({
-        isAut: true
+        isAut: true,
+        updateInfo: this.data.updateInfo
       })
     }
     if(app.globalData.userInfo.role === 'admin'){
@@ -71,219 +66,167 @@ Page({
 
 
   authorization: function(e){
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          wx.getUserInfo({
-            success: res => {
-              const userInfo = res.userInfo
-              wx.cloud.callFunction({
-                name: 'authorization',
-                data: {
-                  nickName: userInfo.nickName,
-                  avatar: userInfo.avatarUrl,
-                },
-                complete: res => {
-                  app.globalData.userInfo = res.result
-                  this.getCurrUserInfo()
-                },
-              })
-            }
-          })
+    if(app.globalData.userInfo._id != undefined) {
+      this.setData({
+        isAut: true
+      })
+    } else {
+      wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            wx.getUserInfo({
+              success: res => {
+                const userInfo = res.userInfo
+                wx.cloud.callFunction({
+                  name: 'authorization',
+                  data: {
+                    nickName: userInfo.nickName,
+                    avatar: userInfo.avatarUrl,
+                  },
+                  complete: res => {
+                    app.globalData.userInfo = res.result
+                    this.getCurrUserInfo()
+                    this.setData({
+                      isAut: true
+                    })
+                  },
+                })
+              }
+            })
+          }
         }
-      }
-    })
-    this.setData({
-      isAut: true
-    })
-
-    this.onLoad()
+      })
+    }
   },
-  
+
+  bindInput: function(e) {
+    this.data.updateInfo[e.currentTarget.dataset.type] = e.detail.value
+    this.setData({updateInfo: this.data.updateInfo})
+  },
+
+  bindAdmin:function(){
+    wx.navigateTo({
+      url: '../manager/manager',
+    })
+  },
+
+  bindClear:function(){
+    this.setData({
+      isAut: false,
+    })
+  },
+
+  bindUpdate:function(){
+    const that = this
+    wx.cloud.callFunction({
+      name: 'user_info',
+      data: {
+        nickName: this.data.updateInfo.nickName,
+        contact: this.data.updateInfo.contact,
+      },
+      complete: res => {
+        wx.showToast({
+          title: '修改成功',
+          icon: 'succes',
+          duration: 2500,
+          mask: true
+        })
+        that.hideModal()
+        app.globalData.userInfo.nickName = that.data.updateInfo.nickName
+        app.globalData.userInfo.contact = that.data.updateInfo.contact
+        that.setData({
+          userInfo: app.globalData.userInfo
+        })
+      },
+    })
+  },
+
+  bindReview:function(){
+    const that = this
+    let filePath = this.data.updateInfo.reviewImage
+    let suffix = /\.[^\.]+$/.exec(filePath)[0];
+    that.setData({
+      buttonLoading: true,
+    })
+    wx.cloud.uploadFile({
+      cloudPath: new Date().getTime() + suffix,
+      filePath: filePath,
+    }).then(res => {
+      that.data.updateInfo.reviewImage = res.fileID
+      wx.cloud.callFunction({
+        name: 'identityCheck',
+        data: {
+          userId: that.data.userInfo._id,
+          pic: that.data.updateInfo.reviewImage,
+          stuNum: that.data.updateInfo.stuNum,
+          stuCollege: that.data.updateInfo.campus,
+          identity: 1,
+        },
+        complete: res => {
+          wx.showToast({
+            title: '提交成功',
+            icon: 'succes',
+            duration: 2500,
+            mask: true
+          })
+          that.hideModal()
+          that.data.updateInfo.stuNum = ''
+          that.data.updateInfo.reviewImage = ''
+          that.data.updateInfo.campus = ''
+          that.setData({
+            updateInfo: that.data.updateInfo,
+            buttonLoading: false,
+          })
+        },
+      })
+    })
+  },
+
+  showModal(e) {
+    this.setData({
+      modalName: e.currentTarget.dataset.target
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
+  },
+
+  ChooseImage() {
+    const that = this
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success: function(res) {
+        that.data.updateInfo.reviewImage = res.tempFilePaths[0]
+      that.setData({updateInfo: that.data.updateInfo})
+      },
+    })
+  },
+  ViewImage(e) {
+    wx.previewImage({
+      urls: this.data.updateInfo.reviewImage,
+      current: e.currentTarget.dataset.url
+    });
+  },
+  DelImg(e) {
+    this.data.updateInfo.reviewImage = ''
+    this.setData({updateInfo: this.data.updateInfo})
+  },
 
     /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
     this.getCurrUserInfo()
-
-    console.log("111")
-   
-   
-    // wx.cloud.callFunction({
-    //   name: 'user_info',
-    //   data: '',
-    //   complete: res => {
-    //     if(res.result._id == null){//么有注册过
-    //       this.setData({
-    //         isAut:false,
-    //         currUser : {}
-    //       })
-    //       app.globalData.userInfo = {}
-    //     }
-    //     else{
-    //       console.log(res.result)
-    //       this.setData({
-    //         isAut:true,
-    //         currUser : app.globalData.userInfo
-    //       })
-    //       console.log("已经注册过")
-    //       console.log(app.globalData.userInfo)
-    //     }
-    //   }
-    // })
-  
-    // if(Object.keys(app.globalData.userInfo).length != 0) {
-    //   this.setData({
-    //     isAut:true
-    //   })
-      
-    //   console.log(app.globalData.userInfo)
-    // }
-    // this.onReady()
-    // this.onLoad()
   },
 
     /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log("222")
-    // if(Object.keys(app.globalData.userInfo).length != 0) {
-    //   this.setData({
-    //     isAut:true
-    //   })
-    //   console.log("test")
-    // }
-    // this.onShow()
-
-  },
-
-  bindClear:function(){
-    app.globalData.userInfo = {},
-    this.setData({
-      isAut: false,
-    })
-  },
-
-
-  
-
-  bindCurrentPriceInput: function(e) {
-    this.setData({
-      stuId: e.detail.value
-    })
-  },
-  //书本信息
-  bindBookcollegeInput: function(e) {
-    this.setData({
-      college: e.detail.value
-    })
-  },
-  bindBookPhoneNumberInput: function(e){
-      this.setData({
-          phoneNum: e.detail.value
-        })
-  },
-  showModal(e) {
-    this.setData({
-      modalName: e.currentTarget.dataset.target
-    })
-  },
-  hideModal(e) {
-    this.setData({
-      modalName: null
-    })
-  },
-  bindThingImageInput: function() { //商品图片选择
-    var that = this;
-    wx.chooseImage({
-      count: 1,
-      sourceType: ['album', 'camera'],
-      success: function(res) {
-        var thingImage = res.tempFilePaths;
-        that.setData({
-          thingImage: thingImage
-        })
-      },
-    })
-  },
-  bindBookNameInput: function(e) {
-    this.setData({
-      name: e.detail.value
-    })
-  },
-
-  jump:function(e){
-    wx.navigateTo({
-      url: '../index/index',
-      success: function(res) {
-        console.log("successs");
-      },
-      fail: function(res) {
-        console.log(e);
-      },
-      complete: function(res) {
-    
-      },
-     })
-  },
-
-
-  showModal(e) {
-    this.setData({
-      modalName: e.currentTarget.dataset.target
-    })
-  },
-  hideModal(e) {
-    this.setData({
-      modalName: null
-    })
-  },
-
-  userNameInput:function(e){
-    this.setData({
-      userPhone:e.detail.value
-    })
-  },
-
-  getMyfabu:function(e){
-    app.globalData.fabu=0,
-    console.log("打印userinfo")
-    console.log(app.globalData.userInfo)
-  },
-
-  getMytao:function(e){
-    app.globalData.fabu=1
-  },
-  getMyqiugou:function(e){
-    app.globalData.fabu=2
-  },
-  getMyshoucang:function(e){
-    app.globalData.fabu=3
-  },
-
-
-/**
-* 获取用户唯一凭证
-*/
-bingGetOpenID: function() {
-  wx.login({
-    success: function(data) {
-      console.log('获取登录 Code：' + data.code)
-      var postData = {
-        code: data.code
-      };
-    },
-    fail: function() {
-      console('登录获取Code失败！');
-    }
-  })
-},
-
-  verify:function(e){
-    console.log("shenfen");
   },
 
 
