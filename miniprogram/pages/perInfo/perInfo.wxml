@@ -1,7 +1,7 @@
 <!--miniprogram/pages/perInfo/perInfo.wxml-->
 
-<view wx:if="{{isAut==false}}">
- <button open-type='getUserInfo' bindgetuserinfo='authorization'>点击授权</button>
+<view class="flex padding justify-center align-center" wx:if="{{isAut==false}}">
+  <button class="cu-btn round line-blue" bindtap='authorization'>授权并登录</button>
 </view>
 
 <view class="cu-card dynamic" wx:if="{{isAut==true}}">
@@ -10,163 +10,119 @@
       <view class="cu-item">
         <view class="cu-avatar round lg" style="background-image:url({{userInfo.avatar}});"></view>
         <view class="content flex-sub">
-        <view class="text-gray">
-          <text class="margin-lr">昵称: {{userInfo.nickName}}</text>
-          <text class="cu-btn sm round line-green margin-lr"  bindtap="showModal" data-target="ModalPhone">编辑资料</text>
-        </view>
-          <view class="text-gray">
+          <view class="text-gray flex justify-between">
+            <text class="margin-lr">{{userInfo.nickName}}</text>
+            <view class="margin-lr" bindtap="showModal" data-target="ModalUpdate">
+              <text class="cuIcon-settings text-blue text-sm"></text>
+              <text class="text-blue text-sm">编辑资料</text>
+            </view>
+          </view>
+          <view class="text-gray flex justify-between">
+            <view class="margin-lr" wx:if="{{isReview==false}}" bindtap="showModal" data-target="ModalReview">
+              <view class='cu-tag line-red sm'>未认证</view>
+            </view>
             <text class="margin-lr" wx:if="{{isReview==true}}">学号: {{userInfo.stuNum}}</text>
-            <text class="cu-btn round sm line-red" wx:if="{{isReview==false}}" bindtap="showModal" data-target="Modal">身份验证</text>
+            <view class="margin-lr" bindtap="bindAdmin" wx:if="{{isReview==true && isAdmin==true}}">
+              <text class="cuIcon-all text-blue text-sm"></text>
+              <text class="text-blue text-sm">管理员</text>
+            </view>
           </view>
         </view>
-        
       </view>
     </view>
     <view class="text-grey margin-lr-xs" wx:if="{{isReview==true}}">校区: {{userInfo.campus}}</view>
     <view class="text-grey">
-     <text class="margin-lr-xs">联系方式: {{userInfo.contact}}</text>
+     <text class="margin-lr-xs">联系方式: {{userInfo.contact==""?"无": userInfo.contact}}</text>
     </view>
     <view class="text-gray">
-      <text class="cuIcon-attentionfill margin-lr-xs"></text><text>关注:{{userInfo.love.length}} </text>
-      <text class="cuIcon-attentionfill margin-lr-xs"></text><text> 粉丝:{{userInfo.fans.length}}</text>
+      <text class="cuIcon-likefill margin-lr-xs"></text><text>关注：{{userInfo.love.length}} </text>
+      <text class="cuIcon-attentionfill margin-lr-xs"></text><text> 粉丝：{{userInfo.fans.length}}</text>
     </view>
-    
   </view>
 </view>
 
-
-<!-- 绑定的对话框事件 -->
-<view class="cu-modal {{modalName=='ModalPhone'?'show':''}}">
-  <view class="cu-dialog">
-    <view class="cu-bar bg-white justify-end">
-      <view class="content">请输入新的手机号</view>
-      <view class="action" bindtap="hideModal">
-        <!-- <text class="cuIcon-close text-red"></text> -->
-        <text class="text-red">确定</text>
+<view class="cu-card dynamic" wx:if="{{isAut==true}}">
+  <view class="cu-item shadow" wx:for="{{blockCard}}" wx:key ="index">
+    <navigator class="cu-bar bg-white" url="{{blockCard[index].url}}">
+      <view class="action">
+        <text class="cuIcon-titles text-blue"></text>
+        <text class="text-xl text-bold">{{blockCard[index].tittle}}</text>
       </view>
-    </view>
-    <view class="padding-xl">
-      <!-- Modal 内容。 -->
-      <input class="input" name="userName" 
-        bindinput="userNameInput"/>
-    </view>
-  </view>
-</view>
-
-<view class="cu-card dynamic" wx:if="{{isAut==true}}">
-  <view class="cu-item shadow" wx:for="{{blockCard}}" wx:key ="{{index}}">
-    <view wx:if="{{index < 4}}">
-    <navigator  url="{{blockCard[index].url}}" class="weui-cell weui-cell_access"  hover-class="weui-cell_active" >
-      <view class="weui-cell__bd">{{blockCard[index].tittle}}</view>
-      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
     </navigator>
-    </view>
-    <view wx:if="{{index === 4 & isAdmin}}">
-      <navigator  url="{{blockCard[index].url}}" class="weui-cell weui-cell_access"  hover-class="weui-cell_active" >
-      <view class="weui-cell__bd">{{blockCard[index].tittle}}</view>
-      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-    </navigator>
-    </view>
   </view>
-</view>
-
-<view class="cu-card dynamic" wx:if="{{isAut==true}}">
   <view class="cu-item shadow">
-    <button class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-      <view class='text-red' bindtap='bindClear'>退出帐号</view>
-    </button>
+    <view class="cu-bar bg-white" bindtap="bindClear">
+      <view class="action">
+        <text class="cuIcon-titles text-red"></text>
+        <text class="text-xl text-bold text-red">退出登录</text>
+      </view>
+    </view>
   </view>
 </view>
 
-  
-
-
-
-
-    <!-- 绑定的对话框事件 -->
-  <view class="cu-modal {{modalName=='Modal'?'show':''}}">
-  <view class="cu-dialog">
-    <view class="cu-bar bg-white justify-end">
-      <!-- <view class="content">请输入新的手机号</view> -->
-      <view class="action" bindtap="hideModal">
-        <!-- <text class="cuIcon-close text-red"></text> -->
-        <text class="text-red">确定</text>
-      </view>
+<view class="cu-modal drawer-modal justify-end {{modalName=='ModalUpdate'?'show':''}}">
+  <view class="cu-dialog  basis-lg">
+    <view class="cu-bar bg-white text-blue flex justify-start" bindtap="hideModal">
+      <text class="cuIcon-titles"></text><text>关闭</text><text class="cuIcon-right"></text>
     </view>
-
-
-    <!-- <view class="weui-panel">
-    <view class="title"> -->
-
-      <view class="title_right">
-        <view class="weui-cell weui-cell_input">
-          <view>
-            <view class="weui-label">姓名</view>
-          </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="请输入您的姓名！" bindinput="bindBookNameInput" value="{{name}}" />
-          </view>
-        </view>
-       
-
-      
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">学号</view>
-          </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="输入让您的学号！" bindinput="bindCurrentPriceInput" value="{{stuId}}" type="digit" />
-          </view>
-        </view>
-
-
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">学院</view>
-          </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="请输入您的学院" bindinput="bindBookcollegeInput" value="{{college}}" type="digit" />
-          </view>
-        </view>
-
-        
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">手机</view>
-          </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="请输入您的手机号" bindinput="bindBookPhoneNumberInput" value="{{phoneNum}}" type="digit" />
-          </view>
-        </view>
-
+    <form>
+      <view class="cu-form-group margin-top">
+        <view class="title text-gray">昵称</view>
+        <input name="input"  bindinput="bindInput" value="{{updateInfo.nickName}}" data-type='nickName'></input>
       </view>
-
-
-      <!-- 图片上传 -->
-<view class="title_image" bindtap='bindThingImageInput' >
-      <!-- <image src="{{thingImage}}" mode="aspectFit" /> -->
-      <image src="{{thingImage}}" />
-</view>
-<view class="wenben">
-    <text >请上传学生证或者学子卡照片</text>
-</view>
-<!-- 
-    </view>
-    
-  </view> -->
-
-    <!-- <view class="padding-xl"> -->
-      <!-- Modal 内容。 -->
-      <!-- <input class="input" name="userName" 
-        bindinput="userNameInput"/>
-    </view> -->
+      <view class="cu-form-group">
+        <view class="title text-gray">联系方式</view>
+        <input name="input" bindinput="bindInput" value="{{updateInfo.contact}}" type="digit" data-type='contact'></input>
+      </view>
+      <view class="cu-form-group">
+        <button class='cu-btn lines-blue round lg shadow' bindtap="bindUpdate">
+          更新
+        </button>
+      </view>
+    </form>
   </view>
 </view>
 
-
-
-
-
-
-
-
+<view class="cu-modal drawer-modal justify-end {{modalName=='ModalReview'?'show':''}}">
+  <view class="cu-dialog  basis-lg">
+    <view class="cu-bar bg-white text-blue flex justify-start" bindtap="hideModal">
+      <text class="cuIcon-titles"></text><text>关闭</text><text class="cuIcon-right"></text>
+    </view>
+    <form>
+      <view class="cu-form-group margin-top">
+        <view class="title text-gray">学号</view>
+        <input name="input"  bindinput="bindInput" value="{{updateInfo.stuNum}}" data-type='stuNum'></input>
+      </view>
+      <view class="cu-form-group margin-top">
+        <view class="title text-gray">校区</view>
+        <input name="input"  bindinput="bindInput" value="{{updateInfo.campus}}" data-type='campus'></input>
+      </view>
+      <view class="cu-bar bg-white margin-top text-gray">
+        <view class="action">
+          上传材料
+        </view>
+        <view class="action">
+          {{updateInfo.reviewImage==''?0:1}}/1
+        </view>
+      </view>
+      <view class="cu-form-group">
+        <view class="grid col-1 grid-square flex-sub">
+          <view wx:if="{{updateInfo.reviewImage!=''}}">
+            <image src="{{updateInfo.reviewImage}}" mode="aspectFill"></image>
+            <view class="cu-tag bg-red" bindtap="DelImg">
+              <text class='cuIcon-close'></text>
+            </view>
+          </view>
+          <view class="solids" bindtap="ChooseImage" wx:if="{{updateInfo.reviewImage==''}}">
+            <text class='cuIcon-cameraadd'></text>
+          </view>
+        </view>
+      </view>
+      <view class="cu-form-group">
+        <button class='cu-btn lines-blue round lg shadow' disabled="{{updateInfo.reviewImage == ''|| updateInfo.campus == '' || updateInfo.stuNum == ''}}" loading="{{buttonLoading}}" bindtap="bindReview">
+          提交
+        </button>
+      </view>
+    </form>
+  </view>
+</view>

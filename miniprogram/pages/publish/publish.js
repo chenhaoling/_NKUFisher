@@ -7,7 +7,7 @@ Page({
    */
   data: {
     good: {
-      condition: 0,
+      condition: 1,
       title: "",
       contact: "",
       campus: "八里台校区",
@@ -39,7 +39,7 @@ Page({
     this.setData({
       TabCur: e.currentTarget.dataset.id
     })
-    this.data.goodcondition = e.currentTarget.dataset.id
+    this.data.goodcondition = 1 - e.currentTarget.dataset.id
     this.setData({good: this.data.good})
   },
 
@@ -50,7 +50,6 @@ Page({
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success: function(res) {
-        console.log(that.data)
         if(that.data.good.image.length != 0) {
           that.data.good.image= that.data.good.image.concat(res.tempFilePaths)
           that.setData({good: that.data.good})
