@@ -49,8 +49,8 @@
           <view class="content">
             <view>
               <view class="text-grey" style="width:95%">{{comments[index].nickname}}</view>
-              <view wx:if = "{{index == 1}}">
-                <text class="cuIcon-roundclosefill lg text-gray"></text>
+              <view wx:if = "{{otheruser._id == _id}}">
+                <text class="cuIcon-roundclosefill lg text-red" bindtap="delcomment"></text>
               </view>
             </view>
             
@@ -60,7 +60,7 @@
             <view class="margin-top-sm flex justify-between">
               <view class="text-gray text-df"> {{comments[index].time}}</view>
               <view>
-                <text class="cuIcon-warnfill lg text-gray" ></text>
+                <text class="cuIcon-warnfill lg text-gray" data-id="{{comments[index]._id}}" bindtap="reportcomment"></text>
               </view>
               
             </view>

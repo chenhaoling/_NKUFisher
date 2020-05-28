@@ -9,9 +9,27 @@ Page({
     'goodinfo':'',
     'otheruser':'',
     'contentInp':'',
+    '_id':'',
      'comments':[],
   },
+  reportcomment:function(e){
+    var that = this
+    wx.cloud.callFunction({
+      name:'report',
+      data:{
+        goodId:that.data.goodinfo._id,
+        commentId:e.currentTarget.dataset.id,
+        reporterId:'app.g',
+      },
+      complete: res=>{
 
+      }
+    })
+  },
+  delcomment:function(e){
+    var that = this
+
+  },
   getotheruserinfo:function(e){
     var label = false
     var that = this
@@ -92,6 +110,9 @@ Page({
     //   otheruser:JSON.parse(options.otheruser),
     // }),
     var that = this
+    that.setData({
+      _id:app.globalData.userInfo._id
+    })
     wx.getStorage({
       key: 'goodinfo',
       success:function(res){
