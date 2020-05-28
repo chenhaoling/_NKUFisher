@@ -21,10 +21,12 @@
     <view class="text-grey margin-lr-xs" >校区: {{otheruser.campus}}</view>
     <view class="text-grey margin-lr-xs">联系方式: {{otheruser.contact}}</view>
     <view class="text-gray">
-      <text class="cuIcon-attentionfill margin-lr-xs"></text><text>关注:{{otheruser.love.length}} </text>
-      <text class="cuIcon-attentionfill margin-lr-xs"></text><text> 粉丝:{{otheruser.fans.length}}</text>
-      <text class="cu-btn sm round line-red margin-lr" wx:if="{{label == false}}" bindtap="changefans" data-target="Modal">关注</text>
-      <text class="cu-btn sm round line-green margin-lr" wx:if="{{label == true}}" bindtap="changefans" data-target="Modal">取消关注</text>
+      <text class="cuIcon-likefill margin-lr-xs"></text><text>关注:{{otheruser.love.length}} </text>
+      <text class="cuIcon-attentionfill margin-lr-xs"></text><text style="margin-right:60rpx"> 粉丝:{{otheruser.fans.length}}</text>
+      <text class="cuIcon-likefill text-red text-sm" wx:if="{{label == false}}" bindtap="changefans"></text>
+        <text class="text-red margin-lr-xs" wx:if="{{label == false}}" bindtap="changefans">关注</text>
+      <text class="cuIcon-likefill text-grey text-sm" wx:if="{{label == true}}" bindtap="changefans"></text>
+      <text class="text-grey margin-lr-xs" wx:if="{{label == true}}" bindtap="changefans" data-target="Modal">取消关注</text>
     </view>
     
   </view>

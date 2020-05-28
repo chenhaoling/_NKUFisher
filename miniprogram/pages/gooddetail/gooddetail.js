@@ -14,15 +14,19 @@ Page({
   },
   reportcomment:function(e){
     var that = this
+    console.log(that.data.goodinfo._id)
+    console.log(e.currentTarget.dataset.id)
+    console.log(app.globalData.userInfo._id)
     wx.cloud.callFunction({
       name:'report',
       data:{
         goodId:that.data.goodinfo._id,
         commentId:e.currentTarget.dataset.id,
-        reporterId:'app.g',
+        reporter:app.globalData.userInfo._id,
       },
       complete: res=>{
-
+          console.log('评论投诉成功')
+          console.log(res.result)
       }
     })
   },

@@ -49,7 +49,7 @@
           <view class="content">
             <view>
               <view class="text-grey" style="width:95%">{{comments[index].nickname}}</view>
-              <view wx:if = "{{otheruser._id == _id}}">
+              <view wx:if = "{{comments[index].userId == _id}}">
                 <text class="cuIcon-roundclosefill lg text-red" bindtap="delcomment"></text>
               </view>
             </view>
