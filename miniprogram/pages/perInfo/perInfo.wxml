@@ -1,7 +1,7 @@
 <!--miniprogram/pages/perInfo/perInfo.wxml-->
 
 <view class="flex padding justify-center align-center" wx:if="{{isAut==false}}">
-  <button class="cu-btn round line-blue" bindtap='authorization'>授权并登录</button>
+  <button class="cu-btn round line-blue" disabled="{{userInfo._id==undefined?true: false}}" bindtap='authorization'>授权并登录</button>
 </view>
 
 <view class="cu-card dynamic" wx:if="{{isAut==true}}">
@@ -91,15 +91,19 @@
     <form>
       <view class="cu-form-group margin-top">
         <view class="title text-gray">学号</view>
-        <input name="input"  bindinput="bindInput" value="{{updateInfo.stuNum}}" data-type='stuNum'></input>
+        <input name="input"  bindinput="bindInput" placeholder="必填" value="{{updateInfo.stuNum}}" data-type='stuNum'></input>
       </view>
-      <view class="cu-form-group margin-top">
-        <view class="title text-gray">校区</view>
-        <input name="input"  bindinput="bindInput" value="{{updateInfo.campus}}" data-type='campus'></input>
-      </view>
+      <view class="cu-form-group">
+    <view class="title text-gray">校区</view>
+      <picker bindchange="bindInput" value="{{campusIndex}}" range="{{campus}}" data-type="campus">
+        <view class="picker">
+          {{campus[campusIndex]}}
+        </view>
+      </picker>
+    </view>
       <view class="cu-bar bg-white margin-top text-gray">
         <view class="action">
-          上传材料
+          上传材料（必填）
         </view>
         <view class="action">
           {{updateInfo.reviewImage==''?0:1}}/1

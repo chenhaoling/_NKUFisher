@@ -1,12 +1,5 @@
 //app.js
 App({
-  async getUserInfo() {
-    const res = await wx.cloud.callFunction({
-      name: 'user_info',
-      data: {},
-    })
-    this.globalData.userInfo = res.result
-  },
   onLaunch: function () {
     
     if (!wx.cloud) { 
@@ -28,7 +21,21 @@ App({
           // 发送 res.code 到后台换取 openId, sessionKey, unionId
         }
       })
-      this.getUserInfo()
+      this.globalData = {
+        userInfo:{},
+        openid:null,
+        fabu:0,
+      }
+      wx.cloud.callFunction({
+        name: 'user_info',
+        data: {},
+        complete: res => {
+          this.globalData.userInfo = res.result
+          if(this.userInfoReadyCallback) {
+            this.userInfoReadyCallback(res)
+          }
+        },
+      })
     // 获取用户信息
     // wx.getSetting({
     //   success: res => {
@@ -50,10 +57,6 @@ App({
     //   }
     // })
 
-    this.globalData = {
-      userInfo:{},
-      openid:null,
-      fabu:0,
-    }
+    
   }
 })

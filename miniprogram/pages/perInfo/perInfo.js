@@ -19,6 +19,8 @@ Page({
       nickName: '',
       contact: '',
     },
+    campus: ["八里台校区", "津南校区", "泰达校区"], 
+    campusIndex: 0,
     buttonLoading: false,
     blockCard: [
       {
@@ -66,10 +68,8 @@ Page({
 
 
   authorization: function(e){
-    if(app.globalData.userInfo._id != undefined) {
-      this.setData({
-        isAut: true
-      })
+    if(app.globalData.userInfo._id != null) {
+      this.getCurrUserInfo()
     } else {
       wx.getSetting({
         success: res => {
@@ -100,7 +100,12 @@ Page({
   },
 
   bindInput: function(e) {
-    this.data.updateInfo[e.currentTarget.dataset.type] = e.detail.value
+    if(e.currentTarget.dataset.type == "campus") {
+      this.data.updateInfo[e.currentTarget.dataset.type] = this.data.campus[e.detail.value]
+      this.setData({campusIndex: e.detail.value})
+    } else {
+      this.data.updateInfo[e.currentTarget.dataset.type] = e.detail.value
+    }
     this.setData({updateInfo: this.data.updateInfo})
   },
 
@@ -220,13 +225,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getCurrUserInfo()
   },
 
     /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const that = this
+    app.userInfoReadyCallback = res =>{
+      this.setData({
+        userInfo: res.result
+      })
+      that.getCurrUserInfo()
+    };
   },
 
 
