@@ -29,6 +29,11 @@ Page({
   bindInput: function(e) {
     if(e.currentTarget.dataset.type == "campus" || e.currentTarget.dataset.type == "category") {
       this.data.good[e.currentTarget.dataset.type] = this.data[e.currentTarget.dataset.type][e.detail.value]
+      if(e.currentTarget.dataset.type == "campus") {
+        this.setData({campusIndex: e.detail.value})
+      } else {
+        this.setData({categoryIndex: e.detail.value})
+      }
     } else {
       this.data.good[e.currentTarget.dataset.type] = e.detail.value
     }
@@ -108,7 +113,7 @@ Page({
             })
             that.setData({
               good: {
-                condition: 0,
+                condition: 1,
                 title: "",
                 contact: "",
                 campus: "八里台校区",
@@ -126,11 +131,11 @@ Page({
             })
             if(that.data.good.condition == 0) {
               wx.navigateTo({
-                url: '../collection/collection?type=fabu',
+                url: '../collection/collection?type=request',
               })
             } else {
               wx.navigateTo({
-                url: '../collection/collection?type=request',
+                url: '../collection/collection?type=fabu',
               })
             }
             
@@ -143,12 +148,9 @@ Page({
         content: '请验证您的学生身份',
         success: function(res) {
           if (res.confirm) {
-            console.log('用户点击确定')
-            wx.navigateTo({
-              url: '../my/mySetting/mySetting',
+            wx.switchTab({
+              url: '../perInfo/perInfo',
             })
-          } else if (res.cancel) {
-            console.log('用户点击取消')
           }
         }
       })
