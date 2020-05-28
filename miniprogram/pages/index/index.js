@@ -76,7 +76,7 @@ Page({
       //   console.log(res)
       // }
       success:function(res){
-        console.log("成功")
+        // console.log("成功")
         // let goodinfo = JSON.stringify(res.result);
        
         wx.setStorage({
@@ -104,8 +104,8 @@ Page({
           name: 'user_info',
           data: {_id:res.result.openId},
           complete: res => {
-            console.log("获取用户信息成功")
-            console.log(res.result)
+            // console.log("获取用户信息成功")
+            // console.log(res.result)
            
             wx.setStorage({
               data: res.result,
@@ -140,7 +140,7 @@ Page({
       isAnounce:  e.currentTarget.dataset.id === 0 ? true : false,
     }),
     this.getInfo()
-    console.log(e.currentTarget.dataset.id)
+    // console.log(e.currentTarget.dataset.id)
   },
 
   tabSelect2(e) {
@@ -150,7 +150,7 @@ Page({
       isAnounce2:  e.currentTarget.dataset.id === 0 ? true : false,
     }),
     this.getInfo()
-    console.log(this.data.TabCur2)
+    // console.log(this.data.TabCur2)
   },
 
    getmes:function(e){
@@ -174,15 +174,15 @@ Page({
     }else{
       cate = "其他"
     }
-    console.log(con),
-    console.log(cate),
+    // console.log(con),
+    // console.log(cate),
     wx.cloud.callFunction({
       name: 'search_good',
       data: {condition:con,
              category:cate,    
       },
       complete: res => {
-        console.log(res.result[1]),
+        // console.log(res.result[1]),
         this.setData({
           goodslist:res.result
         })
@@ -195,10 +195,10 @@ Page({
         this.data.goodslist = res.result
 
 
-        for (var index in this.data.goodslist) {
-            console.log(this.data.goodslist[index].title),
-            console.log(this.data.goodslist[index]._id)
-           }
+        // for (var index in this.data.goodslist) {
+        //     console.log(this.data.goodslist[index].title),
+        //     console.log(this.data.goodslist[index]._id)
+        //    }
 
         // console.log(this.data.goodslist)
         // for (var index in this.data.goodslist) {

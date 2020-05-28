@@ -1,26 +1,15 @@
-<!--pages/thing-detail/thing-detail.wxml-->
-<!-- <view class="{{theCover? 'coverFadeIn' : 'coverFadeOut'}}"></view> -->
-
-
-
-
-  <!-- 用户头像 -->
-  <view class="cu-list menu-avatar">
-        <view class="cu-item">
-          <view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);" bindtap="getotheruserinfo"></view>
-          <view class="content flex-sub">
-            <view>{{otheruser.nickName}}</view>
-            <view class="text-gray text-sm flex justify-between">
-              {{goodinfo.createTime}}
-            </view>
-          </view>
-        </view>
-      </view>
-
-      
+<!-- 用户头像 -->
+<view class="cu-list menu-avatar">
+  <view class="cu-item">
+    <view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);" bindtap="getotheruserinfo"></view>
+    <view class="content flex-sub">
+      <view>{{otheruser.nickName}}</view>
+      <view class="text-gray text-sm flex justify-between">{{goodinfo.createTime}}</view>
+    </view>
+  </view>
+</view>
 <view class='detail'>
-  <image src='{{goodinfo.image}}' class='detail-image'>
-  </image>
+  <image src='{{goodinfo.image}}' class='detail-image'></image>
   <view class='detail-sale'>
     <view class='detail-price'>￥{{goodinfo.curPrice}}</view>
     <image src='../movie-detail/1.png' class='detail-selling-price-img'></image>
@@ -29,53 +18,42 @@
   <view class='detail-cont'>
     <view class='detail-title'>物品：{{goodinfo.title}}</view>
     <view class='detail-poster'>发布者：{{otheruser.nickName}}</view>
-    <view class='detail-detail-box'>
-    <image class='detail-detail-image' src=''></image>
+    <view class='detail-detail-box' wx:if="{{havecollec === false}}">
+      <image class='detail-detail-image' src='../../images/star2.png' bindtap="Collect"></image>
     </view>
+    <view class='detail-detail-box' wx:if="{{havecollec}}">
+      <image class='detail-detail-image' src='../../images/star.png' bindtap="cancelCollect"></image>
+    </view>
+    <!-- <view >shoucang</view> -->
     <view style='color: green'>校区：{{detailData.thingCampus}}</view>
     <view style='color: green'>类别：{{goodinfo.category}}</view>
     <view class='detail-detail'>产品详情：{{goodinfo.detail}}</view>
   </view>
-
-
-
-
-
-
   <!-- 评论 -->
-      <view class="cu-list menu-avatar comment solids-top">
-        <view class="cu-item"  wx:for = "{{comments}}" wx:key = "{{index}}">
-          <view class="cu-avatar round" style="background-image:url({{comments[index].avatarUrl}});"></view>
-          <view class="content">
-            <view>
-              <view class="text-grey" style="width:95%">{{comments[index].nickname}}</view>
-              <view wx:if = "{{comments[index].userId == _id}}">
-                <text class="cuIcon-roundclosefill lg text-red" bindtap="delcomment"></text>
-              </view>
-            </view>
-            
-            <view class="text-gray text-content text-df">
-              {{comments[index].content}}
-            </view>
-            <view class="margin-top-sm flex justify-between">
-              <view class="text-gray text-df"> {{comments[index].time}}</view>
-              <view>
-                <text class="cuIcon-warnfill lg text-gray" data-id="{{comments[index]._id}}" bindtap="reportcomment"></text>
-              </view>
-              
-            </view>
+  <view class="cu-list menu-avatar comment solids-top">
+    <view class="cu-item" wx:for="{{comments}}" wx:key="{{index}}">
+      <view class="cu-avatar round" style="background-image:url({{comments[index].avatarUrl}});"></view>
+      <view class="content">
+        <view>
+          <view class="text-grey" style="width:95%">{{comments[index].nickname}}</view>
+          <view wx:if="{{comments[index].userId == _id}}">
+            <text class="cuIcon-roundclosefill lg text-red" bindtap="delcomment"></text>
+          </view>
+        </view>
+        <view class="text-gray text-content text-df">{{comments[index].content}}</view>
+        <view class="margin-top-sm flex justify-between">
+          <view class="text-gray text-df">{{comments[index].time}}</view>
+          <view>
+            <text class="cuIcon-warnfill lg text-gray" data-id="{{comments[index]._id}}" bindtap="reportcomment"></text>
           </view>
         </view>
       </view>
-
-
-<view class='ask'>
-  <block>
-
-    <input class='input' type='text' placeholder='我来评论' bindinput='contentInp' value='{{contentInp}}' focus='{{focus}}'></input>
-    <button class='button' bindtap='addComment'>评论</button>
-  </block>
-</view>
-
-
+    </view>
+  </view>
+  <view class='ask'>
+    <block>
+      <input class='input' type='text' placeholder='我来评论' bindinput='contentInp' value='{{contentInp}}' focus='{{focus}}'></input>
+      <button class='button' bindtap='addComment'>评论</button>
+    </block>
+  </view>
 </view>

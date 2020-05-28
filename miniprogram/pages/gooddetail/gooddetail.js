@@ -6,6 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    havecollec:false,
+    userInfo:{},
     'goodinfo':'',
     'otheruser':'',
     'contentInp':'',
@@ -109,6 +111,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    const vm = this
+    wx.cloud.callFunction({
+      name: 'user_info',
+      data: {
+      },
+      complete: res => {
+        vm.setData({
+          userInfo: res.result
+        })
+        for(var x of vm.data.userInfo.collection){
+          console.log("hh")
+          console.log(x)
+          if(x === vm.data.goodinfo._id){
+           vm.setData({
+             havecollec:true
+           })
+          }
+        } 
+        console.log(res.result)
+      }
+    })
+    
     // this.setData({
     //   goodinfo:JSON.parse(options.goodinfo),
     //   otheruser:JSON.parse(options.otheruser),
@@ -120,9 +144,13 @@ Page({
     wx.getStorage({
       key: 'goodinfo',
       success:function(res){
+        console.log(res)
         that.setData({
           goodinfo:res.data
         })
+      
+     
+        // console.log(res.data)
       }
     }),
     wx.getStorage({
@@ -140,8 +168,41 @@ Page({
           comments:res.data
         })
       }
-    }),
-    console.log(that.data.goodinfo)
+    })
+  //  setTimeout(this.onShow(), 1000)
+  },
+
+  Collect:function(){
+    this.setData({
+      havecollec:true
+    })
+    wx.cloud.callFunction({
+      name: 'collection_good',
+      data: {
+        _id: this.data.goodinfo._id,
+        add:true
+      },
+      complete: res => {
+        // console.log(this.data.goodinfo._id)
+        // console.log(res)
+        console.log("添加了收藏")
+      }
+    })
+  },
+  cancelCollect:function(){
+    this.setData({
+      havecollec:false
+    })
+    wx.cloud.callFunction({
+      name: 'collection_good',
+      data: {
+        _id: this.data.goodinfo._id
+      },
+      complete: res => {
+        // console.log(res)
+        console.log("取消了收藏")
+      }
+    })
   },
 
   /**
@@ -155,6 +216,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+
+     //判断是否已经收藏过
+     console.log("onShow")
+     
 
   },
 

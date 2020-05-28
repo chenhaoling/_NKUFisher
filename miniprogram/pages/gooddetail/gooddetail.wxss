@@ -68,9 +68,9 @@
   .detail-detail-image {
     position: absolute;
     left: 50%;
-    margin-left: -200rpx;
-    width: 400rpx;
-    height: 80rpx;
+    margin-left: 0rpx;
+    width: 60rpx;
+    height: 60rpx;
   }
   
   .detail-bottom {
