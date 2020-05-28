@@ -74,7 +74,7 @@
 
     </view>
     
-  </view>
+  </view>   
 
   <!-- <view class="weui-panel">
     <view class="title">
@@ -166,17 +166,17 @@
           <view class="cu-avatar round" style="background-image:url(https://ossweb-img.qq.com/images/lol/img/champion/Morgana.png);"></view>
           <view class="content">
             <view>
-              <view class="text-grey" style="width:95%">{{comment[index].name}}</view>
+              <view class="text-grey" style="width:95%">{{comment[index].nickname}}</view>
             </view>
             
             <view class="text-gray text-content text-df">
               {{comment[index].content}}
             </view>
             <view class="margin-top-sm flex justify-between">
-              <view class="text-gray text-df"> {{comment[index].date}}</view>
+              <view class="text-gray text-df"> {{comment[index].time}}</view>
               <view>
-                <text class="cuIcon-check lg text-green" style="margin-right:50rpx"></text>
-                <text class="cuIcon-close lg text-red"></text>
+                <text class="cuIcon-check lg text-green" style="margin-right:50rpx" bindtap="acceptComment" data-id="{{comment[index].checkId}}"></text>
+                <text class="cuIcon-close lg text-red" bindtap="deleteComment" data-id="{{comment[index].checkId}}" data-commentId="{{comment[index].commentId}}"></text>
               </view>
               
             </view>

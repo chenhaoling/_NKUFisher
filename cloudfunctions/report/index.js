@@ -11,13 +11,15 @@ exports.main = async (event, context) => {
   
   if (event.commentId != undefined) {
     // 投诉评论
-    db.collection('PendingCheck').where({
+    let k = 1
+    let re = await db.collection('PendingCheck').where({
       commentId: event.commentId,
       goodId: event.goodId,
       reporter: event.reporter
     }).get().then(res=> {
       if (res.data.length > 0) {
-        return {detail: false} //已被该用户投诉过一次
+        console.log(res.data)
+        k = 0 //已被该用户投诉过一次
       }
       else {
         data = {}
@@ -28,22 +30,30 @@ exports.main = async (event, context) => {
          db.collection('PendingCheck').add({ 
           data: data
         })
-        return {detail: true}
+        console.log("hefaefaewf")
+        
       }
     })
-
+    if (k == 1) {
+      return {detail: true}
+    }
+    else {
+      return {detail: false}
+    }
 
   }
   else  {
+    cnosl
     // 投诉商品
-    db.collection('PendingCheck').where({
+    let k = 1
+    let re = await db.collection('PendingCheck').where({
       goodId: event.goodId,
       reporter: event.reporter
     }).get().then(res=> {
       if (res.data.length > 0 ) {
         for (let i = 0; i < res.data.length; i++) {
           if (res.data[i].commentId == undefined) {
-            return {detail: false}  //已经被该用户投诉过一次
+            k = 0  //已经被该用户投诉过一次
           }
         }
         db.collection('PendingCheck').add({ 
@@ -62,6 +72,12 @@ exports.main = async (event, context) => {
         return {detail: true}
       }
     })
+    if (k == 0) {
+      return {detail: false}
+    }
+    else {
+      return {detail: true}
+    }
   }
 }
 

@@ -88,10 +88,58 @@ Page({
 
   },
 
-  /**
+
+
+  acceptComment: function(e){
+    var that = this
+    var Time = new Date()
+    wx.cloud.callFunction({  
+        name:'review',
+        data:{
+            _id: e.currentTarget.dataset['id'],
+
+        },
+        complete:res =>{
+        }
+      })
+    that.onLoad() 
+  },
+
+  deleteComment: function(e){
+    console.log("inside delete")
+    var that = this
+    var Time = new Date()
+    wx.cloud.callFunction({
+        name:'review',
+        data:{
+            _id: e.currentTarget.dataset['id'],
+            accept: true,
+            commentId: e.currentTarget.dataset['commentId']
+        },
+        complete:res =>{
+        }
+      })
+    that.onLoad() 
+  },
+
+  /** 
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
+    wx.cloud.callFunction({
+        name:'getUserNeedCheck',
+        data:{
+            type: 2
+        },
+        complete:res =>{
+            console.log(res.result)
+            that.setData({
+                comment: res.result
+            }) 
+        }
+      })
+
 
   },
 
@@ -121,7 +169,7 @@ Page({
    */
   onUnload: function () {
 
-  },
+  }, 
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
