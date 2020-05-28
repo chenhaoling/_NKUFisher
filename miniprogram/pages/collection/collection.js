@@ -62,6 +62,38 @@ Page({
     var tempgoods = []
     if(this.data.type === 'fabu'){
 
+      let promiseArr = []
+
+      for (var index in this.data.userInfo.announce) {
+
+
+        promiseArr.push(new Promise((reslove, reject)=>{
+          wx.cloud.callFunction({
+           name: 'good_info',
+           data:{
+            _id:this.data.userInfo.announce[index]
+           }
+          }).then(res => {
+            tempgoods.push(res.result)
+            reslove()
+          }).catch(error => {
+            console.log(error)
+          })
+        }))
+        
+       }
+
+       Promise.all(promiseArr).then(res=>{
+         this.setData({
+           goods:tempgoods
+         })
+         console.log("发布")
+         console.log(this.data.goods)
+       })
+
+
+
+
       
 
        
@@ -96,6 +128,34 @@ Page({
        })
 
     }else if(this.data.type === 'request'){
+      let promiseArr = []
+
+      for (var index in this.data.userInfo.announce) {
+
+
+        promiseArr.push(new Promise((reslove, reject)=>{
+          wx.cloud.callFunction({
+           name: 'good_info',
+           data:{
+            _id:this.data.userInfo.announce[index]
+           }
+          }).then(res => {
+
+            tempgoods.push(res.result)
+            reslove()
+          }).catch(error => {
+            console.log(error)
+          })
+        }))
+        
+       }
+
+       Promise.all(promiseArr).then(res=>{
+         this.setData({
+           goods:tempgoods
+         })
+        //  console.log(this.data.goods)
+       })
 
 
     
