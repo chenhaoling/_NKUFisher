@@ -15,7 +15,7 @@ Page({
     updateInfo: {
       reviewImage: '',
       stuNum: '',
-      campus: '',
+      campus: "八里台校区",
       nickName: '',
       contact: '',
     },
