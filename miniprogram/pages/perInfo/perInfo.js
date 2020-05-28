@@ -231,6 +231,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getCurrUserInfo()
     const that = this
     app.userInfoReadyCallback = res =>{
       this.setData({
