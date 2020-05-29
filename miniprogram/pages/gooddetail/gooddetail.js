@@ -16,70 +16,92 @@ Page({
      'comments':[],
   },
   reportcomment:function(e){
-    var that = this
-    console.log(that.data.goodinfo._id)
-    console.log(e.currentTarget.dataset.id)
-    console.log(app.globalData.userInfo._id)
-    wx.cloud.callFunction({
-      name:'report',
-      data:{
-        goodId:that.data.goodinfo._id,
-        commentId:e.currentTarget.dataset.id,
-        reporter:app.globalData.userInfo._id,
-      },
-      complete: res=>{
-          console.log('评论投诉成功')
-          console.log(res.result)
-      }
-    })
-  },
-  delcomment:function(e){
-    var that = this
-    wx.cloud.callFunction({
-      name:'deleteCommentsByIds',
-      data:{
-        id:e.currentTarget.dataset.id,
-        goodId:that.data.goodinfo._id
-      },
-      complete:res =>{
-        if(res.result.detail === false){
+    if(userInfo == null){
+      wx.showToast({
+        title: '请先登录',
+        icon:'none',
+        duration:2000
+      })
+    }else{
+      var that = this
+      console.log(that.data.goodinfo._id)
+      console.log(e.currentTarget.dataset.id)
+      console.log(app.globalData.userInfo._id)
+      wx.cloud.callFunction({
+        name:'report',
+        data:{
+          goodId:that.data.goodinfo._id,
+          commentId:e.currentTarget.dataset.id,
+          reporter:app.globalData.userInfo._id,
+        },
+        complete: res=>{
           wx.showToast({
-            title: '删除评论失败',
-            icon:'none',
+            title: '评论成功',
+            icon:'success',
             duration:2000
           })
-        }else{
-        wx.showToast({
-          title: '您已成功删除评论',
-          icon:'success',
-          duration:2000
-        })
-        wx.cloud.callFunction({
-          name:'good_info',
-          data:{_id:that.data.goodinfo._id},
-          complete:res =>{
-            console.log("重新获取商品信息成功")
-            that.setData({
-              goodinfo:res.result
+            console.log('评论投诉成功')
+            console.log(res.result)
+        }
+      })
+  }},
+  delcomment:function(e){
+    if(userInfo == null){
+      wx.showToast({
+        title: '请先登录',
+        icon:'none',
+        duration:2000
+      })
+    }else{
+    var that = this
+      wx.cloud.callFunction({
+        name:'deleteCommentsByIds',
+        data:{
+          id:e.currentTarget.dataset.id,
+          goodId:that.data.goodinfo._id
+        },
+        complete:res =>{
+          if(res.result.detail === false){
+            wx.showToast({
+              title: '删除评论失败',
+              icon:'none',
+              duration:2000
             })
-            wx.cloud.callFunction({
-              name:'getCommentsById',
-              data:{
-                ids:that.data.goodinfo.comments,
-              },
-              complete: e =>{
-                console.log()
-                console.log("重新获取comment成功")
-                that.setData({
-                  comments:e.result
-                })
-              }
-            })
-          }
-        })
-      }}
-    })
-  },
+          }else{
+          wx.showToast({
+            title: '您已成功删除评论',
+            icon:'success',
+            duration:2000
+          })
+          wx.cloud.callFunction({
+            name:'good_info',
+            data:{
+              _id:that.data.goodinfo._id,
+              goodId:that.data.goodinfo._id
+            },
+            complete:res =>{
+              console.log("重新获取商品信息成功")
+              that.setData({
+                goodinfo:res.result
+              })
+              wx.cloud.callFunction({
+                name:'getCommentsById',
+                data:{
+                  ids:that.data.goodinfo.comments,
+                },
+                complete: e =>{
+                  console.log()
+                  console.log("重新获取comment成功")
+                  that.setData({
+                    comments:e.result
+                  })
+                }
+              })
+            }
+          })
+        }}
+      })
+  }},
   getotheruserinfo:function(e){
     var label = false
     var that = this
@@ -110,47 +132,59 @@ Page({
   },
 
   addComment: function(){
-    var that = this
-    var Time = new Date()
-    console.log(app.globalData.userInfo.avatar)
-    wx.cloud.callFunction({
-      name: 'comment', 
-      data: {
-        userId:that.data.otheruser._id,
-        content:that.data.contentInp,
-        time:Time,
-        goodId:that.data.goodinfo._id,
-        nickname:app.globalData.userInfo.nickName,
-        avatarUrl:app.globalData.userInfo.avatar
-      },
-      complete: res => {
-        wx.cloud.callFunction({
-          name:'good_info',
-          data:{_id:that.data.goodinfo._id},
-          complete:res =>{
-            console.log("重新获取商品信息成功")
-            that.setData({
-              goodinfo:res.result
-            })
-            wx.cloud.callFunction({
-              name:'getCommentsById',
-              data:{
-                ids:that.data.goodinfo.comments,
-              },
-              complete: e =>{
-                console.log()
-                console.log("重新获取comment成功")
-                that.setData({
-                  comments:e.result
-                })
-              }
-            })
-          }
-        })
-        console.log("插入评论成功")
-      }
-    })
-  },
+    if(userInfo == null){
+      wx.showToast({
+        title: '请先登录',
+        icon:'none',
+        duration:2000
+      })
+    }else{
+      var that = this
+      var Time = new Date()
+      console.log(app.globalData.userInfo.avatar)
+      wx.cloud.callFunction({
+        name: 'comment', 
+        data: {
+          userId:that.data.otheruser._id,
+          content:that.data.contentInp,
+          time:Time,
+          goodId:that.data.goodinfo._id,
+          nickname:app.globalData.userInfo.nickName,
+          avatarUrl:app.globalData.userInfo.avatar
+        },
+        complete: res => {
+          wx.showToast({
+            title: '添加评论成功',
+            icon:'success',
+            duration:2000
+          })
+          wx.cloud.callFunction({
+            name:'good_info',
+            data:{_id:that.data.goodinfo._id},
+            complete:res =>{
+              console.log("重新获取商品信息成功")
+              that.setData({
+                goodinfo:res.result
+              })
+              wx.cloud.callFunction({
+                name:'getCommentsById',
+                data:{
+                  ids:that.data.goodinfo.comments,
+                },
+                complete: e =>{
+                  console.log()
+                  console.log("重新获取comment成功")
+                  that.setData({
+                    comments:e.result
+                  })
+                }
+              })
+            }
+          })
+          console.log("插入评论成功")
+        }
+      })
+  }},
   /**
    * 生命周期函数--监听页面加载
    */
