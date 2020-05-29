@@ -16,7 +16,7 @@ Page({
      'comments':[],
   },
   reportcomment:function(e){
-    if(userInfo == null){
+    if(this.data.userInfo == null){
       wx.showToast({
         title: '请先登录',
         icon:'none',
@@ -46,7 +46,7 @@ Page({
       })
   }},
   delcomment:function(e){
-    if(userInfo == null){
+    if(this.data.userInfo == null){
       wx.showToast({
         title: '请先登录',
         icon:'none',
@@ -132,7 +132,7 @@ Page({
   },
 
   addComment: function(){
-    if(userInfo == null){
+    if(this.data.userInfo == null){
       wx.showToast({
         title: '请先登录',
         icon:'none',
