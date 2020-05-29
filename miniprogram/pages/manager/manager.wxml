@@ -5,14 +5,14 @@
     <text class="cuIcon-shopfill"></text> 身份验证
   </view>
   <view class="cu-item {{1==TabCur?'text-white cur':''}}" catchtap="tabSelect" data-id="1">
-    <text class="cuIcon-explorefill"></text> 商品举报 
+    <text class="cuIcon-explorefill"></text> 评论处理
   </view>
   <view class="cu-item {{2==TabCur?'text-white cur':''}}" catchtap="tabSelect" data-id="2">
-    <text class="cuIcon-explorefill"></text> 评论处理 
+    <text class="cuIcon-explorefill"></text> 商品举报
   </view>
 </scroll-view>
 
-<view class="cu-card article {{isCard?'no-card':''}}" wv:if="{{tabCur==0}}">
+<view class="cu-card article {{isCard?'no-card':''}}" wx:if="{{TabCur==0  && checkUser.length > 0}}">
   <view class="cu-item shadow" wx:for="{{checkUser}}" wx:key="index">
     <view class="content">		
       <image src="{{checkUser[index].pic}}"  mode="aspectFill" style="height:280rpx"></image>  
@@ -32,7 +32,28 @@
   </view>
 </view>
 
-<view class="cu-card article {{isCard?'no-card':''}}" wv:if="{{tabCur==1}}">
+<view class="cu-card article {{isCard?'no-card':''}}" wx:if="{{TabCur==1 && checkComment.length > 0}}">
+  <view class="cu-item shadow" wx:for="{{checkComment}}" wx:key="index">
+    <view class="content">		
+      <image src="{{checkComment[index].pic}}"  mode="aspectFill" style="height:280rpx"></image>  
+      <view class="desc">
+        <view class="text-cut">昵称：{{checkComment[index].detail.nickName}}</view>
+        <view class="text-content">{{checkGood[index].detail.content}}</view>
+        <view class="flex justify-around">
+          <view class="text-blue text-xxl" bindtap="bindReview" data-index="{{index}}" data-accept="{{pass}}">
+            <text class="cuIcon-check"></text>
+          </view>
+          <view class="text-red text-xxl" bindtap="bindReview" data-index="{{index}}" data-accept="{{noPass}}">
+            <text class="cuIcon-delete"></text>
+          </view>
+        </view> 
+      </view> 
+    </view>
+  </view>
+</view> 
+
+
+<view class="cu-card article {{isCard?'no-card':''}}" wx:if="{{TabCur==2 && checkGood.length > 0}}">
   <view class="cu-item shadow" wx:for="{{checkGood}}" wx:key="index">
     <view class="content">		
       <image src="{{checkGood[index].detail.image[0]}}"  mode="aspectFill" style="height:280rpx"></image>  
@@ -40,29 +61,15 @@
         <view class="text-cut">名称：{{checkGood[index].detail.title}}</view>
         <view class="text-cut">价格￥：{{checkGood[index].detail.curPrice}}</view>
         <view class="text-content">{{checkGood[index].detail.detail}}</view>
-        <view>
-          <button class="cu-btn round line-cyan" bindtap="bindReview" data-index="{{index}}" data-accept="{{pass}}">通过</button>
-          <button class="cu-btn round line-cyan" bindtap="bindReview" data-index="{{index}}" data-accept="{{noPass}}">不通过</button>
-        </view>
+        <view class="flex justify-around">
+          <view class="text-blue text-xxl" bindtap="bindReview" data-index="{{index}}" data-accept="{{pass}}">
+            <text class="cuIcon-check"></text>
+          </view>
+          <view class="text-red text-xxl" bindtap="bindReview" data-index="{{index}}" data-accept="{{noPass}}">
+            <text class="cuIcon-delete"></text>
+          </view>
+        </view> 
       </view> 
     </view>
   </view>
-</view> 
-
-<view class="cu-card article {{isCard?'no-card':''}}" wv:if="{{tabCur==2}}">
-  <view class="cu-item shadow" wx:for="{{checkComment}}" wx:key="index">
-    <view class="content">		
-      <image src="{{checkComment[index].pic}}"  mode="aspectFill" style="height:280rpx"></image>  
-      <view class="desc">
-        <view class="text-cut">名称：{{checkComment[index].title}}</view>
-        <view class="text-cut">价格￥：{{checkdetail[index].curPrice}}</view>
-        <view class="text-content">{{checkGood[index].detail}}</view>
-        <view>
-          <button class="cu-btn round line-cyan" bindtap="bindReview" data-index="{{index}}" data-accept="{{pass}}">通过</button>
-          <button class="cu-btn round line-cyan" bindtap="bindReview" data-index="{{index}}" data-accept="{{noPass}}">不通过</button>
-        </view>
-      </view> 
-    </view>
-  </view>
-</view> 
-
+</view>

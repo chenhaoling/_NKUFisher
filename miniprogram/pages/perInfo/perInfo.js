@@ -177,7 +177,7 @@ Page({
           that.hideModal()
           that.data.updateInfo.stuNum = ''
           that.data.updateInfo.reviewImage = ''
-          that.data.updateInfo.campus = ''
+          that.data.updateInfo.campus = "八里台校区",
           that.setData({
             updateInfo: that.data.updateInfo,
             buttonLoading: false,
