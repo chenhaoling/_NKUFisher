@@ -1689,7 +1689,7 @@ button.icon.lg {
 	flex: 1;
 	display: flex;
 	align-items: center;
-	margin: 0 30rpx;
+	margin: 0 5rpx;
 }
 
 .cu-bar .search-form+.action {

@@ -23,7 +23,8 @@
     "pages/tradedetail/tradedetail",
     "pages/othercollection/othercollection",
     "pages/otherbought/otherbought",
-    "pages/otherannounce/otherannounce"
+    "pages/otherannounce/otherannounce",
+    "pages/searchgood/searchgood"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

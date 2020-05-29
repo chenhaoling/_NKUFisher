@@ -1,9 +1,10 @@
 <!-- 搜索框 -->
- <view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px">
-      <view class="search-form round">
-        <text class="icon-search"></text>
-        <input type="text" placeholder="搜索" confirm-type="search" bindinput="searchIcon" style="margin-left:15rpx"></input>
+ <view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px width:60%">
+      <view class="search-form round" >
+         <text class="cuIcon-search"></text>
+        <input type="text" placeholder="请输入搜索内容" confirm-type="search" bindinput="searchIcon" ></input>
       </view>
+     <text class="text-blue" bindtap="getsearch">搜索</text>
   </view>
     
    <!-- 轮播图 -->

@@ -17,7 +17,8 @@ Page({
     scrollLeft:0,
     isAnounce: true,
     mess:"按钮测试数据",
-    
+    searchcontent:'',
+    searchList:[],
     TabCur2: 0,
     scrollLeft2:0,
     goodTab:["数码产品","学习资料","生活用品","全部"],
@@ -67,6 +68,29 @@ Page({
         "content":"折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！",
         "price":"88"
       }]
+  },
+  getsearch:function(e){
+    var that = this
+    wx.cloud.callFunction({
+      name:'search_good',
+      data:{
+        title:that.data.searchcontent
+      },
+      complete: res=>{
+        wx.setStorage({
+          data:res.result,
+          key:'searchgood'
+        })
+        wx.navigateTo({
+          url: '../searchgood/searchgood',
+        })
+      }
+    })
+  },
+  searchIcon:function(e){
+    this.setData({
+      searchcontent:e.detail.value
+    })
   },
   getgoodInfo:function(e){
     wx.cloud.callFunction({
