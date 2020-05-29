@@ -35,10 +35,9 @@
 <view class="cu-card article {{isCard?'no-card':''}}" wx:if="{{TabCur==1 && checkComment.length > 0}}">
   <view class="cu-item shadow" wx:for="{{checkComment}}" wx:key="index">
     <view class="content">		
-      <image src="{{checkComment[index].pic}}"  mode="aspectFill" style="height:280rpx"></image>  
       <view class="desc">
-        <view class="text-cut">昵称：{{checkComment[index].detail.nickName}}</view>
-        <view class="text-content">{{checkGood[index].detail.content}}</view>
+        <view class="text-cut">昵称：{{checkComment[index].nickName}}</view>
+        <view class="text-content">{{checkGood[index].content}}</view>
         <view class="flex justify-around">
           <view class="text-blue text-xxl" bindtap="bindReview" data-index="{{index}}" data-accept="{{pass}}">
             <text class="cuIcon-check"></text>

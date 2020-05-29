@@ -31,6 +31,13 @@ exports.main = async (event, context) => {
       return {detail: true}
     }
     if(event.commentId != undefined) {
+      let result = await db.collection('Good').doc(event.commentGoodId).get()
+      let comments = result.data.comments
+      let index = comments.indexOf(event.commentId)
+      comments.splice(index, 1)
+      await db.collection('Good').doc(event.commentGoodId).update({
+        data: {comments: comments}
+      })
       await cloud.callFunction({
         name: 'deletecommentsbyids',
         data: {
