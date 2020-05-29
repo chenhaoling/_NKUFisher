@@ -43,7 +43,6 @@ exports.main = async (event, context) => {
 
   }
   else  {
-    cnosl
     // 投诉商品
     let k = 1
     let re = await db.collection('PendingCheck').where({

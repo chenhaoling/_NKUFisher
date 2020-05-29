@@ -29,16 +29,17 @@ exports.main = async (event, context) => {
     for (let i = 0; i < data.length; i++) {
         const single = await cloud.callFunction({
             // 要调用的云函数名称
-            name: 'getCommentsById',
+            name: 'getComment',
     
-            data: inData
+            data: {commentId:data[i].commentId}
           })
+        console.log(single.result)
         sObject = {}
         sObject["checkId"] = data[i]._id
-        sObject["nickname"] = single.result[0].nickname
-        sObject["time"] = single.result[0].time
-        sObject["content"] = single.result[0].content
-        sObject["commentId"] = single.result[0]._id
+        sObject["nickname"] = single.result.nickname
+        sObject["time"] = single.result.time
+        sObject["content"] = single.result.content
+        sObject["commentId"] = single.result._id
         outdata.push(sObject)
 
     }
@@ -52,11 +53,25 @@ exports.main = async (event, context) => {
   else {
     //拉取 被投诉的商品
     let data = []
+    let outdata = []
     let result = await db.collection('PendingCheck').where({
       identity: 3
     }).get().then(res=> {
       data = res.data
     })
-    return data
+
+    for (let i = 0; i < data.length; i++) {
+      const single = await cloud.callFunction({
+          // 要调用的云函数名称
+        name: 'good_info',
+        data: {_id:data[i].goodId}
+      })
+      sObject = {}
+      sObject["checkId"] = data[i]._id
+      sObject["detail"] = single.result
+      outdata.push(sObject)
+    }
+
+    return outdata
   }
 }
