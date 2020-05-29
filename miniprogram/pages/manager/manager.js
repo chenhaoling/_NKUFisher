@@ -18,20 +18,22 @@ Page({
     wx.cloud.callFunction({
       name:'getUserNeedCheck',
       data:{
-          type: e.currentTarget.dataset.id + 1
+          type: + e.currentTarget.dataset.id + 1
       },
       complete:res =>{
+        console.log(res.result)
         if(e.currentTarget.dataset.id == 0) {
           that.setData({
             checkUser: res.result,
           })
         } else if(e.currentTarget.dataset.id == 1) {
+          console.log(res)
           that.setData({
-            checkGood: res.result,
+            checkComment: res.result,
           })
         } else {
           that.setData({
-            checkComment: res.result,
+            checkGood: res.result,
           })
         }
       }
@@ -42,9 +44,9 @@ Page({
     if(this.data.TabCur == 0) {
       this.reviewUser(e)
     } else if(this.data.tabCur == 1) {
-      this.reviewGood(e)
-    } else {
       this.reviewComment(e)
+    } else {
+      this.reviewGood(e)
     }
   },
 
@@ -58,45 +60,15 @@ Page({
       name:'review',
       data:{
         _id: that.data.reviewIndex._id,
-        openId: that.data.reviewIndex.openId,
+        openId: that.data.reviewIndex.userId,
         accept: e.currentTarget.dataset.accept,
+        stuNum: that.data.reviewIndex.stuNum,
+        campus: that.data.reviewIndex.stuCollege,
       },
       complete:res =>{
+        console.log(res)
       }
     })
-  },
-
-
-  acceptComment: function(e){
-    var that = this
-    var Time = new Date()
-    wx.cloud.callFunction({  
-        name:'review',
-        data:{
-            _id: e.currentTarget.dataset['id'],
-
-        },
-        complete:res =>{
-        }
-      })
-    that.onLoad() 
-  },
-
-  deleteComment: function(e){
-    console.log("inside delete")
-    var that = this
-    var Time = new Date()
-    wx.cloud.callFunction({
-        name:'review',
-        data:{
-            _id: e.currentTarget.dataset['id'],
-            accept: true,
-            commentId: e.currentTarget.dataset['commentId']
-        },
-        complete:res =>{
-        }
-      })
-    that.onLoad() 
   },
 
   reviewGood: function(e) {
@@ -108,11 +80,12 @@ Page({
     wx.cloud.callFunction({
       name:'review',
       data:{
-        _id: that.data.reviewIndex._id,
-        goodId: that.data.reviewIndex.goodId,
+        _id: that.data.reviewIndex.checkId,
+        goodId: that.data.reviewIndex.detail._id,
         accept: e.currentTarget.dataset.accept,
       },
       complete:res =>{
+        console.log(res)
       }
     })
   },
@@ -126,8 +99,8 @@ Page({
     wx.cloud.callFunction({
       name:'review',
       data:{
-        _id: that.data.reviewIndex._id,
-        commentId: that.data.reviewIndex.commentId,
+        _id: that.data.reviewIndex.checkId,
+        commentId: that.data.reviewIndex.detail._id,
         accept: e.currentTarget.dataset.accept,
       },
       complete:res =>{
@@ -139,34 +112,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this
-    wx.cloud.callFunction({
-        name:'getUserNeedCheck',
-        data:{
-            type: 2
-        },
-        complete:res =>{
-            console.log(res.result)
-            that.setData({
-                comment: res.result
-            }) 
-        }
-      })
-      wx.cloud.callFunction({
-        name:'getUserNeedCheck',
-        data:{
-            type: 3
-        },
-        complete:res =>{
-            console.log(res.result)
-            that.setData({
-                checkGood: res.result
-            }) 
-        }
-      })
-    
-
-
   },
 
   /**
