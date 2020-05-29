@@ -1,191 +1,68 @@
-
-
-
-
 <!--miniprogram/pages/manager/manager.wxml-->
-<view class='box'>
 
-    <view class="flex-sub text-center">
-        <view class="solid-bottom text-lg padding">
-            <text class="text-black">管理员</text>
-        </view>
-    </view>
-
-  <view class='wrapper'>
-    <view class="tab-content {{postBook ? 'select' : 'noSelect'}} " bindtap='choosePostBook'>身份验证</view>
-    <view class="tab-content {{postThing ? 'select' : 'noSelect'}}" bindtap='choosePostThing'>商品举报</view>
-    <view class="tab-content {{postJob ? 'select' : 'noSelect'}}" bindtap='choosePostJob'>评论处理</view>
+<scroll-view scroll-x class="bg-blue nav text-center">
+  <view class="cu-item {{0==TabCur?'text-white cur':''}}" catchtap="tabSelect" data-id="0">
+    <text class="cuIcon-shopfill"></text> 身份验证
   </view>
-</view>
+  <view class="cu-item {{1==TabCur?'text-white cur':''}}" catchtap="tabSelect" data-id="1">
+    <text class="cuIcon-explorefill"></text> 商品举报 
+  </view>
+  <view class="cu-item {{2==TabCur?'text-white cur':''}}" catchtap="tabSelect" data-id="2">
+    <text class="cuIcon-explorefill"></text> 评论处理 
+  </view>
+</scroll-view>
 
-<!-- 身份验证 -->
-<view wx:if="{{postBook}}" class='outside_border'>
-
-  <view class="weui-panel total" wx:for="{{identify}}" wx:key ="{{index}}">
-    <view class="title">
-      <view class="title_image" >
-        <image src="{{identify[index].perImg}}" mode="aspectFit" />
-      </view>
-
-      <view class="title_right">
-        <view class="weui-cell weui-cell_input">
-          <view>
-            <view class="weui-label">姓名</view>
-          </view>
-          <view class="weui-cell__bd">
-            <text class="weui-input">{{identify[index].name}}</text>
-          </view>
-        </view>
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">学院</view>
-          </view>
-          <view class="weui-cell__bd">
-              <text class="weui-input">{{identify[index].college}}</text>
-            <!-- <input class="weui-input" placeholder="请输入作者"  value="{{bookAuthor}}" /> -->
-          </view>
-        </view>
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">学号</view>
-          </view>
-          <view class="weui-cell__bd">
-              <text class="weui-input">{{identify[index].stuId}}</text>
-            <!-- <input class="weui-input" placeholder="请输入出版社" value="{{bookPress}}" /> -->
-          </view>
-        </view>
-
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">手机</view>
-          </view>
-          <view class="weui-cell__bd">
-              <text class="weui-input">{{identify[index].phoneNum}}</text>
-            <!-- <input class="weui-input" placeholder="请输入出售价格" value="{{currentPrice}}" type="digit" /> -->
-          </view>
-        </view>
-
-      </view>
-    </view>
-    <view class="check total" >
-
-         <button class="cu-btn round line-cyan" style=" width:30vw" bindtap="pass">通过</button>
-        <button class="cu-btn round line-cyan" style=" width:30vw" bindtap="noPass">不通过</button>
-
-    </view>
-    
-  </view>   
-
-  <!-- <view class="weui-panel">
-    <view class="title">
-      <view class="title_image" >
-        <image src="{{perImg}}" mode="aspectFit" />
-      </view>
-
-      <view class="title_right">
-        <view class="weui-cell weui-cell_input">
-          <view>
-            <view class="weui-label">姓名</view>
-          </view>
-          <view class="weui-cell__bd">
-            <text class="weui-input">{{name}}</text>
-          </view>
-        </view>
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">学院</view>
-          </view>
-          <view class="weui-cell__bd">
-              <text class="weui-input">{{college}}</text>
-          </view>
-        </view>
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">学号</view>
-          </view>
-          <view class="weui-cell__bd">
-              <text class="weui-input">{{stuId}}</text>
-          </view>
-        </view>
-
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">手机</view>
-          </view>
-          <view class="weui-cell__bd">
-              <text class="weui-input">{{phoneNum}}</text>
-          </view>
-        </view>
-
-      </view>
-    </view>
-    <view class="check">
-         <button class="cu-btn round line-cyan" style="width:30vw" bindtap="pass">通过</button>
-        <button class="cu-btn round line-cyan" style="width:30vw" bindtap="noPass">不通过</button>
-    </view>
-    
-  </view> -->
-
-
-</view>
-
-
-
-<!-- 商品举报 -->
-<view class='weui-panel outside_border' wx:if="{{postThing}}">    
-<!-- 商品卡片 -->
- <view class="cu-card article {{isCard?'no-card':''}}">
-  <view class="cu-item shadow" wx:for="{{good}}" wx:key ="{{index}}">
+<view class="cu-card article {{isCard?'no-card':''}}" wv:if="{{tabCur==0}}">
+  <view class="cu-item shadow" wx:for="{{checkUser}}" wx:key="index">
     <view class="content">		
-      <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"  mode="aspectFill" style="height:280rpx"></image>  
+      <image src="{{checkUser[index].pic}}"  mode="aspectFill" style="height:280rpx"></image>  
       <view class="desc">
-
-        <view class="text-cut">商品名:{{good[index].name}}</view>
-        <view class="text-cut">商品详情:</view>
-        <view class="text-content">{{good[index].content}}</view>
-        <view>
-        <view><text style="color:red" >￥{{good[index].price}}</text></view>     
-      </view>     
+        <view class="text-cut text-gray margin-top">学号：{{checkUser[index].stuNum}}</view>
+        <view class="text-cut text-gray">校区：{{checkUser[index].stuCollege}}</view>
+        <view class="flex justify-around">
+          <view class="text-blue text-xxl" bindtap="bindReview" data-index="{{index}}" data-accept="{{pass}}">
+            <text class="cuIcon-check"></text>
+          </view>
+          <view class="text-red text-xxl" bindtap="bindReview" data-index="{{index}}" data-accept="{{noPass}}">
+            <text class="cuIcon-delete"></text>
+          </view>
+        </view> 
       </view>
     </view>
-        <view style="display:flex margin-top:500rpx">
-        <button class="cu-btn round line-cyan" style="width:30vw">忽略</button>
-        <button class="cu-btn round line-cyan" style="width:30vw">下架</button>
-      </view>  
   </view>
 </view>
 
-</view>
-
-<!-- 评论处理 -->
-<view class='weui-panel outside_border' wx:if="{{postJob}}">
-    
-  <!-- 评论卡片 -->
-      <view class="cu-list menu-avatar comment solids-top">
-        <view class="cu-item"  wx:for = "{{comment}}" wx:key = "{{index}}">
-          <view class="cu-avatar round" style="background-image:url(https://ossweb-img.qq.com/images/lol/img/champion/Morgana.png);"></view>
-          <view class="content">
-            <view>
-              <view class="text-grey" style="width:95%">{{comment[index].nickname}}</view>
-            </view>
-            
-            <view class="text-gray text-content text-df">
-              {{comment[index].content}}
-            </view>
-            <view class="margin-top-sm flex justify-between">
-              <view class="text-gray text-df"> {{comment[index].time}}</view>
-              <view>
-                <text class="cuIcon-check lg text-green" style="margin-right:50rpx" bindtap="acceptComment" data-id="{{comment[index].checkId}}"></text>
-                <text class="cuIcon-close lg text-red" bindtap="deleteComment" data-id="{{comment[index].checkId}}" data-commentId="{{comment[index].commentId}}"></text>
-              </view>
-              
-            </view>
-          </view>
+<view class="cu-card article {{isCard?'no-card':''}}" wv:if="{{tabCur==1}}">
+  <view class="cu-item shadow" wx:for="{{checkGood}}" wx:key="index">
+    <view class="content">		
+      <image src="{{checkGood[index].pic}}"  mode="aspectFill" style="height:280rpx"></image>  
+      <view class="desc">
+        <view class="text-cut">名称：{{checkGood[index].title}}</view>
+        <view class="text-cut">价格￥：{{checkGood[index].curPrice}}</view>
+        <view class="text-content">{{checkGood[index].detail}}</view>
+        <view>
+          <button class="cu-btn round line-cyan" bindtap="bindReview" data-index="{{index}}" data-accept="{{pass}}">通过</button>
+          <button class="cu-btn round line-cyan" bindtap="bindReview" data-index="{{index}}" data-accept="{{noPass}}">不通过</button>
         </view>
-      </view>
+      </view> 
+    </view>
+  </view>
+</view> 
 
-</view>
-
-
-
+<view class="cu-card article {{isCard?'no-card':''}}" wv:if="{{tabCur==2}}">
+  <view class="cu-item shadow" wx:for="{{checkComment}}" wx:key="index">
+    <view class="content">		
+      <image src="{{checkComment[index].pic}}"  mode="aspectFill" style="height:280rpx"></image>  
+      <view class="desc">
+        <view class="text-cut">名称：{{checkComment[index].title}}</view>
+        <view class="text-cut">价格￥：{{checkdetail[index].curPrice}}</view>
+        <view class="text-content">{{checkGood[index].detail}}</view>
+        <view>
+          <button class="cu-btn round line-cyan" bindtap="bindReview" data-index="{{index}}" data-accept="{{pass}}">通过</button>
+          <button class="cu-btn round line-cyan" bindtap="bindReview" data-index="{{index}}" data-accept="{{noPass}}">不通过</button>
+        </view>
+      </view> 
+    </view>
+  </view>
+</view> 
 
