@@ -20,9 +20,11 @@
     <view class='detail-poster'>发布者：{{otheruser.nickName}}</view>
     <view class='detail-detail-box' wx:if="{{havecollec === false}}">
       <image class='detail-detail-image' src='../../images/star2.png' bindtap="Collect"></image>
+      <image class='detail-detail-image' src='{{reportImageUrl}}' bindtap="reportGood"></image>
     </view>
     <view class='detail-detail-box' wx:if="{{havecollec}}">
       <image class='detail-detail-image' src='../../images/star.png' bindtap="cancelCollect"></image>
+      <image class='detail-detail-image' src='{{reportImageUrl}}' bindtap="reportGood"></image>
     </view>
     <!-- <view >shoucang</view> -->
     <view style='color: green'>校区：{{detailData.thingCampus}}</view>
@@ -57,3 +59,5 @@
     </block>
   </view>
 </view>
+
+

@@ -43,7 +43,6 @@ exports.main = async (event, context) => {
 
   }
   else  {
-    cnosl
     // 投诉商品
     let k = 1
     let re = await db.collection('PendingCheck').where({
@@ -56,10 +55,12 @@ exports.main = async (event, context) => {
             k = 0  //已经被该用户投诉过一次
           }
         }
-        db.collection('PendingCheck').add({ 
+        delete event.userInfo
+        if (k != 0) {
+          db.collection('PendingCheck').add({ 
           data: event
-        })
-        return {detail: true} 
+          })
+        }
       }
       else {
         data = {}

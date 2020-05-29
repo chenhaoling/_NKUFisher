@@ -7,6 +7,7 @@ Page({
    */
   data: {
     havecollec:false,
+    reportImageUrl:'../../images/reportGood.png',
     userInfo:{},
     'goodinfo':'',
     'otheruser':'',
@@ -164,8 +165,6 @@ Page({
           userInfo: res.result
         })
         for(var x of vm.data.userInfo.collection){
-          console.log("hh")
-          console.log(x)
           if(x === vm.data.goodinfo._id){
            vm.setData({
              havecollec:true
@@ -176,10 +175,6 @@ Page({
       }
     })
     
-    // this.setData({
-    //   goodinfo:JSON.parse(options.goodinfo),
-    //   otheruser:JSON.parse(options.otheruser),
-    // }),
     var that = this
     that.setData({
       _id:app.globalData.userInfo._id
@@ -226,9 +221,11 @@ Page({
         add:true
       },
       complete: res => {
-        // console.log(this.data.goodinfo._id)
-        // console.log(res)
-        console.log("添加了收藏")
+        wx.showToast({
+          title: '您已成功收藏该商品',
+          icon: 'success',
+          duration: 2000
+      })
       }
     })
   },
@@ -242,10 +239,41 @@ Page({
         _id: this.data.goodinfo._id
       },
       complete: res => {
-        // console.log(res)
-        console.log("取消了收藏")
+        wx.showToast({
+          title: '您已成功取消收藏',
+          icon: 'success',
+          duration: 2000
+      })
       }
     })
+  },
+
+  reportGood:function(){
+    wx.cloud.callFunction({
+      name: 'report',
+      data: {
+        goodId:this.data.goodinfo._id,
+        reporter:app.globalData.userInfo._id,
+      },
+      complete: res => {
+        if(res.result.detail === false){
+          wx.showToast({
+            title: '您已举报过该商品',
+            icon: 'success',
+            duration: 2000
+        })
+        }else{
+          wx.showToast({
+            title: '您已成功举报',
+            icon: 'success',
+            duration: 2000
+        })
+      
+        }
+      }
+    })
+
+  
   },
 
   /**
@@ -260,8 +288,6 @@ Page({
    */
   onShow: function() {
 
-     //判断是否已经收藏过
-     console.log("onShow")
      
 
   },
