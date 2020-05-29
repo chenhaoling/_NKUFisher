@@ -21,13 +21,11 @@ Page({
           type: + e.currentTarget.dataset.id + 1
       },
       complete:res =>{
-        console.log(res.result)
         if(e.currentTarget.dataset.id == 0) {
           that.setData({
             checkUser: res.result,
           })
         } else if(e.currentTarget.dataset.id == 1) {
-          console.log(res)
           that.setData({
             checkComment: res.result,
           })
@@ -43,7 +41,7 @@ Page({
   bindReview: function(e){
     if(this.data.TabCur == 0) {
       this.reviewUser(e)
-    } else if(this.data.tabCur == 1) {
+    } else if(this.data.TabCur == 1) {
       this.reviewComment(e)
     } else {
       this.reviewGood(e)
@@ -100,7 +98,7 @@ Page({
     wx.cloud.callFunction({
       name:'review',
       data:{
-        _id: that.data.reviewIndex.checkId,
+        _id: that.data.reviewIndex._id,
         commentId: that.data.reviewIndex.commentId,
         commentGoodId: that.data.reviewIndex.goodId,
         accept: e.currentTarget.dataset.accept,

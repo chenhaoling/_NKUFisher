@@ -36,8 +36,8 @@
   <view class="cu-item shadow" wx:for="{{checkComment}}" wx:key="index">
     <view class="content">		
       <view class="desc">
-        <view class="text-cut">昵称：{{checkComment[index].nickName}}</view>
-        <view class="text-content">{{checkGood[index].content}}</view>
+        <view class="text-cut">昵称：{{checkComment[index].nickname}}</view>
+        <view class="text-content">{{checkComment[index].content}}</view>
         <view class="flex justify-around">
           <view class="text-blue text-xxl" bindtap="bindReview" data-index="{{index}}" data-accept="{{pass}}">
             <text class="cuIcon-check"></text>
