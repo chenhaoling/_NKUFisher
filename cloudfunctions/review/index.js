@@ -19,11 +19,24 @@ exports.main = async (event, context) => {
       return {detail: true}
     }
     if(event.goodId != undefined) {
+      for(let index = 0; index < event.comments.length; index++) {
+        await cloud.callFunction({
+          name: 'deletecommentsbyids',
+          data: {
+            id: event.comments[index]
+          }
+        })
+      }
       await db.collection('Good').doc(event.goodId).remove()
       return {detail: true}
     }
     if(event.commentId != undefined) {
-      await db.collection('Comment').doc(event.commentId).remove()
+      await cloud.callFunction({
+        name: 'deletecommentsbyids',
+        data: {
+          id: event.commentId
+        }
+      })
       return {detail: true}
     }
     return {detail: false}

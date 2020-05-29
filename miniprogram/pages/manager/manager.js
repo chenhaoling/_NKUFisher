@@ -82,6 +82,7 @@ Page({
       data:{
         _id: that.data.reviewIndex.checkId,
         goodId: that.data.reviewIndex.detail._id,
+        comments: that.data.reviewIndex.detail.comments,
         accept: e.currentTarget.dataset.accept,
       },
       complete:res =>{
