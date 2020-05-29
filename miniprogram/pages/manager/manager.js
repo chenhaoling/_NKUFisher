@@ -82,6 +82,7 @@ Page({
       data:{
         _id: that.data.reviewIndex.checkId,
         goodId: that.data.reviewIndex.detail._id,
+        comments: that.data.reviewIndex.detail.comments,
         accept: e.currentTarget.dataset.accept,
       },
       complete:res =>{
@@ -100,7 +101,8 @@ Page({
       name:'review',
       data:{
         _id: that.data.reviewIndex.checkId,
-        commentId: that.data.reviewIndex.detail._id,
+        commentId: that.data.reviewIndex.commentId,
+        commentGoodId: that.data.reviewIndex.goodId,
         accept: e.currentTarget.dataset.accept,
       },
       complete:res =>{
