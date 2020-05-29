@@ -1,7 +1,7 @@
 <!--miniprogram/pages/perInfo/perInfo.wxml-->
 
 <view class="flex padding justify-center align-center" wx:if="{{isAut==false}}">
-  <button class="cu-btn round line-blue" disabled="{{userInfo._id==undefined?true: false}}" bindtap='authorization'>授权并登录</button>
+  <button class="cu-btn round line-blue" disabled="{{typeof(userInfo.id) == 'undefined'?true: false}}" bindtap='authorization'>授权并登录</button>
 </view>
 
 <view class="cu-card dynamic" wx:if="{{isAut==true}}">

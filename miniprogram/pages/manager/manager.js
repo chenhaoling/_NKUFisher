@@ -1,146 +1,111 @@
 // miniprogram/pages/manager/manager.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    "identify":[
-      {
-        'id': 0,
-        'perImg': '../../images/icon9.jpeg',
-
-        //个人信息
-        'name':'JackLin',
-        'stuId':'123456',
-        'college':'软件学院',
-        'phoneNum':'110'
-      },
-      {
-        'id': 1,
-        'perImg': '../../images/icon9.jpeg',
-
-        //个人信息
-        'name':'JackLin',
-        'stuId':'123456',
-        'college':'软件学院',
-        'phoneNum':'110'
-      },
-      {
-        'id': 2,
-        'perImg': '../../images/icon9.jpeg',
-
-        //个人信息
-        'name':'JackLin',
-        'stuId':'123456',
-        'college':'软件学院',
-        'phoneNum':'110'
-      },
-    ],
-
-    "comment":[
-      {
-        'id':0,
-        'name':'ctj',
-        'content':'凯尔，你被自己的光芒变的盲目。',
-        'date':'2018年12月4日'
-      },
-      {
-        'id':1,
-        'name':'ctj',
-        'content':'凯尔，你被自己的光芒变的盲目。',
-        'date':'2018年12月4日'
-      },
-      {
-        'id':2,
-        'name':'ctj',
-        'content':'凯尔，你被自己的光芒变的盲目。',
-        'date':'2018年12月4日'
-      }
-    ],
-    "good":[
-      {
-        "id":0,
-        "name":"This is a test",
-        "content":"折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！",
-        "price":"88"
-      },
-      {
-        "id":1,
-        "name":"This is a test",
-        "content":"折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！",
-        "price":"88"
-      },
-      {
-        "id":2,
-        "name":"This is a test",
-        "content":"折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！",
-        "price":"88"
-      },
-    ],
-
-    //导航栏的数据
-    postBook: true,
-    postThing: false,
-    postJob: false,
-
-
-
+    checkUser: [],
+    checkGood: [],
+    checkComment: [],
+    TabCur: 0,
+    pass: true,
+    noPass: false,
+    reviewIndex: {}
   },
 
-
-
-  acceptComment: function(e){
-    var that = this
-    var Time = new Date()
-    wx.cloud.callFunction({  
-        name:'review',
-        data:{
-            _id: e.currentTarget.dataset['id'],
-
-        },
-        complete:res =>{
-        }
-      })
-    that.onLoad() 
-  },
-
-  deleteComment: function(e){
-    console.log("inside delete")
-    var that = this
-    var Time = new Date()
+  tabSelect(e) {
+    this.setData({
+      TabCur: e.currentTarget.dataset.id
+    })
+    const that = this
     wx.cloud.callFunction({
-        name:'review',
-        data:{
-            _id: e.currentTarget.dataset['id'],
-            accept: true,
-            commentId: e.currentTarget.dataset['commentId']
-        },
-        complete:res =>{
+      name:'getUserNeedCheck',
+      data:{
+          type: e.currentTarget.dataset.id + 1
+      },
+      complete:res =>{
+        if(e.currentTarget.dataset.id == 0) {
+          that.setData({
+            checkUser: res.result,
+          })
+        } else if(e.currentTarget.dataset.id == 1) {
+          that.setData({
+            checkGood: res.result,
+          })
+        } else {
+          that.setData({
+            checkComment: res.result,
+          })
         }
-      })
-    that.onLoad() 
+      }
+    })
+  },
+
+  bindReview: function(e){
+    if(this.data.TabCur == 0) {
+      this.reviewUser(e)
+    } else if(this.data.tabCur == 1) {
+      this.reviewGood(e)
+    } else {
+      this.reviewComment(e)
+    }
+  },
+
+  reviewUser: function(e) {
+    const that = this
+    this.setData({
+      reviewIndex: this.data.checkUser.splice(e.currentTarget.dataset.index, 1)[0]
+    })
+    this.setData({checkUser: this.data.checkUser})
+    wx.cloud.callFunction({
+      name:'review',
+      data:{
+        _id: that.data.reviewIndex._id,
+        openId: that.data.reviewIndex.openId,
+        accept: e.currentTarget.dataset.accept,
+      },
+      complete:res =>{
+      }
+    })
+  },
+
+  reviewGood: function(e) {
+    const that = this
+    this.setData({
+      reviewIndex: this.data.checkGood.splice(e.currentTarget.dataset.index, 1)[0]
+    })
+    this.setData({checkGood: this.data.checkGood})
+    wx.cloud.callFunction({
+      name:'review',
+      data:{
+        _id: that.data.reviewIndex._id,
+        goodId: that.data.reviewIndex.goodId,
+        accept: e.currentTarget.dataset.accept,
+      },
+      complete:res =>{
+      }
+    })
+  },
+
+  reviewComment: function(e) {
+    const that = this
+    this.setData({
+      reviewIndex: this.data.checkComment.splice(e.currentTarget.dataset.index, 1)[0]
+    })
+    this.setData({checkComment: this.data.checkComment})
+    wx.cloud.callFunction({
+      name:'review',
+      data:{
+        _id: that.data.reviewIndex._id,
+        commentId: that.data.reviewIndex.commentId,
+        accept: e.currentTarget.dataset.accept,
+      },
+      complete:res =>{
+      }
+    })
   },
 
   /** 
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this
-    wx.cloud.callFunction({
-        name:'getUserNeedCheck',
-        data:{
-            type: 2
-        },
-        complete:res =>{
-            console.log(res.result)
-            that.setData({
-                comment: res.result
-            }) 
-        }
-      })
-
-
   },
 
   /**
@@ -154,7 +119,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    const that = this
+    wx.cloud.callFunction({
+      name:'getUserNeedCheck',
+      data:{
+          type: 1
+      },
+      complete:res =>{
+        that.setData({
+            checkUser: res.result,
+            tabCur: 0,
+        })
+      }
+    })
   },
 
   /**
@@ -181,41 +158,6 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-
-  },
-    //导航栏的响应事件
-    choosePostBook: function(e) {
-      var that = this;
-      that.setData({
-        postBook: true,
-        postThing: false,
-        postJob: false
-      })
-    },
-    choosePostThing: function(e) {
-      var that = this;
-      that.setData({
-        postBook: false,
-        postThing: true,
-        postJob: false
-      })
-    },
-    choosePostJob: function(e) {
-      var that = this;
-      that.setData({
-        postBook: false,
-        postThing: false,
-        postJob: true
-      })
-    },
-
-    pass: function(e){
-      console.log("通过");
-    },
-    noPass:function(e){
-      console.log(e);
-    },
 
   /**
    * 用户点击右上角分享
