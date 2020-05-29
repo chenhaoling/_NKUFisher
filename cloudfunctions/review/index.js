@@ -21,7 +21,7 @@ exports.main = async (event, context) => {
     if(event.goodId != undefined) {
       for(let index = 0; index < event.comments.length; index++) {
         await cloud.callFunction({
-          name: 'deletecommentsbyids',
+          name: 'deleteCommentsByIds',
           data: {
             id: event.comments[index]
           }
@@ -39,7 +39,7 @@ exports.main = async (event, context) => {
         data: {comments: comments}
       })
       await cloud.callFunction({
-        name: 'deletecommentsbyids',
+        name: 'deleteCommentsByIds',
         data: {
           id: event.commentId
         }

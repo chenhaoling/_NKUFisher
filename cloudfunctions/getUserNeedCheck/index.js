@@ -36,6 +36,7 @@ exports.main = async (event, context) => {
         console.log(single.result)
         sObject = {}
         sObject["checkId"] = data[i]._id
+        sObject["goodId"] = data[i].goodId
         sObject["nickname"] = single.result.nickname
         sObject["time"] = single.result.time
         sObject["content"] = single.result.content

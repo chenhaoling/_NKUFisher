@@ -98,12 +98,13 @@ Page({
     wx.cloud.callFunction({
       name:'review',
       data:{
-        _id: that.data.reviewIndex._id,
+        _id: that.data.reviewIndex.checkId,
         commentId: that.data.reviewIndex.commentId,
         commentGoodId: that.data.reviewIndex.goodId,
         accept: e.currentTarget.dataset.accept,
       },
       complete:res =>{
+        console.log(res)
       }
     })
   },
