@@ -39,7 +39,7 @@ Page({
       name:'deleteCommentsByIds',
       data:{
         id:e.currentTarget.dataset.id,
-        // goodId:
+        goodId:that.data.goodinfo._id
       },
       complete:res =>{
         if(res.result.detail === false){
