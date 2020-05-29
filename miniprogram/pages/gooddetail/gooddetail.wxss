@@ -64,11 +64,14 @@
     background-color: #F2F3F3;
     width: 100%;
     height: 80rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
   }
   .detail-detail-image {
-    position: absolute;
+    /* position: absolute;
     left: 50%;
-    margin-left: 0rpx;
+    margin-left: 0rpx; */
     width: 60rpx;
     height: 60rpx;
   }
