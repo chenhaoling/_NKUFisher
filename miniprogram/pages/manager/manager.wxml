@@ -35,11 +35,11 @@
 <view class="cu-card article {{isCard?'no-card':''}}" wv:if="{{tabCur==1}}">
   <view class="cu-item shadow" wx:for="{{checkGood}}" wx:key="index">
     <view class="content">		
-      <image src="{{checkGood[index].pic}}"  mode="aspectFill" style="height:280rpx"></image>  
+      <image src="{{checkGood[index].detail.image[0]}}"  mode="aspectFill" style="height:280rpx"></image>  
       <view class="desc">
-        <view class="text-cut">名称：{{checkGood[index].title}}</view>
-        <view class="text-cut">价格￥：{{checkGood[index].curPrice}}</view>
-        <view class="text-content">{{checkGood[index].detail}}</view>
+        <view class="text-cut">名称：{{checkGood[index].detail.title}}</view>
+        <view class="text-cut">价格￥：{{checkGood[index].detail.curPrice}}</view>
+        <view class="text-content">{{checkGood[index].detail.detail}}</view>
         <view>
           <button class="cu-btn round line-cyan" bindtap="bindReview" data-index="{{index}}" data-accept="{{pass}}">通过</button>
           <button class="cu-btn round line-cyan" bindtap="bindReview" data-index="{{index}}" data-accept="{{noPass}}">不通过</button>
