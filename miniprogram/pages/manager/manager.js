@@ -66,7 +66,8 @@ Page({
     })
   },
 
-  ignoreGood: function(e){
+
+  acceptComment: function(e){
     var that = this
     var Time = new Date()
     wx.cloud.callFunction({  
@@ -81,14 +82,16 @@ Page({
     that.onLoad() 
   },
 
-  deleteGood: function(e){
+  deleteComment: function(e){
+    console.log("inside delete")
     var that = this
     var Time = new Date()
-    wx.cloud.callFunction({  
+    wx.cloud.callFunction({
         name:'review',
         data:{
             _id: e.currentTarget.dataset['id'],
-            goodId: e.currentTarget.dataset['goodId']
+            accept: true,
+            commentId: e.currentTarget.dataset['commentId']
         },
         complete:res =>{
         }
