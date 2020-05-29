@@ -37,7 +37,7 @@
         <view>
           <view class="text-grey" style="width:95%">{{comments[index].nickname}}</view>
           <view wx:if="{{comments[index].userId == _id}}">
-            <text class="cuIcon-roundclosefill lg text-red" bindtap="delcomment"></text>
+            <text class="cuIcon-roundclosefill lg text-red" data-id="{{comments[index]._id}}"   bindtap="delcomment"></text>
           </view>
         </view>
         <view class="text-gray text-content text-df">{{comments[index].content}}</view>

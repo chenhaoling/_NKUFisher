@@ -34,7 +34,50 @@ Page({
   },
   delcomment:function(e){
     var that = this
-
+    wx.cloud.callFunction({
+      name:'deleteCommentsByIds',
+      data:{
+        id:e.currentTarget.dataset.id,
+        // goodId:
+      },
+      complete:res =>{
+        if(res.result.detail === false){
+          wx.showToast({
+            title: '删除评论失败',
+            icon:'none',
+            duration:2000
+          })
+        }else{
+        wx.showToast({
+          title: '您已成功删除评论',
+          icon:'success',
+          duration:2000
+        })
+        wx.cloud.callFunction({
+          name:'good_info',
+          data:{_id:that.data.goodinfo._id},
+          complete:res =>{
+            console.log("重新获取商品信息成功")
+            that.setData({
+              goodinfo:res.result
+            })
+            wx.cloud.callFunction({
+              name:'getCommentsById',
+              data:{
+                ids:that.data.goodinfo.comments,
+              },
+              complete: e =>{
+                console.log()
+                console.log("重新获取comment成功")
+                that.setData({
+                  comments:e.result
+                })
+              }
+            })
+          }
+        })
+      }}
+    })
   },
   getotheruserinfo:function(e){
     var label = false

@@ -67,24 +67,34 @@ Page({
   },
 
 
-  authorization: function(res){
+  authorization: function(e){
     if(app.globalData.userInfo._id != null) {
       this.getCurrUserInfo()
     } else {
-      const userInfo = res.detail.userInfo
-      wx.cloud.callFunction({
-        name: 'authorization',
-        data: {
-          nickName: userInfo.nickName,
-          avatar: userInfo.avatarUrl,
-        },
-        complete: res => {
-          app.globalData.userInfo = res.result
-          this.getCurrUserInfo()
-          this.setData({
-            isAut: true
-          })
-        },
+      wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            wx.getUserInfo({
+              success: res => {
+                const userInfo = res.userInfo
+                wx.cloud.callFunction({
+                  name: 'authorization',
+                  data: {
+                    nickName: userInfo.nickName,
+                    avatar: userInfo.avatarUrl,
+                  },
+                  complete: res => {
+                    app.globalData.userInfo = res.result
+                    this.getCurrUserInfo()
+                    this.setData({
+                      isAut: true
+                    })
+                  },
+                })
+              }
+            })
+          }
+        }
       })
     }
   },
