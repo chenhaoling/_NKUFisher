@@ -104,7 +104,7 @@ Page({
           name: 'distribute_good',
           data: this.data.good,
           complete: res => {
-            console.log(res)
+            const goodId = res.result
             wx.showToast({
               title: '发布成功',
               icon: 'succes',
@@ -129,16 +129,34 @@ Page({
               TabCur: 0,
               scrollLeft: 0,
             })
-            if(that.data.good.condition == 0) {
-              wx.navigateTo({
-                url: '../collection/collection?type=request',
-              })
-            } else {
-              wx.navigateTo({
-                url: '../collection/collection?type=fabu',
-              })
-            }
-            
+            wx.cloud.callFunction({
+              name: 'good_info',
+              data:{_id: goodId},
+              success:function(res){         
+                wx.setStorage({
+                  data: res.result,
+                  key: 'goodinfo',
+                })
+                wx.setStorage({
+                  data: [],
+                  key: 'comments',
+                })
+                var otheruser
+                wx.cloud.callFunction({
+                  name: 'user_info',
+                  data: {_id:res.result.openId},
+                  complete: res => {
+                    wx.setStorage({
+                      data: res.result,
+                      key: 'otheruser',
+                    })
+                  }
+                }),
+                wx.navigateTo({
+                  url: '../gooddetail/gooddetail',
+                })
+              },
+            })
           },
         })
       })
