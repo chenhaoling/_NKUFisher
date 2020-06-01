@@ -40,8 +40,9 @@ Page({
       type:type
     })
    
-    // console.log("onLoad")
+
     if(this.data.goods.length === 0){
+     
     wx.cloud.callFunction({
       name: 'user_info',
       data: '',
@@ -51,6 +52,7 @@ Page({
         })
         // console.log("发布的"+this.data.fabu_id)
         
+
         this.backDetail()
       }
     })

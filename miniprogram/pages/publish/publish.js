@@ -44,7 +44,7 @@ Page({
     this.setData({
       TabCur: e.currentTarget.dataset.id
     })
-    this.data.goodcondition = 1 - e.currentTarget.dataset.id
+    this.data.good.condition = 1 - e.currentTarget.dataset.id
     this.setData({good: this.data.good})
   },
 
