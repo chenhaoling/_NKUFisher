@@ -36,7 +36,7 @@ Page({
         },
         complete: res=>{
           wx.showToast({
-            title: '评论成功',
+            title: '评论投诉成功',
             icon:'success',
             duration:2000
           })

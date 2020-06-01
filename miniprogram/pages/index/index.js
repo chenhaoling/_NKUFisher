@@ -27,27 +27,27 @@ Page({
     swiperList: [{
       id: 0,
       type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg'
+      url: 'cloud://test-ywggy.7465-test-ywggy-1302091504/1590743528263.jpg'
     }, {
       id: 1,
         type: 'image',
-        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84001.jpg',
+        url: 'https://img.alicdn.com/imgextra/https://img.alicdn.com/imgextra/i2/420722466/O1CN01A2Bg731U5TIn7Dt6X_!!420722466.jpg_430x430q90.jpg',
     }, {
       id: 2,
       type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big39000.jpg'
+      url: 'https://img.alicdn.com/imgextra/i1/435989107/O1CN014rCGTP2H93VKxyO5S_!!435989107.jpg_430x430q90.jpg'
     }, {
       id: 3,
       type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg'
+      url: 'https://img.alicdn.com/imgextra/i3/2609694927/O1CNA1b8aXkP100d2acd4a770b1b36a1000g_!!2609694927-0-picassodesign.jpg_430x430q90.jpg'
     }, {
       id: 4,
       type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big25011.jpg'
+      url: 'https://img.alicdn.com/imgextra/i1/2041592426/O1CNA1LVENVj100d2f3eca750b0f7561000j_!!2041592426-0-picassodesign.jpg_430x430q90.jpg'
     }, {
       id: 5,
       type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big21016.jpg'
+      url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1590984994579&di=a79956ed14985b00c5f7ec7230f93d9a&imgtype=0&src=http%3A%2F%2Fwww.kfzimg.com%2FG05%2FM00%2F96%2FF6%2Fp4YBAFezYbKAV4DLAAITKj57jUw195_b.jpg'
     }],
     "good":[
       {
