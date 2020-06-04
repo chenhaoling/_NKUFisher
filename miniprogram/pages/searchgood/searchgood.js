@@ -11,13 +11,8 @@ Page({
     wx.cloud.callFunction({
       name: 'good_info',
       data:{_id:e.currentTarget.dataset.id},
-      // complete: res => {
-      //   console.log(res)
-      // }
+
       success:function(res){
-        // console.log("成功")
-        // let goodinfo = JSON.stringify(res.result);
-       
         wx.setStorage({
           data: res.result,
           key: 'goodinfo',
@@ -29,8 +24,6 @@ Page({
             ids:res.result.comments,
           },
           complete: e =>{
-            console.log()
-            console.log("获取comment成功")
             wx.setStorage({
               data: e.result,
               key: 'comments',
@@ -43,8 +36,6 @@ Page({
           name: 'user_info',
           data: {_id:res.result.openId},
           complete: res => {
-            // console.log("获取用户信息成功")
-            // console.log(res.result)
            
             wx.setStorage({
               data: res.result,

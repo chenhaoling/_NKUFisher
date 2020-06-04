@@ -20,7 +20,6 @@ Page({
        love:!that.data.label
       },
       complete: res =>{
-        console.log("修改关注成功")
         that.setData({
           label:!that.data.label
         })
@@ -30,7 +29,6 @@ Page({
             _id:that.data.otheruser._id
           },
           complete:res =>{
-            console.log("关注更改后重新获取用户信息成功")
             that.setData({
               otheruser:res.result
             })
@@ -59,13 +57,10 @@ Page({
       }))
       
      }
-     console.log(tempgoods)
      Promise.all(promiseArr).then(res=>{
        that.setData({
          announce:tempgoods
        })
-       console.log("发布gggggg")
-       console.log(this.data.announce)
      })
     wx.setStorage({
       data:this.data.announce,
@@ -99,13 +94,10 @@ Page({
       }))
       
      }
-     console.log(tempgoods)
      Promise.all(promiseArr).then(res=>{
        that.setData({
          announce:tempgoods
        })
-       console.log("发布gggggg")
-       console.log(this.data.announce)
      })
   
     wx.setStorage({
@@ -140,13 +132,10 @@ Page({
       }))
       
      }
-     console.log(tempgoods)
      Promise.all(promiseArr).then(res=>{
        that.setData({
          announce:tempgoods
        })
-       console.log("发布gggggg")
-       console.log(this.data.announce)
      })
     wx.setStorage({
       data: this.data.announce,
@@ -176,13 +165,10 @@ Page({
       }))
       
      }
-     console.log(tempgoods)
      Promise.all(promiseArr).then(res=>{
        that.setData({
          announce:tempgoods
        })
-       console.log("发布gggggg")
-       console.log(this.data.announce)
      })
     wx.setStorage({
       data: this.data.announce,
@@ -196,10 +182,8 @@ Page({
     wx.navigateTo({
       url: '../index/index',
       success: function(res) {
-        console.log("successs");
       },
       fail: function(res) {
-        console.log(e);
       },
       complete: function(res) {
     

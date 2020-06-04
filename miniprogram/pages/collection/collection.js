@@ -15,7 +15,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function ({type}) {
-    // console.log(type)
     this.setData({
       type:type
     })
@@ -30,7 +29,6 @@ Page({
         this.setData({
           userInfo: res.result
         })
-        // console.log("发布的"+this.data.fabu_id)
         
 
         this.backDetail()
@@ -57,7 +55,6 @@ Page({
             tempgoods.push(res.result)
             reslove()
           }).catch(error => {
-            console.log(error)
           })
         }))
         
@@ -67,8 +64,6 @@ Page({
          this.setData({
            goods:tempgoods
          })
-         console.log("发布")
-         console.log(this.data.goods)
        })
 
 
@@ -185,24 +180,19 @@ Page({
 
 
     if(this.data.type === 'fabu'){
-      console.log("发布")
-      console.log(event.currentTarget.dataset.goodid)
       wx.cloud.callFunction({
         name: 'remove_good',
         data: {
           _id:event.currentTarget.dataset.goodid, 
         },
         complete: res => {
-          console.log(res)
           this.backDetail()
           // this.onLoad()
         }
       })
 
     }else if(this.data.type === 'bought'){
-      console.log("买到的不能删除")
     }else if(this.data.type === 'request'){
-      console.log("取消求购")
       wx.cloud.callFunction({
         name: 'remove_good',
         data: {
@@ -210,7 +200,6 @@ Page({
           buy_id:app.globalData.userInfo._id
         },
         complete: res => {
-          console.log(res.result)
           this.backDetail()
           // this.onLoad()
         }
@@ -218,20 +207,16 @@ Page({
 
     }else{
       var that = this
-      console.log("取消收藏")
-
       wx.cloud.callFunction({
         name: 'collection_good',
         data:{
           _id:event.currentTarget.dataset.goodid,
         },
         complete: res => {
-          console.log(res.result)
           wx.cloud.callFunction({
             name: 'user_info',
             data: {},
             complete: restep => {
-              console.log("重新获取userinfo")
               app.globalData.userInfo = restep.result
               this.setData({
                   userInfo: restep.result
@@ -254,20 +239,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    console.log("onReady")
-    // console.log("河流:"+this.data.goods[0])
-    // this.onLoad()
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // console.log("onShow")
-    // console.log(app.globalData.fabu)
-    // console.log("河流:"+this.data.goods[0])
-  //  console.log(this.data.goods)
-  // this.onLoad()
+
   },
 
   /**

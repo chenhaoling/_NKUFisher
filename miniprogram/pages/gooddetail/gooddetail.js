@@ -24,9 +24,6 @@ Page({
       })
     }else{
       var that = this
-      console.log(that.data.goodinfo._id)
-      console.log(e.currentTarget.dataset.id)
-      console.log(app.globalData.userInfo._id)
       wx.cloud.callFunction({
         name:'report',
         data:{
@@ -40,8 +37,6 @@ Page({
             icon:'success',
             duration:2000
           })
-            console.log('评论投诉成功')
-            console.log(res.result)
         }
       })
   }},
@@ -80,7 +75,6 @@ Page({
               goodId:that.data.goodinfo._id
             },
             complete:res =>{
-              console.log("重新获取商品信息成功")
               that.setData({
                 goodinfo:res.result
               })
@@ -90,8 +84,6 @@ Page({
                   ids:that.data.goodinfo.comments,
                 },
                 complete: e =>{
-                  console.log()
-                  console.log("重新获取comment成功")
                   that.setData({
                     comments:e.result
                   })
@@ -146,8 +138,6 @@ Page({
       m = now.getMonth() + 1,  
       d = now.getDate(), 
       x = y + "-" + (m < 10 ? "0" + m : m) + "-" + (d < 10 ? "0" + d : d) + " " + now.toTimeString().substr(0, 8); 
-      console.log(x)
-      console.log(app.globalData.userInfo.avatar)
       wx.cloud.callFunction({
         name: 'comment', 
         data: {
@@ -168,7 +158,6 @@ Page({
             name:'good_info',
             data:{_id:that.data.goodinfo._id},
             complete:res =>{
-              console.log("重新获取商品信息成功")
               that.setData({
                 goodinfo:res.result
               })
@@ -178,8 +167,6 @@ Page({
                   ids:that.data.goodinfo.comments,
                 },
                 complete: e =>{
-                  console.log()
-                  console.log("重新获取comment成功")
                   that.setData({
                     comments:e.result
                   })
@@ -187,7 +174,6 @@ Page({
               })
             }
           })
-          console.log("插入评论成功")
         }
       })
   }},
@@ -211,7 +197,6 @@ Page({
            })
           }
         } 
-        console.log(res.result)
       }
     })
     
@@ -222,13 +207,9 @@ Page({
     wx.getStorage({
       key: 'goodinfo',
       success:function(res){
-        console.log(res)
         that.setData({
           goodinfo:res.data
         })
-      
-     
-        // console.log(res.data)
       }
     }),
     wx.getStorage({

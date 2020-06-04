@@ -64,7 +64,6 @@ Page({
         campus: that.data.reviewIndex.stuCollege,
       },
       complete:res =>{
-        console.log(res)
       }
     })
   },
@@ -84,7 +83,6 @@ Page({
         accept: e.currentTarget.dataset.accept,
       },
       complete:res =>{
-        console.log(res)
       }
     })
   },
@@ -104,7 +102,6 @@ Page({
         accept: e.currentTarget.dataset.accept,
       },
       complete:res =>{
-        console.log(res)
       }
     })
   },
