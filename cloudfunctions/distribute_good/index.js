@@ -14,7 +14,11 @@ exports.main = async (event, context) => {
     event.state = 1
     event.star = 0
     event.hot = 0
-    event.createTime = db.serverDate()
+    var now = new Date()
+    y = now.getFullYear()
+    m = now.getMonth() + 1
+    d = now.getDate()
+    event.createTime = y + "-" + (m < 10 ? "0" + m : m) + "-" + (d < 10 ? "0" + d : d) + " " + now.toTimeString().substr(0, 8)
     event.comments = []
     event.openId = cloud.getWXContext().OPENID
     let result = await db.collection('Good').add({

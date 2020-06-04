@@ -27,27 +27,27 @@ Page({
     swiperList: [{
       id: 0,
       type: 'image',
-      url: 'cloud://test-ywggy.7465-test-ywggy-1302091504/1590743528263.jpg'
+      url: ''
     }, {
       id: 1,
         type: 'image',
-        url: 'https://img.alicdn.com/imgextra/https://img.alicdn.com/imgextra/i2/420722466/O1CN01A2Bg731U5TIn7Dt6X_!!420722466.jpg_430x430q90.jpg',
+        url: '',
     }, {
       id: 2,
       type: 'image',
-      url: 'https://img.alicdn.com/imgextra/i1/435989107/O1CN014rCGTP2H93VKxyO5S_!!435989107.jpg_430x430q90.jpg'
+      url: ''
     }, {
       id: 3,
       type: 'image',
-      url: 'https://img.alicdn.com/imgextra/i3/2609694927/O1CNA1b8aXkP100d2acd4a770b1b36a1000g_!!2609694927-0-picassodesign.jpg_430x430q90.jpg'
+      url: ''
     }, {
       id: 4,
       type: 'image',
-      url: 'https://img.alicdn.com/imgextra/i1/2041592426/O1CNA1LVENVj100d2f3eca750b0f7561000j_!!2041592426-0-picassodesign.jpg_430x430q90.jpg'
+      url: ''
     }, {
       id: 5,
       type: 'image',
-      url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1590984994579&di=a79956ed14985b00c5f7ec7230f93d9a&imgtype=0&src=http%3A%2F%2Fwww.kfzimg.com%2FG05%2FM00%2F96%2FF6%2Fp4YBAFezYbKAV4DLAAITKj57jUw195_b.jpg'
+      url: ''
     }],
     "good":[
       {
@@ -237,11 +237,32 @@ Page({
     })
     
   },
+
+  getSwiperList :function() {
+    const that = this
+    wx.cloud.callFunction({
+      name: 'search_good',
+      data: {
+        orderBy: ["hot", "desc"],
+        limit: 6,
+      },
+      complete: res => {
+        console.log(res.result)
+        for(let index = 0; index < res.result.length; index++) {
+          that.data.swiperList[index].url = res.result[index].image[0]
+        }
+        that.setData({
+          swiperList: that.data.swiperList
+        })
+      }
+    })
+  },
   
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getSwiperList()
     this.getInfo()
   },
 
