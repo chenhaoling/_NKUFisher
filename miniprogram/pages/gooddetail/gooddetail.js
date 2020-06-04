@@ -151,7 +151,7 @@ Page({
       wx.cloud.callFunction({
         name: 'comment', 
         data: {
-          userId:that.data.otheruser._id,
+          userId:app.globalData.userInfo.userid,
           content:that.data.contentInp,
           time:x,
           goodId:that.data.goodinfo._id,
