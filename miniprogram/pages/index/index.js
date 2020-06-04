@@ -26,26 +26,32 @@ Page({
     cardCur: 0,
     swiperList: [{
       id: 0,
+      _id: null,
       type: 'image',
       url: ''
     }, {
       id: 1,
+      _id: null,
         type: 'image',
         url: '',
     }, {
       id: 2,
+      _id: null,
       type: 'image',
       url: ''
     }, {
       id: 3,
+      _id: null,
       type: 'image',
       url: ''
     }, {
       id: 4,
+      _id: null,
       type: 'image',
       url: ''
     }, {
       id: 5,
+      _id: null,
       type: 'image',
       url: ''
     }],
@@ -144,6 +150,54 @@ Page({
       fail:console.error
     })  
   },
+
+  getSwiperInfo:function(e){
+    console.log(e.currentTarget.dataset.good)
+    if(e.currentTarget.dataset.good != null) {
+      wx.cloud.callFunction({
+        name: 'good_info',
+        data:{_id:e.currentTarget.dataset.good},
+        success:function(res){
+          wx.setStorage({
+            data: res.result,
+            key: 'goodinfo',
+          })
+          wx.cloud.callFunction({
+            name:'getCommentsById',
+            
+            data:{
+              ids:res.result.comments,
+            },
+            complete: e =>{
+              console.log()
+              console.log("获取comment成功")
+              wx.setStorage({
+                data: e.result,
+                key: 'comments',
+              })
+            }
+          })
+          
+          var otheruser
+          wx.cloud.callFunction({
+            name: 'user_info',
+            data: {_id:res.result.openId},
+            complete: res => {
+              wx.setStorage({
+                data: res.result,
+                key: 'otheruser',
+              })
+            }
+          }),
+          wx.navigateTo({
+            url: '../gooddetail/gooddetail',
+          })
+        },
+        fail:console.error
+      })  
+    }
+  },
+
   // cardSwiper
   cardSwiper(e) {
     this.setData({
@@ -250,6 +304,7 @@ Page({
         console.log(res.result)
         for(let index = 0; index < res.result.length; index++) {
           that.data.swiperList[index].url = res.result[index].image[0]
+          that.data.swiperList[index]._id = res.result[index]._id
         }
         that.setData({
           swiperList: that.data.swiperList
