@@ -8,8 +8,8 @@ Page({
   data: {
     'otheruser':'',
     isAdmi:true,
-    label:false
-    
+    label:false,
+    announce:[]
   },
   changefans:function(e){
     var that = this
@@ -40,8 +40,35 @@ Page({
     })
   },
   getannounce0:function(e){
+    var that = this
+    var tempgoods = []
+    let promiseArr = []
+    for (var index in that.data.otheruser.announce) {
+      promiseArr.push(new Promise((reslove, reject)=>{
+        wx.cloud.callFunction({
+         name: 'good_info',
+         data:{
+          _id:that.data.otheruser.announce[index]
+         }
+        }).then(res => {
+          tempgoods.push(res.result)
+          reslove()
+        }).catch(error => {
+          console.log(error)
+        })
+      }))
+      
+     }
+     console.log(tempgoods)
+     Promise.all(promiseArr).then(res=>{
+       that.setData({
+         announce:tempgoods
+       })
+       console.log("发布gggggg")
+       console.log(this.data.announce)
+     })
     wx.setStorage({
-      data:this.data.otheruser.announce,
+      data:this.data.announce,
       key: 'announce',
     })
     wx.setStorage({
@@ -53,8 +80,36 @@ Page({
     })
   },
   getannounce1:function(e){
+    var that = this
+    var tempgoods = []
+    let promiseArr = []
+    for (var index in that.data.otheruser.announce) {
+      promiseArr.push(new Promise((reslove, reject)=>{
+        wx.cloud.callFunction({
+         name: 'good_info',
+         data:{
+          _id:that.data.otheruser.announce[index]
+         }
+        }).then(res => {
+          tempgoods.push(res.result)
+          reslove()
+        }).catch(error => {
+          console.log(error)
+        })
+      }))
+      
+     }
+     console.log(tempgoods)
+     Promise.all(promiseArr).then(res=>{
+       that.setData({
+         announce:tempgoods
+       })
+       console.log("发布gggggg")
+       console.log(this.data.announce)
+     })
+  
     wx.setStorage({
-      data:this.data.otheruser.announce,
+      data:this.data.announce,
       key: 'announce',
     })
     wx.setStorage({
@@ -66,8 +121,35 @@ Page({
     })
   },
   getbought:function(e){
+    var that = this
+    var tempgoods = []
+    let promiseArr = []
+    for (var index in that.data.otheruser.announce) {
+      promiseArr.push(new Promise((reslove, reject)=>{
+        wx.cloud.callFunction({
+         name: 'good_info',
+         data:{
+          _id:that.data.otheruser.announce[index]
+         }
+        }).then(res => {
+          tempgoods.push(res.result)
+          reslove()
+        }).catch(error => {
+          console.log(error)
+        })
+      }))
+      
+     }
+     console.log(tempgoods)
+     Promise.all(promiseArr).then(res=>{
+       that.setData({
+         announce:tempgoods
+       })
+       console.log("发布gggggg")
+       console.log(this.data.announce)
+     })
     wx.setStorage({
-      data: this.data.otheruser.bought,
+      data: this.data.announce,
       key: 'boughts',
     }),
     wx.navigateTo({
@@ -75,8 +157,35 @@ Page({
     })
   },
   getcollection:function(e){
+    var that = this
+    var tempgoods = []
+    let promiseArr = []
+    for (var index in that.data.otheruser.announce) {
+      promiseArr.push(new Promise((reslove, reject)=>{
+        wx.cloud.callFunction({
+         name: 'good_info',
+         data:{
+          _id:that.data.otheruser.announce[index]
+         }
+        }).then(res => {
+          tempgoods.push(res.result)
+          reslove()
+        }).catch(error => {
+          console.log(error)
+        })
+      }))
+      
+     }
+     console.log(tempgoods)
+     Promise.all(promiseArr).then(res=>{
+       that.setData({
+         announce:tempgoods
+       })
+       console.log("发布gggggg")
+       console.log(this.data.announce)
+     })
     wx.setStorage({
-      data: this.data.otheruser.collection,
+      data: this.data.announce,
       key: 'goods',
     }),
     wx.navigateTo({

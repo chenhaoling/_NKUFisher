@@ -67,8 +67,6 @@ Page({
       let promiseArr = []
 
       for (var index in this.data.userInfo.announce) {
-
-
         promiseArr.push(new Promise((reslove, reject)=>{
           wx.cloud.callFunction({
            name: 'good_info',

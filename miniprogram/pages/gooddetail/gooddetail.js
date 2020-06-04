@@ -12,7 +12,7 @@ Page({
     'goodinfo':'',
     'otheruser':'',
     'contentInp':'',
-    '_id':'',
+    'userid':'',
      'comments':[],
   },
   reportcomment:function(e){
@@ -140,14 +140,20 @@ Page({
       })
     }else{
       var that = this
-      var Time = new Date()
+      // var Time = new Date()
+      var now = new Date(), 
+      y = now.getFullYear(), 
+      m = now.getMonth() + 1,  
+      d = now.getDate(), 
+      x = y + "-" + (m < 10 ? "0" + m : m) + "-" + (d < 10 ? "0" + d : d) + " " + now.toTimeString().substr(0, 8); 
+      console.log(x)
       console.log(app.globalData.userInfo.avatar)
       wx.cloud.callFunction({
         name: 'comment', 
         data: {
           userId:that.data.otheruser._id,
           content:that.data.contentInp,
-          time:Time,
+          time:x,
           goodId:that.data.goodinfo._id,
           nickname:app.globalData.userInfo.nickName,
           avatarUrl:app.globalData.userInfo.avatar
@@ -211,7 +217,7 @@ Page({
     
     var that = this
     that.setData({
-      _id:app.globalData.userInfo._id
+      userid:app.globalData.userInfo._id
     })
     wx.getStorage({
       key: 'goodinfo',

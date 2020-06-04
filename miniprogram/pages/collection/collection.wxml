@@ -55,7 +55,7 @@
  <view wx:else>
   <view class="cu-item shadow" wx:for="{{goods}}" wx:key ="{{index}}">
     <view class="content">		
-      <image src="{{goods[index].image[0]}}"  mode="aspectFill" style="height:280rpx"></image>  
+      <image src="goods[index].image[0]"  mode="aspectFill" style="height:280rpx"></image>  
       <view class="desc">
 
         <view class="text-cut">商品名:{{goods[index].title}}</view>

@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    announce:[],
+    announce:'',
     // announce1:[],
     key:0,
   },
@@ -14,6 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
     var that = this
     wx.getStorage({
       key: 'key',
@@ -31,6 +32,7 @@ Page({
         })
       }
     })
+
   },
 
   /**

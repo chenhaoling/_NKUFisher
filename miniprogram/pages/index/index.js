@@ -21,7 +21,7 @@ Page({
     searchList:[],
     TabCur2: 0,
     scrollLeft2:0,
-    goodTab:["数码产品","学习资料","生活用品","全部"],
+    goodTab:["数码产品","学习资料","生活用品","其他"],
 
     cardCur: 0,
     swiperList: [{
