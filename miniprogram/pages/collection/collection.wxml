@@ -1,77 +1,24 @@
 <!-- 商品卡片 -->
 
  <view class="cu-card article {{isCard?'no-card':''}}">
- <view wx:if="{{type === 'fabu'}}">
 
-
- <!-- hhhfabu -->
-    <view class="cu-item shadow" wx:for="{{goods}}" wx:key ="{{index}}">
-    <!-- <view wx:if="{{goods[index].condition === 1}}"> -->
-    <view class="content" wx:if="{{goods[index].condition === 1}}">		
-      <image src="{{goods[index].image[0]}}"  mode="aspectFill" style="height:280rpx"></image>  
-      <view class="desc">
-
-        <view class="text-cut">商品名:{{goods[index].title}}</view>
-        <view class="text-cut">商品详情:</view>
-        <view class="text-content">{{goods[index].detail}}</view>
-        <view>
-        <view><text style="color:red" >￥{{goods[index].curPrice}}</text></view>     
-      </view>     
-      </view>
-    </view>
-        <view style="display:flex margin-top:500rpx" wx:if="{{goods[index].condition === 1}}">
-        <button class="cu-btn round line-cyan" style="margin-top:10rpx">忽略</button>
-        <button class="cu-btn round line-cyan" style="margin-top:10rpx" data-goodid="{{goods[index]._id}}" bindtap="remove">下架</button>
-      </view>  
-      <!-- </view> -->
-  </view>
- </view>
-
- <view wx:elif="{{type === 'request'}}">
-
-    <!-- hhhhhrequest -->
-      <view class="cu-item shadow" wx:for="{{goods}}" wx:key ="{{index}}">
-    <!-- <view wx:if="{{goods[index].condition === 0}}"> -->
-    <view class="content" wx:if="{{goods[index].condition === 0}}">		
-      <image src="{{goods[index].image[0]}}"  mode="aspectFill" style="height:280rpx"></image>  
-      <view class="desc">
-
-        <view class="text-cut">商品名:{{goods[index].title}}</view>
-        <view class="text-cut">商品详情:</view>
-        <view class="text-content">{{goods[index].detail}}</view>
-        <view>
-        <view><text style="color:red" >￥{{goods[index].curPrice}}</text></view>     
-      </view>     
-      </view>
-    </view>
-        <view style="display:flex margin-top:500rpx" wx:if="{{goods[index].condition === 0}}">
-        <button class="cu-btn round line-cyan" style="margin-top:10rpx">忽略</button>
-        <button class="cu-btn round line-cyan" style="margin-top:10rpx" data-goodid="{{goods[index]._id}}" bindtap="remove">下架</button>
-      </view>  
-      <!-- </view> -->
-  </view>
- </view>
-
- <view wx:else>
-  <view class="cu-item shadow" wx:for="{{goods}}" wx:key ="{{index}}">
+  <view class="cu-item shadow" wx:for="{{goods}}" wx:for-item="good" wx:key="_id">
     <view class="content">		
-      <image src="goods[index].image[0]"  mode="aspectFill" style="height:280rpx"></image>  
+      <image src="{{good.image[0]}}" style="height:280rpx"></image>  
       <view class="desc">
 
-        <view class="text-cut">商品名:{{goods[index].title}}</view>
+        <view class="text-cut">商品名:{{good.title}}</view>
         <view class="text-cut">商品详情:</view>
-        <view class="text-content">{{goods[index].detail}}</view>
+        <view class="text-content">{{good.detail}}</view>
         <view>
-        <view><text style="color:red" >￥{{goods[index].curPrice}}</text></view>     
+        <view><text style="color:red" >￥{{good.curPrice}}</text></view> 
+        <view wx:if="{{type == 'fabu' || type == 'request'}}" bindtap="remove" data-goodid='{{good._id}}'><text class="text-grey margin-lr-xs"style="margin-left:300rpx">删除</text></view>  
+        <view wx:elif="{{type != 'bougth'}}" bindtap="remove" data-goodid='{{good._id}}'><text class="text-grey margin-lr-xs" style="margin-left:250rpx">取消收藏</text></view>     
       </view>     
       </view>
     </view>
         <view style="display:flex margin-top:500rpx">
-        <button class="cu-btn round line-cyan" style="margin-top:10rpx">忽略</button>
-        <button class="cu-btn round line-cyan" style="margin-top:10rpx" data-goodid="{{goods[index]._id}}" bindtap="remove">下架</button>
       </view>  
   </view>
-
-</view>
 
 </view>
